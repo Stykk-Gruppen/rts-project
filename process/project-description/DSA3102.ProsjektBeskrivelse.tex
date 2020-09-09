@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
-\usepackage[english, norsk]{babel}
+\usepackage[english]{babel}
 \usepackage{tcolorbox}
 \usepackage{url}
 \usepackage{etoolbox}
@@ -51,7 +51,10 @@ DSA3102-1 20H Intelligente sanntidssystemer}
 \section{Description}
 	Autonomous vehicle with attached antibac for driving on tables or floor.\\
 	Proximity sensors forward/backward and sloped forward/backward.\\
-	It has servos to automatically dispense a small amount of antibac if a hand is detected. It has a pressure plate to detect if the antibac is empty.
+	It has servos to automatically dispense a small amount of antibac if a hand is detected. It has a pressure plate to detect if the antibac is empty. When the antibac container is running low, the car will trigger an alarm. 
+
+	Initially the car will drive in a random direction until it either meets a wall or a cliff, which will result in a change in direction. It will over time build a map of the area, and therafter visit each possible location in sequence, perhaps by making use of a graph theory algorithm like Dijkstra.
+
 \newpage
 \section{Hardware}
 	\begin{itemize}
@@ -73,8 +76,6 @@ Antibac       & 119,9         & https://bit.ly/3hdS8GH \\
               &               &                  
 \end{tabular}
 \end{table}
-
-
 \end{document}
 
 
