@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{float}
-\usepackage[english, norsk]{babel}
+\usepackage[english]{babel}
 \usepackage{tcolorbox}
 \usepackage{url}
 \usepackage{etoolbox}
@@ -12,6 +12,7 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{geometry}
+\graphicspath{ {./img/} }
 
 \usepackage{listings}
 \usepackage{color}
@@ -36,7 +37,7 @@ DSA3102-1 20H Intelligente sanntidssystemer}
 \thispagestyle{empty}
 %\centering
 \begin{center}
-\includegraphics[width=\linewidth,height=0.2\textheight,keepaspectratio]{img/USN.png}
+\includegraphics[width=\linewidth,height=0.2\textheight,keepaspectratio]{USN.png}
 \end{center}
 
 
@@ -53,7 +54,13 @@ DSA3102-1 20H Intelligente sanntidssystemer}
 	Proximity sensors forward/backward and sloped forward/backward.\\
 	It has servos to automatically dispense a small amount of antibac if a hand is detected.\\
 	It has a pressure plate to detect if the antibac is empty.
-%\newpage
+
+\subsection{Prototype drawing}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{prototype-drawing.png}
+\end{figure}
+\newpage
 \section{Hardware}
 	\begin{itemize}
 		\item{Four wheels}
