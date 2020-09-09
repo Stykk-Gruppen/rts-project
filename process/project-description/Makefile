@@ -1,4 +1,4 @@
-PROG = main
+PROG = DSA3102.ProsjektBeskrivelse
 CC = pdflatex
 
 all: build
