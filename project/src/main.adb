@@ -1,6 +1,8 @@
 with NRF52_DK.IOs;
 with NRF52_DK.Time;
 
+with Servo;
+
 procedure Main is
 begin
    loop
