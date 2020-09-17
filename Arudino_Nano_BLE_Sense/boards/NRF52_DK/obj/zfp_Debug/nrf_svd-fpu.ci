@@ -1,3 +1,0 @@
-graph: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-fpu.ads"
-node: { title: "nrf_svd__fpu__fpu_peripheralIP" label: "FPU_PERIPHERALIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-fpu.ads:59:9\n16 bytes (static)" }
-}

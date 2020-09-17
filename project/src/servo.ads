@@ -7,7 +7,6 @@ package Servo is
    type Angle is range -180 .. 180;
    period : constant Integer := 20000;
 
-
    procedure RotateCont(rpm : Integer; pinId : NRF52_DK.IOs.Pin_Id);
    procedure SetAngle(angle : Servo.Angle; pinId : NRF52_DK.IOs.Pin_Id);
    function RetAngle(pinId : NRF52_DK.IOs.Pin_Id) return Angle;

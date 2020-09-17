@@ -1,6 +1,0 @@
-graph: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-temperature.adb"
-node: { title: "nrf__temperature__read" label: "Read\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-temperature.adb:44:4\n16 bytes (static)" }
-node: { title: "__gnat_last_chance_handler" label: "gnat_last_chance_handler\n<built-in>" shape : ellipse }
-edge: { sourcename: "nrf__temperature__read" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-temperature.adb:61:14" }
-edge: { sourcename: "nrf__temperature__read" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-temperature.adb:62:32" }
-}
