@@ -1,5 +1,3 @@
-
-
 package body Servo is
    
    currentAngle : Angle := 0;
