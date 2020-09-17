@@ -2,6 +2,7 @@ with Servo;
 with NRF52_DK.IOs;
 with NRF52_DK.Time;
 with HAL;
+with Ada.Real_Time;
 
 package VehicleController is
    
