@@ -1,4 +1,4 @@
-with Servo.adb;
+with Servo;
 with NRF52_DK.IOs;
 
 package VehicleController is
