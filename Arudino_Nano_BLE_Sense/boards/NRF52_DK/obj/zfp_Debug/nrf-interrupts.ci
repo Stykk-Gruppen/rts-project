@@ -1,0 +1,25 @@
+graph: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb"
+node: { title: "nrf__interrupts__set_priority" label: "Set_Priority\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:48:4\n16 bytes (static)" }
+node: { title: "cortex_m__nvic__set_priority" label: "Set_Priority\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/cortex_m/src/nvic_cm4_cm7/cortex_m-nvic.ads:75:14" shape : ellipse }
+edge: { sourcename: "nrf__interrupts__set_priority" targetname: "cortex_m__nvic__set_priority" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:50:20" }
+node: { title: "nrf__interrupts__enable" label: "Enable\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:57:4\n16 bytes (static)" }
+node: { title: "cortex_m__nvic__enable_interrupt" label: "Enable_Interrupt\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/cortex_m/src/nvic_cm4_cm7/cortex_m-nvic.ads:94:14" shape : ellipse }
+edge: { sourcename: "nrf__interrupts__enable" targetname: "cortex_m__nvic__enable_interrupt" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:59:20" }
+node: { title: "nrf__interrupts__disable" label: "Disable\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:66:4\n16 bytes (static)" }
+node: { title: "cortex_m__nvic__disable_interrupt" label: "Disable_Interrupt\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/cortex_m/src/nvic_cm4_cm7/cortex_m-nvic.ads:96:14" shape : ellipse }
+edge: { sourcename: "nrf__interrupts__disable" targetname: "cortex_m__nvic__disable_interrupt" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:68:20" }
+node: { title: "nrf__interrupts__pending" label: "Pending\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:75:4\n16 bytes (static)" }
+node: { title: "cortex_m__nvic__pending" label: "Pending\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/cortex_m/src/nvic_cm4_cm7/cortex_m-nvic.ads:100:13" shape : ellipse }
+edge: { sourcename: "nrf__interrupts__pending" targetname: "cortex_m__nvic__pending" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:77:27" }
+node: { title: "nrf__interrupts__register" label: "Register\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:84:4\n16 bytes (static)" }
+node: { title: "__gnat_last_chance_handler" label: "gnat_last_chance_handler\n<built-in>" shape : ellipse }
+edge: { sourcename: "nrf__interrupts__register" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:88:17" }
+node: { title: "__adl_irq_handler" label: "Gnat_Irq_Handler\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:95:4\n16 bytes (static)" }
+edge: { sourcename: "__adl_irq_handler" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:105:53" }
+edge: { sourcename: "__adl_irq_handler" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:108:24" }
+node: { title: "__indirect_call" label: "Indirect Call Placeholder" shape : ellipse }
+edge: { sourcename: "__adl_irq_handler" targetname: "__indirect_call" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:108:24" }
+node: { title: "nrf__interrupts___elabb" label: "Interrupts\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-interrupts.adb:36:1\n8 bytes (static)" }
+node: { title: "memset" label: "builtin_memset\n<built-in>" shape : ellipse }
+edge: { sourcename: "nrf__interrupts___elabb" targetname: "memset" }
+}

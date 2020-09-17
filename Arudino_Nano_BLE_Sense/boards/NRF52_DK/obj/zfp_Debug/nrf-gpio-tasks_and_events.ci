@@ -1,0 +1,11 @@
+graph: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb"
+node: { title: "nrf__gpio__tasks_and_events__disable" label: "Disable\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb:41:4\n16 bytes (static)" }
+node: { title: "nrf__gpio__tasks_and_events__enable_event" label: "Enable_Event\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb:50:4\n24 bytes (static)" }
+node: { title: "__gnat_last_chance_handler" label: "gnat_last_chance_handler\n<built-in>" shape : ellipse }
+edge: { sourcename: "nrf__gpio__tasks_and_events__enable_event" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb:58:32" }
+node: { title: "nrf__gpio__tasks_and_events__enable_task" label: "Enable_Task\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb:69:4\n24 bytes (static)" }
+edge: { sourcename: "nrf__gpio__tasks_and_events__enable_task" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb:78:32" }
+edge: { sourcename: "nrf__gpio__tasks_and_events__enable_task" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb:82:31" }
+node: { title: "nrf__gpio__tasks_and_events__out_task" label: "Out_Task\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb:92:4\n16 bytes (static)" }
+node: { title: "nrf__gpio__tasks_and_events__in_event" label: "In_Event\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/drivers/nrf_common/nrf-gpio-tasks_and_events.adb:99:4\n16 bytes (static)" }
+}

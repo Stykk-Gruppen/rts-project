@@ -1,0 +1,194 @@
+V "GNAT Lib v2020"
+A -O0
+A -gnatA
+A --RTS=/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/zfp-cortex-m4f/
+A -mlittle-endian
+A -mthumb
+A -mfloat-abi=hard
+A -mcpu=cortex-m4
+A -mfpu=fpv4-sp-d16
+A -gnata
+A -fcallgraph-info=su
+A -fcallgraph-info=su
+A -g
+A -gnatwa
+A -gnatw_A
+A -gnatQ
+A -gnatw.X
+A -ffunction-sections
+A -fdata-sections
+A -march=armv7e-m+fp
+P ZX
+
+RN
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U nrf.gpio%b		nrf-gpio.adb		ab262cd8 NE OO PK
+Z interfaces%s		interfac.ads		interfac.ali
+W nrf%s			nrf.ads			nrf.ali
+W nrf_svd%s		nrf_svd.ads		nrf_svd.ali
+W nrf_svd.gpio%s	nrf_svd-gpio.ads	nrf_svd-gpio.ali
+Z system.assertions%s	s-assert.adb		s-assert.ali
+
+U nrf.gpio%s		nrf-gpio.ads		81ca9089 BN EE NE OO PK
+Z ada.tags%s		a-tags.adb		a-tags.ali
+W hal%s			hal.ads			hal.ali
+W hal.gpio%s		hal-gpio.ads		hal-gpio.ali
+Z interfaces%s		interfac.ads		interfac.ali
+W nrf%s			nrf.ads			nrf.ali
+Z system%s		system.ads		system.ali
+
+D ada.ads		20200916100226 76789da1 ada%s
+D a-tags.ads		20200916100226 95e09aae ada.tags%s
+D hal.ads		20200916092946 2b42c80e hal%s
+D hal-gpio.ads		20200916092946 7f0c2ffe hal.gpio%s
+D interfac.ads		20200916100226 5ab55268 interfaces%s
+D nrf.ads		20200916092946 74cf72f5 nrf%s
+D nrf-gpio.ads		20200916092946 8a09cd82 nrf.gpio%s
+D nrf-gpio.adb		20200916092946 92f62815 nrf.gpio%b
+D nrf_svd.ads		20200916092946 f75b610a nrf_svd%s
+D nrf_svd-gpio.ads	20200916092946 b3d9c94f nrf_svd.gpio%s
+D system.ads		20200916100226 e69b74bd system%s
+D s-assert.ads		20200916100226 cd8d2c94 system.assertions%s
+D s-stoele.ads		20200916100226 2dc34a04 system.storage_elements%s
+D s-unstyp.ads		20200916100226 5ecf7212 system.unsigned_types%s
+G a e
+G c Z s s [support nrf__gpio 71 13 none]
+G c Z s b [mode nrf__gpio 79 13 none]
+G c Z s b [set_mode nrf__gpio 82 14 none]
+G c Z s b [pull_resistor nrf__gpio 86 13 none]
+G c Z s b [set_pull_resistor nrf__gpio 90 14 none]
+G c Z s b [set nrf__gpio 94 13 none]
+G c Z s b [set nrf__gpio 100 14 none]
+G c Z s b [clear nrf__gpio 106 14 none]
+G c Z s b [toggle nrf__gpio 112 14 none]
+G c Z s b [configure_io nrf__gpio 117 14 none]
+G c Z s s [gpio_configurationIP nrf__gpio 58 9 none]
+G c Z s s [gpio_pointIP nrf__gpio 66 9 none]
+X 3 hal.ads
+34K9*HAL 166e8 7|32r6 66r27 72r29 79r45 83r31 87r35 91r40 8|37r45 41r31 42r32
+. 52r31 57r27 58r27 60r29 61r29 83r35 87r34 88r34 89r32 99r40 104r18 105r18
+. 106r18
+X 4 hal-gpio.ads
+32K13*GPIO 95e13 7|32w10 66r31 72r33 79r49 83r35 87r39 91r44 8|37r49 41r35
+. 42r36 52r35 57r31 58r31 60r33 61r33 83r39 87r38 88r38 89r36 99r44 104r22
+. 105r22 106r22
+34E9*Capability 35e53 7|72r38
+34n38*Input{34E9} 8|41r40 57r36 60r38
+34n45*Output{34E9} 8|42r41 58r36 61r38
+35n24*Floating{34E9} 8|87r43 104r27
+35n34*Pull_Up{34E9} 8|89r41 106r27
+35n43*Pull_Down{34E9} 8|88r43 105r27
+37E12*GPIO_Mode{34E9} 7|79r54 8|37r54
+42E12*GPIO_Config_Mode{37E12} 7|83r40 8|52r40
+45E12*GPIO_Pull_Resistor{34E9} 7|87r44 91r49 8|83r44 99r49
+47h9*GPIO_Point 7|66r36
+X 6 nrf.ads
+34K9*nRF 43e8 7|34r9 122r5 8|34r14 185r5
+X 7 nrf-gpio.ads
+34K13*GPIO 6|34k9 7|122l9 122e13 8|34b18 185l9 185t13
+36I12*GPIO_Pin_Index{natural} 67r13
+38E9*Pin_IO_Modes 38e44 59r22
+38n26*Mode_In{38E9} 8|157r27
+38n35*Mode_Out{38E9} 8|158r27
+40E9*Pin_Resistors 40e55 60r22
+40n27*Pull_Up{40E9} 8|166r28
+40n36*Pull_Down{40E9} 8|167r28
+40n47*No_Pull{40E9} 8|165r28
+42E9*Pin_Drive 49e34 62r22
+42n23*Drive_S0S1{42E9} 62r47 8|170r29
+43n23*Drive_H0S1{42E9} 8|171r29
+44n23*Drive_S0H1{42E9} 8|172r29
+45n23*Drive_H0H1{42E9} 8|173r29
+46n23*Drive_D0S1{42E9} 8|174r29
+47n23*Drive_D0H1{42E9} 8|175r29
+48n23*Drive_S0D1{42E9} 8|176r29
+49n23*Drive_H0D1{42E9} 8|177r29
+51E9*Pin_Sense_Mode 53e48 63r22
+51n28*Sense_Disabled{51E9} 63r47 8|180r29
+52n28*Sense_For_High_Level{51E9} 8|181r29
+53n28*Sense_For_Low_Level{51E9} 8|182r29
+55E9*Pin_Input_Buffer_Mode 56e59 61r22
+55n35*Input_Buffer_Connect{55E9} 8|161r29
+56n35*Input_Buffer_Disconnect{55E9} 61r47 8|162r29
+58R9*GPIO_Configuration 64e14 119r16 8|152r16
+59e7*Mode{38E9} 8|156r31
+60e7*Resistors{40E9} 8|164r32
+61e7*Input_Buffer{55E9} 8|160r33
+62e7*Drive{42E9} 8|169r33
+63e7*Sense{51E9} 8|179r33
+66R9*GPIO_Point<4|47R9> 68e14 71P13 71r29 79P13 79r26 82P14 82r38 86P13 86r35
+. 90P14 90r47 94P13 94r25 100P14 100r33 106P14 106r35 112P14 112r36 117p14
+. 118r16 8|37r26 51r38 70r14 82r35 98r47 114r21 125r21 136r21 151r16
+67i7*Pin{36I12} 8|38r64 54r64 74r41 86r38 102r33 117r35 128r35 154r64
+71V13*Support{boolean}<4|51p13> 71>22 72>22
+71r22 This{66R9}
+72e22 Capa{4|34E9} 74r13
+79V13*Mode{4|37E12}<4|57p13> 79>19 8|37b13 44l8 44t12
+79r19 This{66R9} 8|37b19 38r59
+82U14*Set_Mode<4|60p14> 82=24 83>24 8|51b14 62l8 62t16
+82r24 This{66R9} 8|51b24 54r59
+83e24 Mode{4|42E12} 8|52b24 56r24 59r26
+86V13*Pull_Resistor{4|45E12}<4|66p13> 86>28 8|82b13 91l8 91t21
+86r28 This{66R9} 8|82b28 86r33
+90U14*Set_Pull_Resistor<4|70p14> 90=33 91>33 8|98b14 107l8 107t25
+90r33 This{66R9} 8|98b33 102r28
+91e33 Pull{4|45E12} 8|99b33 103r15
+94V13*Set{boolean}<4|76p13> 94>18 8|69b13 75l8 75t11 139s15
+94r18 This{66R9} 8|70b7 74r36
+100U14*Set<4|88p14> 100=19 8|113b25 118l8 118t11 142s15
+100r19 This{66R9} 8|114b7 117r30
+106U14*Clear<4|90p14> 106=21 8|124b25 129l8 129t13 140s15
+106r21 This{66R9} 8|125b7 128r30
+112U14*Toggle<4|92p14> 112=22 8|135b25 144l8 144t14
+112r22 This{66R9} 8|136b7 139r10 140m10 140r10 142m10 142r10
+117U14*Configure_IO 118>7 119>7 8|150b14 183l8 183t20
+118r7 This{66R9} 8|151b7 154r59
+119r7 Config{58R9} 8|152b7 156r24 160r26 164r25 169r26 179r26
+X 8 nrf-gpio.adb
+38r7 CNF{10|495R9} 40r12
+54r7 CNF{10|495R9} 56r7 59r7
+154r7 CNF{10|495R9} 156r7 160r7 164r7 169r7 179r7
+X 9 nrf_svd.ads
+49K9*NRF_SVD 8|32r6 32r24 9|122e12
+X 10 nrf_svd-gpio.ads
+48K17*GPIO 8|32w14 32r32 10|577e17
+58n7*Low{56E9} 8|128r43
+60n7*High{56E9} 8|117r43
+67A9*OUT_PIN_Field_Array(56E9)<integer>
+80a13*Arr{67A9} 8|117m25 117r25 128m25 128r25
+190n7*High{186E9} 8|74r48
+197A9*IN_PIN_Field_Array(186E9)<integer>
+210a13*Arr{197A9} 8|74r31
+418n7*Input{416E9} 8|41r15 57r46 157r39
+420n7*Output{416E9} 8|42r15 58r46 158r39
+429n7*Connect{427E9} 8|60r48 161r56
+431n7*Disconnect{427E9} 8|61r48 162r56
+440n7*Disabled{438E9} 8|87r15 104r40 165r41
+442n7*Pulldown{438E9} 8|88r15 105r40 167r41
+444n7*Pullup{438E9} 8|89r15 106r40 166r41
+454n7*S0S1{452E9} 8|170r43
+456n7*H0S1{452E9} 8|171r43
+458n7*S0H1{452E9} 8|172r43
+460n7*H0H1{452E9} 8|173r43
+462n7*D0S1{452E9} 8|174r43
+464n7*D0H1{452E9} 8|175r43
+466n7*S0D1{452E9} 8|176r43
+468n7*H0D1{452E9} 8|177r43
+483n7*Disabled{481E9} 8|180r53
+485n7*High{481E9} 8|181r53
+487n7*Low{481E9} 8|182r53
+495R9*PIN_CNF_Register 8|38r13 54r13 154r13 10|513e6
+497e7*DIR{416E9} 8|40r16 56m11 156m11
+499e7*INPUT{427E9} 8|59m11 160m11
+501e7*PULL{438E9} 8|86r43 102m38 164m11
+505e7*DRIVE{452E9} 8|169m11
+509e7*SENSE{481E9} 8|179m11
+528A9*PIN_CNF_Registers(495R9)<integer>
+537r7*OUT_k{71R9} 8|117m19 117r19 128m19 128r19
+543r7*IN_k{201R9} 8|74r26
+556a7*PIN_CNF{528A9} 8|38m50 38r50 54m50 86r24 102m19 154m50
+574r4*GPIO_Periph{535R9} 8|38m38 38r38 54m38 54r38 74r14 86r12 102m7 117m7
+. 117r7 128m7 128r7 154m38 154r38
+

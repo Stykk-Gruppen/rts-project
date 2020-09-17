@@ -1,0 +1,12 @@
+graph: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads"
+node: { title: "nrf_svd__rng__shorts_registerIP" label: "SHORTS_REGISTERIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:67:9\n16 bytes (static)" }
+node: { title: "nrf_svd__rng__intenset_registerIP" label: "INTENSET_REGISTERIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:104:9\n16 bytes (static)" }
+node: { title: "nrf_svd__rng__intenclr_registerIP" label: "INTENCLR_REGISTERIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:141:9\n16 bytes (static)" }
+node: { title: "nrf_svd__rng__config_registerIP" label: "CONFIG_REGISTERIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:167:9\n16 bytes (static)" }
+node: { title: "nrf_svd__rng__value_registerIP" label: "VALUE_REGISTERIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:184:9\n16 bytes (static)" }
+node: { title: "nrf_svd__rng__rng_peripheralIP" label: "RNG_PERIPHERALIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:203:9\n16 bytes (static)" }
+edge: { sourcename: "nrf_svd__rng__rng_peripheralIP" targetname: "nrf_svd__rng__shorts_registerIP" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:212:7" }
+edge: { sourcename: "nrf_svd__rng__rng_peripheralIP" targetname: "nrf_svd__rng__intenset_registerIP" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:214:7" }
+edge: { sourcename: "nrf_svd__rng__rng_peripheralIP" targetname: "nrf_svd__rng__intenclr_registerIP" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:216:7" }
+edge: { sourcename: "nrf_svd__rng__rng_peripheralIP" targetname: "nrf_svd__rng__config_registerIP" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/Nordic/svd/nrf52/nrf_svd-rng.ads:218:7" }
+}

@@ -1,0 +1,50 @@
+graph: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb"
+edge: { sourcename: "ov7725__read"
+  targetname: "1:hal__i2c__i2c_port,hal__i2c__i2c_port"
+  label: "ov7725.adb:145:15"
+}
+edge: { sourcename: "ov7725__read"
+  targetname: "2:hal__i2c__i2c_port,hal__i2c__i2c_port"
+  label: "ov7725.adb:152:15"
+}
+edge: { sourcename: "ov7725__write"
+  targetname: "1:hal__i2c__i2c_port,hal__i2c__i2c_port"
+  label: "ov7725.adb:171:15"
+}
+node: { title: "ov7725__ov7725_cameraIP" label: "OV7725_CAMERAIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.ads:57:9\n16 bytes (static)" }
+node: { title: "ov7725__addr_and_dataIP" label: "ADDR_AND_DATAIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:33:9\n16 bytes (static)" }
+node: { title: "ov7725__command_arrayIP" label: "COMMAND_ARRAYIP\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:37:9\n16 bytes (static)" }
+node: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__read" label: "READ\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:139:4\n48 bytes (static)" }
+node: { title: "__indirect_call" label: "Indirect Call Placeholder" shape : ellipse }
+edge: { sourcename: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__read" targetname: "__indirect_call" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:145:15" }
+node: { title: "__gnat_last_chance_handler" label: "gnat_last_chance_handler\n<built-in>" shape : ellipse }
+edge: { sourcename: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__read" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:149:10" }
+edge: { sourcename: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__read" targetname: "__indirect_call" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:152:15" }
+edge: { sourcename: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__read" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:156:10" }
+node: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "WRITE\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:165:4\n48 bytes (static)" }
+edge: { sourcename: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" targetname: "__indirect_call" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:171:15" }
+edge: { sourcename: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:175:10" }
+node: { title: "ov7725__initialize" label: "INITIALIZE\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:183:4\n32 bytes (static)" }
+edge: { sourcename: "ov7725__initialize" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:190:10" }
+node: { title: "ov7725__set_pixel_format" label: "SET_PIXEL_FORMAT\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:198:4\n24 bytes (static)" }
+edge: { sourcename: "ov7725__set_pixel_format" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__read" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:202:22" }
+edge: { sourcename: "ov7725__set_pixel_format" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:205:12" }
+edge: { sourcename: "ov7725__set_pixel_format" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:213:7" }
+edge: { sourcename: "ov7725__set_pixel_format" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__read" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:215:14" }
+edge: { sourcename: "ov7725__set_pixel_format" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:216:7" }
+node: { title: "ov7725__set_frame_size" label: "SET_FRAME_SIZE\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:223:4\n24 bytes (static)" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:231:41" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:231:7" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:232:41" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:232:7" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:235:27" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "__gnat_last_chance_handler" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:237:42" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:234:7" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:240:10" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:242:10" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:243:10" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:244:10" }
+edge: { sourcename: "ov7725__set_frame_size" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__write" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:245:10" }
+node: { title: "ov7725__get_pid" label: "GET_PID\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:253:4\n16 bytes (static)" }
+edge: { sourcename: "ov7725__get_pid" targetname: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:ov7725__read" label: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/components/src/camera/OV7725/ov7725.adb:255:14" }
+}

@@ -1,0 +1,3 @@
+graph: { title: "/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/cortex_m/src/memory_barriers.adb"
+node: { title: "memory_barriers__data_synchronization_barrier" label: "Data_Synchronization_Barrier\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/arch/ARM/cortex_m/src/memory_barriers.adb:40:4\n4 bytes (static)" }
+}
