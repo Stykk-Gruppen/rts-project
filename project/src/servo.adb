@@ -1,24 +1,22 @@
 
 
-package body servo is
-   
-   
+package body Servo is
    
    currentAngle : Angle := 0;
         
-   procedure rotateCont(rpm : Access Integer; pinId : NRF52_DK.IOs.Pin_Id) is
+   procedure RotateCont(rpm : Integer; pinId : NRF52_DK.IOs.Pin_Id) is
    begin
       null;
-   end rotateCont;
+   end RotateCont;
    
-   procedure setAngle(angle : Integer; pinId : NRF52_DK.IOs.Pin_Id) is
+   procedure SetAngle(angle : Servo.Angle; pinId : NRF52_DK.IOs.Pin_Id) is
    begin
       null;
-   end setAngle;
+   end SetAngle;
    
-   function getAngle(pinId : NRF52_DK.IOs.Pin_Id) return Angle is
+   function RetAngle(pinId : NRF52_DK.IOs.Pin_Id) return Angle is
    begin
       return currentAngle;
-   end getAngle;
+   end RetAngle;
      
-end servo;
+end Servo;

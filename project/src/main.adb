@@ -1,11 +1,10 @@
 with NRF52_DK.IOs;
 with NRF52_DK.Time;
-with Servo;
 with VehicleController;
 
 procedure Main is
-   constant frontWheelsPin : NRF52_DK.IOs.Pin_Id := 1;
-   constant rearWheelsPin : NRF52_DK.IOs.Pin_Id := 2;
+   frontWheelsPin : constant NRF52_DK.IOs.Pin_Id := 1;
+   rearWheelsPin : constant NRF52_DK.IOs.Pin_Id := 2;
 begin
 
    VehicleController.Init(frontWheelsPin, rearWheelsPin);
