@@ -1,14 +1,16 @@
 with Servo;
 with NRF52_DK.IOs;
+with NRF52_DK.Time;
+with HAL;
 
 package VehicleController is
    
-   frontWheelsPin : NRF52_DK.IOs.Pin_Id;
-   rearWheelsPin : NRF52_DK.IOs.Pin_Id;
-   wheelRadius : Integer;
+   FrontWheelsPin : NRF52_DK.IOs.Pin_Id;
+   RearWheelsPin : NRF52_DK.IOs.Pin_Id;
+   WheelRadius : Integer;
    
-   procedure Init(frontWheelsPinId, rearWheelsPinId : NRF52_DK.IOs.Pin_Id);
-   procedure SetVelocity(velocity : Integer);
-   procedure SetSteeringAngle(degree, delayTime : Integer);
+   procedure Init (FrontWheelsPinId, RearWheelsPinId : NRF52_DK.IOs.Pin_Id);
+   procedure SetVelocity (Velocity : Integer);
+   procedure SetSteeringAngle (Degree, DelayTimeMs : Integer);
        
 end VehicleController;

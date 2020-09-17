@@ -1,30 +1,40 @@
 package body VehicleController is
+   
+   ----------
+   -- Init --
+   ----------
 
-   procedure init(frontWheelsPinId, rearWheelsPinId : NRF52_DK.IOs.Pin_Id) is
+   procedure Init (FrontWheelsPinId, RearWheelsPinId : NRF52_DK.IOs.Pin_Id) is
    begin
       VehicleController.frontWheelsPin := frontWheelsPinId;
       VehicleController.rearWheelsPin := rearWheelsPinId;
       Servo.RotateCont(0, VehicleController.rearWheelsPin);
-   end init;
+   end Init;
    
-   procedure setVelocity(velocity : Integer) is
-      rpm : Integer;
+   -----------------
+   -- SetVelocity --
+   -----------------
+   
+   procedure SetVelocity (Velocity : Integer) is
+      Rpm : Integer;
    begin
-      rpm := (60 * velocity) / (2 * VehicleController.wheelRadius * 3);
+      Rpm := (60 * velocity) / (2 * VehicleController.wheelRadius * 3);
       
       Servo.RotateCont(rpm, VehicleController.rearWheelsPin); -- Will be threaded
-      
-      
-   end setVelocity;
+   end SetVelocity;
    
-   procedure setSteeringAngle(degree, delayTime : Integer) is
-      d : Float;
+   ----------------------
+   -- SetSteeringAngle --
+   ----------------------
+   
+   procedure SetSteeringAngle (Degree, DelayTimeMs : Integer) is
+      D : Float;
    begin
-      d := Float(degree) / Float(delayTime);
+      D := Float(degree) / Float(delayTimeMs);
       for i in 1 .. degree loop
-         --delay Duration(d);
-         Servo.SetAngle(Servo.Angle(degree), VehicleController.frontWheelsPin);
+         NRF52_DK.Time.Delay_Ms(Hal.Uint64(D));
+         Servo.SetAngle(Servo.Angle(Degree), VehicleController.frontWheelsPin);
       end loop;
-   end setSteeringAngle;
+   end SetSteeringAngle;
 
 end VehicleController;
