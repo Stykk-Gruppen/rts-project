@@ -2,8 +2,14 @@ with NRF52_DK.IOs;
 with NRF52_DK.Time;
 
 package servo is
-   --procedure rotateCont(rpm : Integer; pinId : NRF52_DK.IOs.PinId);
-   --procedure setAngle(angle : Integer; pinId : NRF52_DK.IOs.PinId);
-   --function getAngle(pinId : NRF52_DK.IOs.PinId) return Angle is
+
+   type PulseRange is range 1000 .. 2000;
+   type Angle is range -180 .. 180;
+   --constant period : Integer := 20000;
+
+
+   procedure rotateCont(rpm : Access Integer; pinId : NRF52_DK.IOs.Pin_Id);
+   procedure setAngle(angle : Integer; pinId : NRF52_DK.IOs.Pin_Id);
+   function getAngle(pinId : NRF52_DK.IOs.Pin_Id) return Angle;
 
 end servo;

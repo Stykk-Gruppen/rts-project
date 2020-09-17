@@ -1,25 +1,22 @@
-with NRF52_DK.IOs;
-with NRF52_DK.Time;
+
 
 package body servo is
    
-   constant period : Integer := 20000;
    
-   type PulseRange is range(1000 .. 2000);
-   type Angle is range(-180 .. 180);
+   
    currentAngle : Angle := 0;
         
-   task rotateCont(rpm : Access Integer, pinId : NRF52_DK.IOs.PinId) is
+   procedure rotateCont(rpm : Access Integer; pinId : NRF52_DK.IOs.Pin_Id) is
    begin
       null;
-   end thrust;
+   end rotateCont;
    
-   procedure setAngle(angle : Integer; pinId : NRF52_DK.IOs.PinId) is
+   procedure setAngle(angle : Integer; pinId : NRF52_DK.IOs.Pin_Id) is
    begin
       null;
-   end steer;
+   end setAngle;
    
-   function getAngle(pinId : NRF52_DK.IOs.PinId) return Angle is
+   function getAngle(pinId : NRF52_DK.IOs.Pin_Id) return Angle is
    begin
       return currentAngle;
    end getAngle;
