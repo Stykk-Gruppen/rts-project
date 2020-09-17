@@ -1,4 +1,4 @@
-with "../../Ada_Drivers_Library/boards/NRF52_DK/nrf52_dk_zfp.gpr";
+with "../Arudino_Nano_BLE_Sense/boards/NRF52_DK/nrf52_dk_zfp.gpr";
 project Antibacbuggy is
 
 for Runtime ("ada") use NRF52_DK_ZFP'Runtime ("Ada");
