@@ -1,9 +1,10 @@
 --with "../Arudino_Nano_BLE_Sense/boards/NRF52_DK/nrf52_dk_zfp.gpr";
-with "../../Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/nrf52_dk_zfp.gpr";
+--with "../../Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/nrf52_dk_zfp.gpr";
+with "../../Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/arduino_nano_33_ble_sense_full.gpr";
 
 project Antibacbuggy is
 
-for Runtime ("ada") use NRF52_DK_ZFP'Runtime ("Ada");
+for Runtime ("ada") use arduino_nano_33_ble_sense_full'Runtime ("Ada");
   for Target use "arm-eabi";
   for Main use ("main.adb");
   for Languages use ("Ada");
@@ -11,11 +12,11 @@ for Runtime ("ada") use NRF52_DK_ZFP'Runtime ("Ada");
   for Object_Dir use "obj";
   for Create_Missing_Dirs use "True";
 
-  package Compiler renames NRF52_DK_ZFP.Compiler;
+  package Compiler renames arduino_nano_33_ble_sense_full.Compiler;
 
   package Linker is
      for Default_Switches ("Ada") use
-       NRF52_DK_ZFP.Linker_Switches &
+       arduino_nano_33_ble_sense_full.Linker_Switches &
        ("-Wl,--print-memory-usage",
         "-Wl,--gc-sections");
   end Linker;
