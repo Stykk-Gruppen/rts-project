@@ -4,7 +4,7 @@ package body VehicleController is
    -- Init --
    ----------
 
-   procedure Init (FrontWheelsPinId, RearWheelsPinId : NRF52_DK.IOs.Pin_Id) is
+   procedure Init (FrontWheelsPinId, RearWheelsPinId : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id) is
    begin
       VehicleController.frontWheelsPin := frontWheelsPinId;
       VehicleController.rearWheelsPin := rearWheelsPinId;
@@ -16,7 +16,7 @@ package body VehicleController is
    -----------------
    
    procedure SetVelocity (Velocity : Integer) is
-      Rpm : Integer;
+      --Rpm : Integer;
    begin
       null;
       --Rpm := (60 * velocity) / (2 * VehicleController.wheelRadius * 3);
@@ -33,8 +33,8 @@ package body VehicleController is
    begin
       D := Float(degree) / Float(delayTimeMs);
       for i in 1 .. degree loop
-         NRF52_DK.Time.Delay_Ms(Hal.Uint64(D));
-         Servo.SetAngle(Servo.AngleRange(Degree), VehicleController.frontWheelsPin);
+         Arduino_Nano_33_Ble_Sense.Time.Delay_Ms(Hal.Uint64(D));
+         --Servo.SetAngle(Servo.AngleRange(Degree), VehicleController.frontWheelsPin);
       end loop;
    end SetSteeringAngle;
 
