@@ -56,7 +56,10 @@ After Steven showed us a proof of concept that it will be quite doable to base o
 
 %Before we could start using Ada's real-time library under runtime, we had to generate the library for our microcontroller nRF52840. We followed the official guide [kilde]\url{https://github.com/AdaCore/bb-runtimes} to generate and build the library. 
 
+\vspace{5mm}
+On the 18th of September we improved our library build, by letting the project\_wizard script in Ada drivers library generate the gpr-files for our board automatically. All we had to do was to provide some basic information about the microcontroller, and the script did the rest. We also started adapting the pin mappings from the nrf52832 to the nrf52840. 
 
+Provided that our efforts lead to a useful library, we will create a pull request into the Ada drivers library, so that others may benefit from our work. 
 
 
 \vspace{5mm}
