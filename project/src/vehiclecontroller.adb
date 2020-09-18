@@ -8,7 +8,7 @@ package body VehicleController is
    begin
       VehicleController.frontWheelsPin := frontWheelsPinId;
       VehicleController.rearWheelsPin := rearWheelsPinId;
-      Servo.RotateCont(0, VehicleController.rearWheelsPin);
+      --Servo.RotateCont(0, VehicleController.rearWheelsPin);
    end Init;
    
    -----------------
@@ -18,9 +18,10 @@ package body VehicleController is
    procedure SetVelocity (Velocity : Integer) is
       Rpm : Integer;
    begin
-      Rpm := (60 * velocity) / (2 * VehicleController.wheelRadius * 3);
+      null;
+      --Rpm := (60 * velocity) / (2 * VehicleController.wheelRadius * 3);
       
-      Servo.RotateCont(rpm, VehicleController.rearWheelsPin); -- Will be threaded
+      --.RotateCont(rpm, VehicleController.rearWheelsPin); -- Will be threaded
    end SetVelocity;
    
    ----------------------
@@ -33,7 +34,7 @@ package body VehicleController is
       D := Float(degree) / Float(delayTimeMs);
       for i in 1 .. degree loop
          NRF52_DK.Time.Delay_Ms(Hal.Uint64(D));
-         Servo.SetAngle(Servo.Angle(Degree), VehicleController.frontWheelsPin);
+         Servo.SetAngle(Servo.AngleRange(Degree), VehicleController.frontWheelsPin);
       end loop;
    end SetSteeringAngle;
 
