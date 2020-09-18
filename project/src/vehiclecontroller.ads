@@ -1,16 +1,17 @@
 with Servo;
-with NRF52_DK.IOs;
-with NRF52_DK.Time;
+with Arduino_Nano_33_Ble_Sense.IOs;
+with Arduino_Nano_33_Ble_Sense.Time;
 with HAL;
 with Ada.Real_Time;
 
 package VehicleController is
+   package Arduino renames Arduino_Nano_33_Ble_Sense;
    
-   FrontWheelsPin : NRF52_DK.IOs.Pin_Id;
-   RearWheelsPin : NRF52_DK.IOs.Pin_Id;
+   FrontWheelsPin : Arduino.IOs.Pin_Id;
+   RearWheelsPin : Arduino.IOs.Pin_Id;
    WheelRadius : Integer;
    
-   procedure Init (FrontWheelsPinId, RearWheelsPinId : NRF52_DK.IOs.Pin_Id);
+   procedure Init (FrontWheelsPinId, RearWheelsPinId : Arduino.IOs.Pin_Id);
    procedure SetVelocity (Velocity : Integer);
    procedure SetSteeringAngle (Degree, DelayTimeMs : Integer);
        
