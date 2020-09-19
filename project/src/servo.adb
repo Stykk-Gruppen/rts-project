@@ -1,48 +1,47 @@
+--Av en eller annen grunn må man skrive USE HAL, selv om alle referanser til namespace HAL har prefixet i seg. Merkelig!
 with HAL; use HAL;
+with Ada.Real_Time; use Ada.Real_Time;
 
 package body Servo is
-   
-   currentAngle : AngleRange := 0;
-   
-   function mapVal(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer is
-   begin
-      return outputMin + ((outputMax - outputMin) / (inputMax - inputMin)) * (input - outputMax);
-   end mapVal;
+      
+   function MapVal(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer is
+   	begin
+      	return outputMin + (input - inputMin) * (outputMax - outputMin) / (inputMax - inputMin);
+   	end MapVal;
         
    
-   procedure write(highTime : HAL.UInt64; pinId : NRF52_DK.IOs.Pin_Id) is
+   procedure Write(highTime : HAL.UInt64; pinId : Arduino.IOs.Pin_Id) is
+      --Har satt inn det krøkkete greiene her, siden det virket som delay ikke ville fungere med mikrosekunder.
+      TimeNow : Time;
    begin
-      NRF52_DK.IOs.Set (pinId, True);
-      NRF52_DK.Time.Delay_Ms(HAL.UInt64 (highTime / 1000));
-      NRF52_DK.IOs.Set (pinId, false);
-      NRF52_DK.Time.Delay_Ms(HAL.UInt64(period-highTime) / 1000));
-   end write;
+      TimeNow := Ada.Real_Time.Clock;
+      Arduino.IOs.Set (pinId, True);
+      delay until TimeNow + Ada.Real_Time.Microseconds(Integer(highTime));
+      
+      TimeNow := Ada.Real_Time.Clock;
+      Arduino.IOs.Set (pinId, false);
+      delay until TimeNow + Ada.Real_Time.Microseconds(Integer(period - highTime));
+   end Write;
    
-   task body SetAngle is
-      highTime : HAL.UInt64 := HAL.UInt64(mapVal(angle, AngleRange'First, AngleRange'Last, PulseRange'First, PulseRange'Last)); 
-   begin
-      currentAngle := angle;
-      loop
-         write(highTime, pinId);
-      end loop;
-   end SetAngle;
-   
-   
-   task body rotateCont is
-      --Mapping the rpm values, to the min and max pulse high time. 
-      highTime : constant NRF52_DK.Time.Time_Ms := (HAL.UInt64(mapVal(rpm, RpmRange'First, RpmRange'Last, PulseRange'First, PulseRange'Last)));
+   task body SteeringServo is
+      pinId : constant Arduino.IOs.Pin_Id := 5;
+      highTime : HAL.UInt64;
    begin
       loop
+         highTime := HAL.UInt64(mapVal(WheelAngle, AngleRange'First, AngleRange'Last, PulseRange'First, PulseRange'Last)); 
          write(highTime, pinId);
       end loop;
-   end Drive;
+   end SteeringServo;
    
-    
-   function RetAngle(pinId : NRF52_DK.IOs.Pin_Id) return AngleRange is
+   
+   task body EngineServo is
+      PinId : constant Arduino.IOs.Pin_Id := 8;
+      highTime : Arduino.Time.Time_Ms;
    begin
-      return currentAngle;
-   end RetAngle;
-   
-   
+      loop
+         highTime := (HAL.UInt64(mapVal(EngineRpm, RpmRange'First, RpmRange'Last, PulseRange'First, PulseRange'Last)));
+         write(highTime, pinId);
+      end loop;
+   end EngineServo;
 end Servo;
 
