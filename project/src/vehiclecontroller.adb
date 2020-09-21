@@ -1,4 +1,3 @@
-with Servo;
 with Arduino_Nano_33_Ble_Sense.Time;
 with HAL;
 
@@ -54,7 +53,6 @@ package body VehicleController is
    
    task body EngineServo is
       PinId : constant Arduino.IOs.Pin_Id := 8;
-      highTime : Arduino.Time.Time_Ms;
    begin
       loop
          Servo.SetRpm(EngineRpm, PinId);

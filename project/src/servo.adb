@@ -4,10 +4,7 @@ with Ada.Real_Time; use Ada.Real_Time;
 
 package body Servo is
       
-   function MapVal(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer is
-   begin
-      return outputMin + (input - inputMin) * (outputMax - outputMin) / (inputMax - inputMin);
-   end MapVal;
+   
    
    procedure SetAngle(angle : AngleRange; PinId : Arduino.IOs.Pin_Id) is
       highTime : HAL.UInt64;
@@ -23,6 +20,11 @@ package body Servo is
       write(highTime, pinId);
    end SetRpm;
 
+     
+   function MapVal(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer is
+   begin
+      return outputMin + (input - inputMin) * (outputMax - outputMin) / (inputMax - inputMin);
+   end MapVal;
    
    procedure Write(highTime : HAL.UInt64; pinId : Arduino.IOs.Pin_Id) is
       --Har satt inn det krøkkete greiene her, siden det virket som delay ikke ville fungere med mikrosekunder.
