@@ -5,10 +5,24 @@ with Ada.Real_Time; use Ada.Real_Time;
 package body Servo is
       
    function MapVal(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer is
-   	begin
-      	return outputMin + (input - inputMin) * (outputMax - outputMin) / (inputMax - inputMin);
-   	end MapVal;
-        
+   begin
+      return outputMin + (input - inputMin) * (outputMax - outputMin) / (inputMax - inputMin);
+   end MapVal;
+   
+   procedure SetAngle(angle : AngleRange; PinId : Arduino.IOs.Pin_Id) is
+      highTime : HAL.UInt64;
+   begin
+      highTime := HAL.UInt64(mapVal(angle, AngleRange'First, AngleRange'Last, PulseRange'First, PulseRange'Last)); 
+      write(highTime, pinId);
+   end SetAngle;
+      
+   procedure SetRpm(rpm : RpmRange; pinId : Arduino.IOs.Pin_Id) is
+      highTime : HAL.UInt64;
+   begin
+      highTime := (HAL.UInt64(mapVal(rpm, RpmRange'First, RpmRange'Last, PulseRange'First, PulseRange'Last)));
+      write(highTime, pinId);
+   end SetRpm;
+
    
    procedure Write(highTime : HAL.UInt64; pinId : Arduino.IOs.Pin_Id) is
       --Har satt inn det krøkkete greiene her, siden det virket som delay ikke ville fungere med mikrosekunder.
@@ -23,25 +37,6 @@ package body Servo is
       delay until TimeNow + Ada.Real_Time.Microseconds(Integer(period - highTime));
    end Write;
    
-   task body SteeringServo is
-      pinId : constant Arduino.IOs.Pin_Id := 5;
-      highTime : HAL.UInt64;
-   begin
-      loop
-         highTime := HAL.UInt64(mapVal(WheelAngle, AngleRange'First, AngleRange'Last, PulseRange'First, PulseRange'Last)); 
-         write(highTime, pinId);
-      end loop;
-   end SteeringServo;
    
-   
-   task body EngineServo is
-      PinId : constant Arduino.IOs.Pin_Id := 8;
-      highTime : Arduino.Time.Time_Ms;
-   begin
-      loop
-         highTime := (HAL.UInt64(mapVal(EngineRpm, RpmRange'First, RpmRange'Last, PulseRange'First, PulseRange'Last)));
-         write(highTime, pinId);
-      end loop;
-   end EngineServo;
 end Servo;
 

@@ -12,11 +12,10 @@ package Servo is
    subtype AngleRange is Integer range -180 .. 180;
    subtype RpmRange is Integer range -240 .. 240;
 
-   WheelAngle : AngleRange := 0 with Atomic;
-   EngineRpm : RpmRange := 0 with Atomic;
 
-   task type EngineServo;
-   task type SteeringServo;
+   procedure SetAngle(angle : AngleRange; PinId : Arduino.IOs.Pin_Id);
+   procedure SetRpm(rpm : RpmRange; pinId : Arduino.IOs.Pin_Id);
+
 
    procedure Write(highTime : HAL.UInt64; pinId : Arduino.IOs.Pin_Id);
    function mapVal(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer;

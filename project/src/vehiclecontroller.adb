@@ -25,7 +25,7 @@ package body VehicleController is
    begin
       null;
       Rpm := (60 * velocity) / (2 * VehicleController.wheelRadius * 3);
-      Servo.EngineRpm := Rpm;
+      EngineRpm := Rpm;
    end SetVelocity;
    
    ----------------------
@@ -38,8 +38,27 @@ package body VehicleController is
       D := Float(degree) / Float(delayTimeMs);
       for i in 1 .. Degree loop
          Arduino_Nano_33_Ble_Sense.Time.Delay_Ms(Hal.Uint64(D));
-         Servo.WheelAngle := Servo.AngleRange(Degree);
+         WheelAngle := Servo.AngleRange(Degree);
       end loop;
    end SetSteeringAngle;
+   
+   task body SteeringServo is
+      pinId : constant Arduino.IOs.Pin_Id := 5;
+      
+   begin
+      loop
+         Servo.SetAngle(WheelAngle, pinId);
+      end loop;
+   end SteeringServo;
+   
+   
+   task body EngineServo is
+      PinId : constant Arduino.IOs.Pin_Id := 8;
+      highTime : Arduino.Time.Time_Ms;
+   begin
+      loop
+         Servo.SetRpm(EngineRpm, PinId);
+      end loop;
+   end EngineServo;
 
 end VehicleController;
