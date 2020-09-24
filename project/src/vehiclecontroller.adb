@@ -9,8 +9,8 @@ package body VehicleController is
 
    procedure Init (FrontWheelsPinId, RearWheelsPinId : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id) is
    begin
-      --VehicleController.frontWheelsPin := frontWheelsPinId;
-      --VehicleController.rearWheelsPin := rearWheelsPinId;
+      VehicleController.frontWheelsPin := frontWheelsPinId;
+      VehicleController.rearWheelsPin := rearWheelsPinId;
       --Servo.RotateCont(0, VehicleController.rearWheelsPin);
       null;
    end Init;
