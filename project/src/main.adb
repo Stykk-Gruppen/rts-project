@@ -3,7 +3,6 @@ with Arduino_Nano_33_Ble_Sense.Time;
 with VehicleController;
 with HCSR04;
 
-
 procedure Main is
    package Arduino renames Arduino_Nano_33_Ble_Sense;
 

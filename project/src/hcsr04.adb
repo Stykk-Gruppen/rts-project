@@ -2,14 +2,15 @@ with Ada.Real_Time; use Ada.Real_Time;
 
 package body HCSR04 is
 
-   procedure Init(outPinId, inPinId : Arduino.IOs.Pin_Id) is
+   procedure Init(outPin, inPin : Arduino.IOs.Pin_Id) is
+      Test : Integer;
    begin
-      HCSR04.outPin := outPinId;
-      HCSR04.inPin := inPinId;
+      -- Må kanskje gjøre noe her..
+      Test := 1;
       
    end Init;
 
-   function Distance return Float is
+   function Distance(outPin, inPin : Arduino.IOs.Pin_Id) return Float is
       TimeNow : Ada.Real_Time.Time;
       Result : Float;
       Pulse : Boolean;
