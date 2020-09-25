@@ -16,7 +16,7 @@ begin
    loop
 
       for i in Arduino.IOs.Pin_Id loop
-         Arduino.IOs.Set (i, True);
+         Arduino.IOs.DigitalWrite (i, True);
       end loop;
 
       --  Wait 500 milliseconds
@@ -25,7 +25,7 @@ begin
 
       --  Turn off the LED connected to pin 17
       for i in Arduino.IOs.Pin_Id loop
-         Arduino.IOs.Set (i, False);
+         Arduino.IOs.DigitalWrite (i, False);
       end loop;
 
       --  Wait 500 milliseconds
