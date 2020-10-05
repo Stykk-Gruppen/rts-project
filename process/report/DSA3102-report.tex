@@ -72,9 +72,26 @@ pyocd pack --install  stm32l476VG
 
 As all development within the group is done on Linux, we also had to add udev rules, so that we were able to access the usb ports without being root. These rule-sets were found on pyocds git repository.
 
+We also had to give the respective user access to the serial port by running the command: 
+usermod -a -G dialout MY\_USER\_NAME
 
 
 Legge til utilization test og grafikk.
+
+\section{Ravenscar}
+
+The full ravenscar run-time library offers what is called the Ravenscar profile. This is a subset of the Ada language, where the features and available libraries are limited. The reason for this is to ensure robust software on realtime and safety critical systems. 
+
+The specifications of the ravenscar profile are the following:
+%Lim inn liste kanskje?
+https://www.ada-switzerland.ch/rm/RM-D-13.html
+
+There are a couple of limitations here that will affect the way we initially planned our software. 
+
+The maximum number of entries in tasks are set to 0. This means that we won't be able do have dynamic tasking, and all tasks will rather have to be defined at compile-time. 
+
+Another thing we planned was to specify which tasks would run on the respective cores of the CPU. This however, is not supported within the ravenscar profile, and we will need to do all the scheduling as if we only had a single-core processor. 
+
 
 \section{Maybe useful pictures}
 
