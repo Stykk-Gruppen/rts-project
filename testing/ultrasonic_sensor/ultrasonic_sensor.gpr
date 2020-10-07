@@ -1,0 +1,27 @@
+with "../../../Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/arduino_nano_33_ble_sense_full.gpr";
+
+project Ultrasonic_Sensor is
+   for Runtime ("ada") use arduino_nano_33_ble_sense_full'Runtime ("Ada");
+   for Target use "arm-eabi";
+   for Main use ("main.adb");
+   for Languages use ("Ada");
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj";
+   for Create_Missing_Dirs use "True";
+
+   package Compiler renames arduino_nano_33_ble_sense_full.Compiler;
+
+   package Linker is
+      for Default_Switches ("Ada") use
+        arduino_nano_33_ble_sense_full.Linker_Switches &
+      ("-Wl,--print-memory-usage",
+       "-Wl,--gc-sections");
+   end Linker;
+
+   package Ide is
+      for Program_Host use ":1234";
+      for Communication_Protocol use "remote";
+      for Connection_Tool use "pyocd";
+   end Ide;
+
+end Ultrasonic_Sensor;
