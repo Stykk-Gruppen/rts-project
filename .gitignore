@@ -3,4 +3,6 @@
 *.gz
 *.out
 project/obj/
+testing/led_blinking/obj/
+testing/ultrasonic_sensor/obj/
 *.xml
