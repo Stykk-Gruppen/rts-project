@@ -92,7 +92,26 @@ The maximum number of entries in tasks are set to 0. This means that we won't be
 
 Another thing we planned was to specify which tasks would run on the respective cores of the CPU. This however, is not supported within the ravenscar profile, and we will need to do all the scheduling as if we only had a single-core processor. 
 
+\section{Various problems we've encountered along the way}
 
+By the time you're reading this, some of these issues might have been fixed. Down below are some problems we have encountered during our development phase from 17.02.2020 - ??. Most of these issues have occured using Linux, it is stated otherwise.
+
+\begin{itemize}
+	\item Flashing to the Arduino board without a debugging probe might be impossible.
+
+	\item After installing software for the Segger J-Link debugger from their official webpage, a new .rules file for the debugger appears in $/etc/udev/rules.d$ containing the necessary information for the debugger to be found by $pyocd\ list$. This has only been successful with one of our computers. A workaround is to run pyocd with sudo privileges.
+
+	\item Including unused libraries in the Ada source-code makes the arduino crash under run-time.
+
+	\item When trying to flash to the board without having the cables soldered, errors in the list below have appeared as a consequence of unstable hands.
+		\begin{itemize}
+			\item skriv inn meldingene her.
+		\end{itemize}
+
+
+\end{itemize}
+
+\newpage
 \section{Maybe useful pictures}
 
 \includegraphics[width=\linewidth]{img/NANO-33-BLE-Sense_sensor-indentification.png}
