@@ -2,6 +2,7 @@
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{listings}
 \graphicspath{ {./img/} }
 
 \author{Kent Odde, Stian Onarheim, Tarald Vestbøstad}
@@ -111,13 +112,13 @@ By the time you're reading this, some of these issues might have been fixed. Dow
 			\item Det var vel en til?
 		\end{itemize}
 
-	\item Including Arduino_Nano_33_Ble_Sense.Time makes the microcontroller crash in real time. ref{Dump lstlisting i appendix}
+	\item Including Arduino\_Nano\_33\_Ble\_Sense.Time makes the microcontroller crash in real time. --ref til Debug lstlisting i appendix--
 
 \end{itemize}
 
 \subsection{Pin layout}
 11.10.2020\\
-The P1 base address for the nRF52840 seen here on page 23 ref{}. Without it we were only able to use the pins with P0 seen on figure ref{}. It was missing from the Ada code for nrf52, so we had to add it and the functionality to choose a pin number 0-31 and pin base 1-2.
+The P1 base address for the nRF52840 seen here on page 23 --ref--. Without it we were only able to use the pins with P0 seen on figure --ref--. It was missing from the Ada code for nrf52, so we had to add it and the functionality to choose a pin number 0-31 and pin base 1-2.
 
 
 \newpage
