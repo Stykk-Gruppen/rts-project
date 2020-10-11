@@ -111,6 +111,11 @@ By the time you're reading this, some of these issues might have been fixed. Dow
 
 \end{itemize}
 
+\subsection{Pin layout}
+11.10.2020\\
+The P1 base address for the nRF52840 seen here on page 23 ref{}. Without it we were only able to use the pins with P0 seen on figure ref{}. It was missing from the Ada code for nrf52, so we had to add it and the functionality to choose a pin number 0-31 and pin base 1-2.
+
+
 \newpage
 \section{Maybe useful pictures}
 
