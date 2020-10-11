@@ -1,5 +1,6 @@
 with Arduino_Nano_33_Ble_Sense.LEDs;
 with Arduino_Nano_33_Ble_Sense.IOs;
+with Arduino_Nano_33_Ble_Sense.Time;
 with Ada.Real_Time; use Ada.Real_Time;
 
 procedure Main is
