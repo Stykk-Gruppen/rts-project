@@ -1,5 +1,3 @@
---Av en eller annen grunn må man skrive USE HAL, selv om alle referanser til namespace HAL har prefixet i seg. Merkelig!
-with HAL; use HAL;
 with Ada.Real_Time; use Ada.Real_Time;
 
 package body Servo is
@@ -9,9 +7,9 @@ package body Servo is
    --------------
 
    procedure SetAngle(angle : AngleRange; PinId : Arduino.IOs.Pin_Id) is
-      highTime : HAL.UInt64;
+      highTime : Integer;
    begin
-      highTime := HAL.UInt64(mapVal(angle, AngleRange'First, AngleRange'Last, PulseRange'First, PulseRange'Last)); 
+      highTime := (mapVal(angle, AngleRange'First, AngleRange'Last, PulseRange'First, PulseRange'Last)); 
       Write(highTime, pinId);
    end SetAngle;
 
@@ -20,9 +18,9 @@ package body Servo is
    ------------
 
    procedure SetRpm(rpm : RpmRange; pinId : Arduino.IOs.Pin_Id) is
-      highTime : HAL.UInt64;
+      highTime : Integer;
    begin
-      highTime := (HAL.UInt64(mapVal(rpm, RpmRange'First, RpmRange'Last, PulseRange'First, PulseRange'Last)));
+      highTime := ((mapVal(rpm, RpmRange'First, RpmRange'Last, PulseRange'First, PulseRange'Last)));
       Write(highTime, pinId);
    end SetRpm;
 
@@ -39,7 +37,7 @@ package body Servo is
    -- Write --
    -----------
 
-   procedure Write(highTime : HAL.UInt64; pinId : Arduino.IOs.Pin_Id) is
+   procedure Write(highTime : Integer; pinId : Arduino.IOs.Pin_Id) is
       --Har satt inn det krøkkete greiene her, siden det virket som delay ikke ville fungere med mikrosekunder.
       TimeNow : Time;
    begin

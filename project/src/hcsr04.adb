@@ -12,7 +12,7 @@ package body HCSR04 is
 
    function Distance(outPin, inPin : Arduino.IOs.Pin_Id) return Float is
       TimeNow : Ada.Real_Time.Time;
-      Result : Float;
+      Result : Duration;
       Pulse : Boolean;
    begin
       TimeNow := Ada.Real_Time.Clock;
@@ -49,14 +49,19 @@ package body HCSR04 is
             Result := -1.0;
          end loop;
          
-         --return Float(Ada.Real_Time.Clock - TimeNow) / 58.0;
+         
+         Result := Ada.Real_Time.To_Duration(Ada.Real_Time.Clock - TimeNow);
+         
+         return (Float(Result) / 58.0) * 1000000.0;
+
          -- https://github.com/gamegine/HCSR04-ultrasonic-sensor-lib/blob/master/src/HCSR04.cpp
          
       end if;
       
-      return Result;
+      return -1.0;
       
       --Something went wrong if we end up here!
    end Distance;
 
 end HCSR04;
+

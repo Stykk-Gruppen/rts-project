@@ -43,6 +43,8 @@ package ada_main is
    --  system.machine_code%s
    --  system.parameters%s
    --  system.parameters%b
+   --  system.semihosting%s
+   --  system.semihosting%b
    --  system.storage_elements%s
    --  system.storage_elements%b
    --  system.secondary_stack%s
@@ -155,8 +157,6 @@ package ada_main is
    --  system.stream_attributes%b
    --  ada.real_time%s
    --  ada.real_time%b
-   --  ada.real_time.delays%s
-   --  ada.real_time.delays%b
    --  system.assertions%s
    --  system.assertions%b
    --  system.pool_global%s
@@ -227,8 +227,6 @@ package ada_main is
    --  arduino_nano_33_ble_sense%s
    --  arduino_nano_33_ble_sense.ios%s
    --  arduino_nano_33_ble_sense.ios%b
-   --  arduino_nano_33_ble_sense.servo%s
-   --  arduino_nano_33_ble_sense.servo%b
    --  main%b
    --  END ELABORATION ORDER
 

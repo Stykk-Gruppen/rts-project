@@ -1,5 +1,3 @@
-with Arduino_Nano_33_Ble_Sense.Time;
-with HAL;
 
 package body VehicleController is
    
@@ -33,16 +31,19 @@ package body VehicleController is
    
    procedure SetSteeringAngle (Degree, DelayTimeMs : Integer) is
       D : Float;
+      TimeNow : Ada.Real_Time.Time := Ada.Real_Time.Clock;
+
    begin
       D := Float(degree) / Float(delayTimeMs);
       for i in 1 .. Degree loop
-         Arduino_Nano_33_Ble_Sense.Time.Delay_Ms(Hal.Uint64(D));
+         TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(DelayTimeMs);
          WheelAngle := Servo.AngleRange(Degree);
       end loop;
    end SetSteeringAngle;
    
    task body SteeringServo is
-      pinId : constant Arduino.IOs.Pin_Id := 5;
+      pinId : constant Arduino.IOs.Pin_Id := 4;
       
    begin
       loop
@@ -52,7 +53,7 @@ package body VehicleController is
    
    
    task body EngineServo is
-      PinId : constant Arduino.IOs.Pin_Id := 8;
+      PinId : constant Arduino.IOs.Pin_Id := 5;
    begin
       loop
          Servo.SetRpm(EngineRpm, PinId);

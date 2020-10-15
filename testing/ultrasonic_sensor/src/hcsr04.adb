@@ -52,7 +52,7 @@ package body HCSR04 is
          
          Result := Ada.Real_Time.To_Duration(Ada.Real_Time.Clock - TimeNow);
          
-         return Float(Result) / 58.0;
+         return (Float(Result) / 58.0) * 1000000.0;
          -- https://github.com/gamegine/HCSR04-ultrasonic-sensor-lib/blob/master/src/HCSR04.cpp
          
       end if;

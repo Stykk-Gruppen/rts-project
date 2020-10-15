@@ -6,11 +6,11 @@ pragma Suppress (Overflow_Check);
 
 package body ada_main is
 
-   E093 : Short_Integer; pragma Import (Ada, E093, "ada__tags_E");
+   E095 : Short_Integer; pragma Import (Ada, E095, "ada__tags_E");
    E022 : Short_Integer; pragma Import (Ada, E022, "ada__exceptions_E");
-   E047 : Short_Integer; pragma Import (Ada, E047, "system__soft_links_E");
-   E107 : Short_Integer; pragma Import (Ada, E107, "system__bb__timing_events_E");
-   E045 : Short_Integer; pragma Import (Ada, E045, "system__exception_table_E");
+   E050 : Short_Integer; pragma Import (Ada, E050, "system__soft_links_E");
+   E109 : Short_Integer; pragma Import (Ada, E109, "system__bb__timing_events_E");
+   E048 : Short_Integer; pragma Import (Ada, E048, "system__exception_table_E");
    E132 : Short_Integer; pragma Import (Ada, E132, "ada__streams_E");
    E141 : Short_Integer; pragma Import (Ada, E141, "system__finalization_root_E");
    E139 : Short_Integer; pragma Import (Ada, E139, "ada__finalization_E");
@@ -39,7 +39,6 @@ package body ada_main is
    E174 : Short_Integer; pragma Import (Ada, E174, "nrf__uart_E");
    E117 : Short_Integer; pragma Import (Ada, E117, "nrf__device_E");
    E178 : Short_Integer; pragma Import (Ada, E178, "arduino_nano_33_ble_sense__ios_E");
-   E207 : Short_Integer; pragma Import (Ada, E207, "arduino_nano_33_ble_sense__servo_E");
 
    Sec_Default_Sized_Stacks : array (1 .. 1) of aliased System.Secondary_Stack.SS_Stack (System.Parameters.Runtime_Default_Sec_Stack_Size);
 
@@ -111,11 +110,11 @@ package body ada_main is
       end if;
       Is_Elaborated := True;
       Main_Priority := -1;
-      Time_Slice_Value := 0;
+      Time_Slice_Value := -1;
       WC_Encoding := 'b';
-      Locking_Policy := 'C';
+      Locking_Policy := ' ';
       Queuing_Policy := ' ';
-      Task_Dispatching_Policy := 'F';
+      Task_Dispatching_Policy := ' ';
       Priority_Specific_Dispatching :=
         Local_Priority_Specific_Dispatching'Address;
       Num_Specific_Dispatching := 0;
@@ -136,18 +135,16 @@ package body ada_main is
       Ada.Exceptions'Elab_Spec;
       System.Soft_Links'Elab_Spec;
       System.Bb.Timing_Events'Elab_Spec;
-      System.Bb.Timing_Events'Elab_Body;
-      E107 := E107 + 1;
+      E109 := E109 + 1;
       Ada.Tags'Elab_Body;
-      E093 := E093 + 1;
+      E095 := E095 + 1;
       System.Exception_Table'Elab_Body;
-      E045 := E045 + 1;
-      E047 := E047 + 1;
+      E048 := E048 + 1;
+      E050 := E050 + 1;
       E022 := E022 + 1;
       Ada.Streams'Elab_Spec;
       E132 := E132 + 1;
       System.Finalization_Root'Elab_Spec;
-      System.Finalization_Root'Elab_Body;
       E141 := E141 + 1;
       Ada.Finalization'Elab_Spec;
       E139 := E139 + 1;
@@ -159,7 +156,6 @@ package body ada_main is
       Ada.Real_Time'Elab_Body;
       E006 := E006 + 1;
       System.Pool_Global'Elab_Spec;
-      System.Pool_Global'Elab_Body;
       E145 := E145 + 1;
       HAL.GPIO'ELAB_SPEC;
       E134 := E134 + 1;
@@ -204,7 +200,6 @@ package body ada_main is
       Arduino_Nano_33_Ble_Sense.Ios'Elab_Spec;
       Arduino_Nano_33_Ble_Sense.Ios'Elab_Body;
       E178 := E178 + 1;
-      E207 := E207 + 1;
    end adainit;
 
    procedure Ada_Main_Program;
@@ -234,7 +229,7 @@ package body ada_main is
    --   -L/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/obj/
    --   -L/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/obj/
    --   -L/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/obj/full_lib_Debug/
-   --   -L/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840-v2/adalib/
+   --   -L/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840/adalib/
    --   -static
    --   -lgnarl
    --   -lgnat

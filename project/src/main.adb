@@ -1,33 +1,38 @@
 with Arduino_Nano_33_Ble_Sense.IOs;
-with Arduino_Nano_33_Ble_Sense.Time;
-with VehicleController;
+--with VehicleController;
 with HCSR04;
+with Ada.Real_Time; use Ada.Real_Time;
+with tasktest;
+
 
 procedure Main is
    package Arduino renames Arduino_Nano_33_Ble_Sense;
 
    frontWheelsPin : constant Arduino.IOs.Pin_Id := 1;
    rearWheelsPin : constant Arduino.IOs.Pin_Id := 2;
+   TimeNow : Ada.Real_Time.Time := Ada.Real_Time.Clock;
+   TestingSensorIn : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id := 5;
+   TestingSensorOut : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id := 4;
+   DistanceValue : Float;
+
 begin
 
-   VehicleController.Init(frontWheelsPin, rearWheelsPin);
-
+   --VehicleController.Init(frontWheelsPin, rearWheelsPin);
+   --Arduino.IOs.DigitalWrite (6, True);
    loop
+      DistanceValue := HCSR04.Distance(TestingSensorOut, TestingSensorIn);
 
-      for i in Arduino.IOs.Pin_Id loop
-         Arduino.IOs.DigitalWrite (i, True);
-      end loop;
+      if DistanceValue < 20.0 then
+         --tasktest.highTime := 2000;
+         Arduino.IOs.DigitalWrite (6, False);
 
-      --  Wait 500 milliseconds
-      Arduino.Time.Delay_Ms (500);
+      else
+         --tasktest.highTime := 1000;
+         Arduino.IOs.DigitalWrite (6, True);
 
+      end if;
 
-      --  Turn off the LED connected to pin 17
-      for i in Arduino.IOs.Pin_Id loop
-         Arduino.IOs.DigitalWrite (i, False);
-      end loop;
-
-      --  Wait 500 milliseconds
-      Arduino.Time.Delay_Ms (500);
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Microseconds(30000);
    end loop;
 end Main;

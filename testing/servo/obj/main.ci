@@ -1,26 +1,7 @@
 graph: { title: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb"
-node: { title: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:main__servo_pin_stateD2.5668" label: "Servo_Pin_Stated2\n/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:8:4\n16 bytes (static)" }
-node: { title: "_ada_main" label: "Main\n/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:5:1\n72 bytes (static)" }
-node: { title: "ada__real_time__clock" label: "Clock\n/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840-v2/gnarl/a-reatim.ads:68:13" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "ada__real_time__clock" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:18:49" }
-node: { title: "arduino_nano_33_ble_sense__servo__servo_pin_idPredicate" label: "Servo_Pin_Idpredicate\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/src/arduino_nano_33_ble_sense-servo.ads:40:12" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "arduino_nano_33_ble_sense__servo__servo_pin_idPredicate" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:32:20" }
-node: { title: "system__assertions__raise_assert_failure" label: "Raise_Assert_Failure\n/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840-v2/gnat/s-assert.ads:46:14" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "system__assertions__raise_assert_failure" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:32:20" }
-edge: { sourcename: "_ada_main" targetname: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:main__servo_pin_stateD2.5668" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:32:37" }
-node: { title: "__gnat_rcheck_CE_Discriminant_Check" label: "gnat_rcheck_CE_Discriminant_Check\n<built-in>" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "__gnat_rcheck_CE_Discriminant_Check" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:32:37" }
-node: { title: "arduino_nano_33_ble_sense__servo__go" label: "Go\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/src/arduino_nano_33_ble_sense-servo.ads:48:14" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "arduino_nano_33_ble_sense__servo__go" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:32:16" }
-edge: { sourcename: "_ada_main" targetname: "arduino_nano_33_ble_sense__servo__servo_pin_idPredicate" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:34:22" }
-edge: { sourcename: "_ada_main" targetname: "system__assertions__raise_assert_failure" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:34:22" }
-node: { title: "arduino_nano_33_ble_sense__servo__stop" label: "Stop\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/src/arduino_nano_33_ble_sense-servo.ads:45:14" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "arduino_nano_33_ble_sense__servo__stop" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:34:16" }
-edge: { sourcename: "_ada_main" targetname: "ada__real_time__clock" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:40:31" }
-node: { title: "ada__real_time__milliseconds" label: "Milliseconds\n/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840-v2/gnarl/a-reatim.ads:128:13" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "ada__real_time__milliseconds" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:41:42" }
-node: { title: "ada__real_time__Oadd" label: "+\n/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840-v2/gnarl/a-reatim.ads:72:13" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "ada__real_time__Oadd" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:41:27" }
-node: { title: "ada__real_time__delays__delay_until" label: "Delay_Until\n/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840-v2/gnarl/a-retide.ads:42:14" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "ada__real_time__delays__delay_until" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:41:7" }
+node: { title: "_ada_main" label: "Main\n/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:5:1\n16 bytes (static)" }
+node: { title: "ada__real_time__clock" label: "Clock\n/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840/gnarl/a-reatim.ads:68:13" shape : ellipse }
+edge: { sourcename: "_ada_main" targetname: "ada__real_time__clock" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:6:49" }
+node: { title: "arduino_nano_33_ble_sense__ios__analogwrite" label: "Analogwrite\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/src/arduino_nano_33_ble_sense-ios.ads:62:14" shape : ellipse }
+edge: { sourcename: "_ada_main" targetname: "arduino_nano_33_ble_sense__ios__analogwrite" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:10:33" }
 }

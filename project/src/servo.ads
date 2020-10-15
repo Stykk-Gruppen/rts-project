@@ -1,6 +1,5 @@
-with Arduino_Nano_33_Ble_Sense.Time;
-with HAL;
 with Arduino_Nano_33_Ble_Sense.IOs;
+with Ada.Real_Time; use Ada.Real_Time;
 
 package Servo is
    package Arduino renames Arduino_Nano_33_Ble_Sense;
@@ -16,7 +15,7 @@ package Servo is
 
 private
 
-   period : constant Arduino.Time.Time_Ms := 20;
+   period : constant Integer := 20;
    subtype PulseRange is Natural range 1000 .. 2000;
 
    --Guessing these values, will probably have to be changed several times.
@@ -26,6 +25,6 @@ private
 
 
 
-   procedure Write(highTime : HAL.UInt64; pinId : Arduino.IOs.Pin_Id);
+   procedure Write(highTime : Integer; pinId : Arduino.IOs.Pin_Id);
    function mapVal(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer;
 end Servo;
