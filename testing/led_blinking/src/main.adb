@@ -5,18 +5,97 @@ procedure Main is
    TimeNow : Ada.Real_Time.Time := Ada.Real_Time.Clock;
 begin
    loop
-      for I in 0 .. 47 loop
-         Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(Arduino_Nano_33_Ble_Sense.IOs.Pin_Id(I), True);
-      end loop;
+      --6 13 41 16 24
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(13, True);
 
       TimeNow := Ada.Real_Time.Clock;
-      delay until TimeNow + Ada.Real_Time.Milliseconds(500);
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
 
-      for I in 0 .. 47 loop
-         Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(Arduino_Nano_33_Ble_Sense.IOs.Pin_Id(I), False);
-      end loop;
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(41, True);
 
       TimeNow := Ada.Real_Time.Clock;
-      delay until TimeNow + Ada.Real_Time.Milliseconds(500);
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(6, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(13, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(41, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(6, True);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(13, True);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(41, True);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(16, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(13, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(41, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(16, True);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(13, True);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(41, True);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(24, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(13, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(41, False);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(24, True);
+
+      TimeNow := Ada.Real_Time.Clock;
+      delay until TimeNow + Ada.Real_Time.Milliseconds(100);
+
+
    end loop;
 end Main;
