@@ -7,7 +7,7 @@ with Arduino_Nano_33_Ble_Sense.IOs;
 with Ada.Real_Time; use Ada.Real_Time;
 with tasktest;
 
-procedure Main with Priority => 1 is
+procedure Main with Priority => 0 is
    TimeNow : Ada.Real_Time.Time;
 
 begin
