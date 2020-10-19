@@ -6,7 +6,7 @@ package body HCSR04 is
    -- Distance --
    --------------
 
-   function Distance(outPin, inPin : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id) return Float is
+   function Distance(TrigPin, EchoPin : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id) return Float is
       TimeNow : Ada.Real_Time.Time;
       TimeoutStart : Ada.Real_Time.Time;
       Result : Duration;
@@ -14,19 +14,19 @@ package body HCSR04 is
    begin
       --<<DistStart>>
       TimeNow := Ada.Real_Time.Clock;
-      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(outPin, False);
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(TrigPin, False);
       delay until TimeNow + Ada.Real_Time.Microseconds(2);
       
       TimeNow := Ada.Real_Time.Clock;
-      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(outPin, True);
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(TrigPin, True);
       delay until TimeNow + Ada.Real_Time.Microseconds(10);
-      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(outPin, False);
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(TrigPin, False);
 
       --There must be no interrupts between these parts.
 
-      Pulse := Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(inPin);
+      Pulse := Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin);
       TimeoutStart := Ada.Real_Time.Clock;
-      while Pulse = Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(inPin) loop
+      while Pulse = Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) loop
          --Wait for the analog signal to change from low - high or high - low
          --exit when Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(500000);
          if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then
@@ -38,7 +38,7 @@ package body HCSR04 is
       
       TimeoutStart := Ada.Real_Time.Clock;
 
-      while Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(inPin) = False loop
+      while Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) = False loop
          --Wait for the signal to go from low to high
          if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then
             --goto DistStart;
@@ -49,12 +49,12 @@ package body HCSR04 is
         null;
       end loop;
 
-      if Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(inPin) = True then
+      if Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) = True then
          TimeNow := Ada.Real_Time.Clock;
 
          TimeoutStart := Ada.Real_Time.Clock;
 
-         while not Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(inPin) = False loop
+         while not Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) = False loop
             -- Wait for the signal to change to LOW
             --exit when Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(500000);
             if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then

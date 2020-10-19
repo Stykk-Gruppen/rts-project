@@ -2,7 +2,7 @@ with Ada.Real_Time; use Ada.Real_Time;
 with Arduino_Nano_33_Ble_Sense.IOs;
 with Arduino_Nano_33_Ble_Sense;
 with Ada;
-with DistanceSensorsController;
+with Distance_Sensor_Controller;
 
 
 package body tasktest is
@@ -15,7 +15,7 @@ package body tasktest is
       TimeNow2 : Ada.Real_Time.Time := Ada.Real_Time.Clock;
    begin
       loop
-         if DistanceSensorsController.front.value < 20.0 then 
+         if Distance_Sensor_Controller.Front.Value < 20.0 then 
             highTime := 2000;
          else
             highTime := 1000;
@@ -37,7 +37,7 @@ package body tasktest is
       TimeNow2 : Ada.Real_Time.Time := Ada.Real_Time.Clock;
    begin
       loop
-         if DistanceSensorsController.back.value < 20.0 then 
+         if Distance_Sensor_Controller.Bront.Value < 20.0 then 
             highTime := 1000;
          else
             highTime := 2000;
@@ -60,7 +60,7 @@ package body tasktest is
       TimeNow2 : Ada.Real_Time.Time := Ada.Real_Time.Clock;
    begin
       loop
-         if DistanceSensorsController.dispenser.value < 20.0 then 
+         if Distance_Sensor_Controller.Dispenser.Value < 20.0 then 
             highTime := 1000;
          else
             highTime := 2000;
@@ -83,7 +83,7 @@ package body tasktest is
    begin
       loop
          
-         DistanceSensorsController.Measure2;
+         Distance_Sensor_Controller.Measure2;
          --TimeNow := Ada.Real_Time.Clock;
          --delay until TimeNow + Ada.Real_Time.Microseconds(10000);
          
