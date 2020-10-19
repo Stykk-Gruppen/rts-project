@@ -11,18 +11,18 @@ package DistanceSensorsController is
    
    -- Begynner først med bare 3stk, da vi ikke helt vet om den kan kjøre på et bord.
    front : Distance_Sensor :=
-     (outPin => 0,
-      inPin => 0,
+     (outPin => 4,
+      inPin => 5,`
       value => 0.0);
                                
    back : Distance_Sensor :=
-     (outPin => 0,
-      inPin => 0,
+     (outPin => 27,
+      inPin => 28,
       value => 0.0);
       
    dispenser : Distance_Sensor :=
-     (outPin => 0,
-      inPin => 0,
+     (outPin => 29,
+      inPin => 30,
       value => 0.0);
    
    procedure Measure;
