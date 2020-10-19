@@ -1,22 +1,12 @@
 
 pragma Task_Dispatching_Policy(FIFO_Within_Priorities);
-
-
-with Arduino_Nano_33_Ble_Sense.IOs;
---with VehicleController;
-with Ada.Real_Time; use Ada.Real_Time;
+--with Vehicle_Controller;
 with tasktest;
 
 procedure Main with Priority => 0 is
-   TimeNow : Ada.Real_Time.Time;
-
 begin
-
-
    loop
    --VehicleController.Init(frontWheelsPin, rearWheelsPin);
-
       null;
-
    end loop;
    end Main;

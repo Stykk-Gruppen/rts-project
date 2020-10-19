@@ -2,7 +2,9 @@ package body Servo_Controller is
 
    task body Steering is
    begin
-      Servo.SetAngle(SteeringServo.Angle, SteeringServo.Pin);
+      loop
+         Servo.SetAngle(SteeringServo.Angle, SteeringServo.Pin);
+      end loop;
    end Steering;
    
    task body Engine is

@@ -3,6 +3,6 @@ with DistanceSensorsController;
 
 package Vehicle_Controller is
 
-   task Compute;
+   task Compute with Priority => 10;
    
 end Vehicle_Controller;

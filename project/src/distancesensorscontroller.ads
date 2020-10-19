@@ -24,6 +24,7 @@ package DistanceSensorsController is
       inPin => 30,
       value => 0.0);
    
-   procedure Measure;
+   task Measure with Priority => 9;
+   procedure Measure2;
    
 end DistanceSensorsController;

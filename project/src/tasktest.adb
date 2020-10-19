@@ -83,7 +83,7 @@ package body tasktest is
    begin
       loop
          
-         DistanceSensorsController.Measure;
+         DistanceSensorsController.Measure2;
          --TimeNow := Ada.Real_Time.Clock;
          --delay until TimeNow + Ada.Real_Time.Microseconds(10000);
          

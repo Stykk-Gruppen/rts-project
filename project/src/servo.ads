@@ -15,7 +15,7 @@ package Servo is
 
 private
 
-   period : constant Integer := 20;
+   period : constant Integer := 20000;
    subtype PulseRange is Natural range 1000 .. 2000;
 
    --Guessing these values, will probably have to be changed several times.
