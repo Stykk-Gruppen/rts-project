@@ -1,2 +1,0 @@
-main.adb:3:21: warning: use clause for package "Real_Time" has no effect
-main.adb:6:04: warning: variable "TimeNow" is not referenced

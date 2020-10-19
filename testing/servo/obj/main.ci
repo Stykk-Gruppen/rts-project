@@ -1,7 +1,0 @@
-graph: { title: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb"
-node: { title: "_ada_main" label: "Main\n/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:5:1\n16 bytes (static)" }
-node: { title: "ada__real_time__clock" label: "Clock\n/home/kent/opt/GNAT/2020-arm-elf/arm-eabi/lib/gnat/ravenscar-full-nrf52840/gnarl/a-reatim.ads:68:13" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "ada__real_time__clock" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:6:49" }
-node: { title: "arduino_nano_33_ble_sense__ios__analogwrite" label: "Analogwrite\n/home/kent/Source/School/RealTimeProject/Ada_Drivers_Library/boards/Arduino_Nano_33_BLE_Sense/src/arduino_nano_33_ble_sense-ios.ads:62:14" shape : ellipse }
-edge: { sourcename: "_ada_main" targetname: "arduino_nano_33_ble_sense__ios__analogwrite" label: "/home/kent/Source/School/RealTimeProject/rts-project/testing/servo/src/main.adb:10:33" }
-}
