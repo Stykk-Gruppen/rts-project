@@ -12,7 +12,7 @@ package body HCSR04 is
       Result : Duration;
       Pulse : Boolean;
    begin
-      <<DistStart>>
+      --<<DistStart>>
       TimeNow := Ada.Real_Time.Clock;
       Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(outPin, False);
       delay until TimeNow + Ada.Real_Time.Microseconds(2);
@@ -30,7 +30,8 @@ package body HCSR04 is
          --Wait for the analog signal to change from low - high or high - low
          --exit when Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(500000);
          if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then
-            goto DistStart;
+            --goto DistStart;
+            return -1.0;
          end if;
         null;
       end loop;
@@ -40,7 +41,9 @@ package body HCSR04 is
       while Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(inPin) = False loop
          --Wait for the signal to go from low to high
          if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then
-            goto DistStart;
+            --goto DistStart;
+            return -1.0;
+
          end if;
 
         null;
@@ -55,7 +58,8 @@ package body HCSR04 is
             -- Wait for the signal to change to LOW
             --exit when Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(500000);
             if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then
-               goto DistStart;
+               --goto DistStart;
+               return -1.0;
             end if;
 
             null;
@@ -69,7 +73,7 @@ package body HCSR04 is
 
       end if;
 
-      return 0.0;
+      return -1.0;
 
       --Something went wrong if we end up here!
    end Distance;
