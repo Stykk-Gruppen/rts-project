@@ -8,7 +8,6 @@ package DistanceSensorsController is
       inPin : Arduino.IOs.Pin_Id;
       value : Float;
    end record;
-   
    -- Begynner først med bare 3stk, da vi ikke helt vet om den kan kjøre på et bord.
    front : Distance_Sensor :=
      (outPin => 4,
