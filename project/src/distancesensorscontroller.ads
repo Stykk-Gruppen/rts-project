@@ -3,7 +3,7 @@ with Arduino_Nano_33_Ble_Sense.IOs;
 package DistanceSensorsController is
    package Arduino renames Arduino_Nano_33_Ble_Sense;
 
-   protected type Distance_Sensor is record
+   type Distance_Sensor is record
       outPin : Arduino.IOs.Pin_Id;
       inPin : Arduino.IOs.Pin_Id;
       value : Float;
@@ -12,7 +12,7 @@ package DistanceSensorsController is
    -- Begynner først med bare 3stk, da vi ikke helt vet om den kan kjøre på et bord.
    front : Distance_Sensor :=
      (outPin => 4,
-      inPin => 5,`
+      inPin => 5,
       value => 0.0);
                                
    back : Distance_Sensor :=
