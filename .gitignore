@@ -8,3 +8,6 @@ testing/ultrasonic_sensor/obj/
 testing/servo/obj/
 */obj/
 *.xml
+process/report/DSA3102-report.bbl
+process/report/DSA3102-report.blg
+process/report/DSA3102-report.toc
