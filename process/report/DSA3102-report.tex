@@ -123,6 +123,27 @@ usermod -a -G dialout MY\_USER\_NAME
 \end{lstlisting}
 
 Legge til utilization test og grafikk.
+\vspace{5mm}
+
+October 12. 
+
+We are able to flash and debug by manually holding cables to the debug connections on the Arduino. We used the diagram on the segger website \cite{JLINK} to find out which JLink pins to "connect" to the Arduino points.
+
+AnalogWrite seems like the perfect choice to generate a pulse for both servo and sensor. In the Ada Drivers Library \cite{ADADRIVERSLIBRARY} there is a very good example for controlling a servo. It changes the analog signal period with \textbf{Set\_Analog\_Period\_Us} to generate a steady pulse.
+
+However we were never able to make it work on the arduino. Seems to be a problem with incompatibility between the drivers and the Arduino or the nRF52840 chip.\\
+We suspect it is tied to interrupts since the stacktrace from the debugger kept stopping on a new line each time.
+
+Progress is slow because of the manual labour required for each flash and debugging session.
+\vspace{5mm}
+
+October 19. 
+
+We recieved the clamps from Richard and Steven was able to put it together with the Arduino and a breadboard. We are finally able to easily flash and debug.
+
+We were able to create a steady pulse using digital I/O and tasks with a fixed priority. With a proper priority we were able to use three tasks for three separate servos and one task for three sensors.
+
+We encountered some problems using a 9V battery power source, as the Ardino requires at least 5V and the peripherals need 5V.
 
 \section{Ravenscar}
 
@@ -161,6 +182,8 @@ By the time you're reading this, some of these issues might have been fixed. Dow
 
 	\item Including Arduino\_Nano\_33\_Ble\_Sense.Time makes the microcontroller crash in real time. --ref til Debug lstlisting i appendix--
 
+	\item Only Digital I/O works. Possibly because Analog relies on interrupt/timers which seem broken in our drivers or runtime.
+
 	\item Generating a pulse accepted by the servos and ultrasonic sensor is more challenging than setting pins to low/high and using a delay.
 
 	\item Using a copied bb-runtime library will not work correctly on other computers under debugging. They must be generated on every new computer.
@@ -169,7 +192,8 @@ By the time you're reading this, some of these issues might have been fixed. Dow
 
 \subsection{Pin layout}
 11.10.2020\\
-The P1 base address for the nRF52840 seen here on page 23 in the datasheet \cite{NRF52840}. Without it we were only able to use the pins with P0 seen on figure \ref{pinlayout}. It was missing from the Ada code for nrf52, so we had to add it and the functionality to choose a pin number 0-31 and pin base 1-2.
+The nRF52840 has two ports, P0 has 32 pins while P1 has 16 pins.\\ 
+We found the P1 base address for the nRF52840 seen on page 23 in the datasheet \cite{NRF52840}. Without it we were only able to use the pins with P0 seen on figure \ref{pinlayout}. After adding the base address to the Ada code and the option to chose between 0 and 47 pin number we were able to make all the pins function.
 
 
 \newpage
