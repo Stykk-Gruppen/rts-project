@@ -17,8 +17,11 @@ package body Distance_Sensor_Controller is
          exit when Dispenser.Value /= -1.0;
       end loop;
    end Measure2;
-   
-   
+
+   -------------
+   -- Measure --
+   -------------
+
    task body Measure is
    begin
       loop

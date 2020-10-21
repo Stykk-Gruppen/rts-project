@@ -57,7 +57,7 @@ package body tasktest is
    
    task body DispenserServo is
       --PinId : constant Arduino.IOs.Pin_Id := 3;
-      TimeNow2 : Ada.Real_Time.Time := Ada.Real_Time.Clock;
+      TimeNow : Ada.Real_Time.Time := Ada.Real_Time.Clock;
    begin
       loop
          if Distance_Sensor_Controller.Dispenser.Value < 20.0 then 
@@ -67,13 +67,13 @@ package body tasktest is
          end if;
          
          Arduino.IOs.DigitalWrite (Arduino_Nano_33_Ble_Sense.IOs.Pin_Id(23), True);
-         TimeNow2 := Ada.Real_Time.Clock;
-         delay until TimeNow2 + Ada.Real_Time.Microseconds(highTime);
+         TimeNow := Ada.Real_Time.Clock;
+         delay until TimeNow + Ada.Real_Time.Microseconds(highTime);
          
          Arduino.IOs.DigitalWrite (Arduino_Nano_33_Ble_Sense.IOs.Pin_Id(23), False);
          
-         TimeNow2 := Ada.Real_Time.Clock;
-         delay until TimeNow2 + Ada.Real_Time.Microseconds(20000 - highTime);
+         TimeNow := Ada.Real_Time.Clock;
+         delay until TimeNow + Ada.Real_Time.Microseconds(20000 - highTime);
       end loop;
    end DispenserServo;
    

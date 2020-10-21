@@ -7,7 +7,7 @@ package body Servo_Controller is
    task body Steering is
    begin
       loop
-         Servo.SetAngle(SteeringServo.Angle, SteeringServo.Pin);
+         Servo.Set_Angle (Steering_Servo.Angle, Steering_Servo.Pin);
       end loop;
    end Steering;
 
@@ -17,7 +17,9 @@ package body Servo_Controller is
 
    task body Engine is
    begin
-      null;
+      loop
+         Servo.Set_Rpm (Engine_Servo.Rpm, Engine_Servo.Pin);
+      end loop;
    end Engine;
 
    ---------------
@@ -26,7 +28,10 @@ package body Servo_Controller is
 
    task body Dispenser is
    begin
-      null;
+      loop
+         Servo.Set_Angle (Dispenser_Servo_Left.Angle, Dispenser_Servo_Left.Pin);
+         Servo.Set_Angle (Dispenser_Servo_Right.Angle, Dispenser_Servo_Right.Pin);
+      end loop;
    end Dispenser;
 
 end Servo_Controller;

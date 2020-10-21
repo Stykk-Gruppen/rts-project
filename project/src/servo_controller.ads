@@ -3,23 +3,28 @@ with Servo;
 
 package Servo_Controller is
    
+   subtype Rpm_Range is Servo.Rpm_Range;
+   
    type Servo_Half is record
       Pin : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id;
-      Angle : Servo.AngleRange;
+      Angle : Servo.Angle_Range;
    end record;
    
    type Servo_Full is record
       Pin : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id;
-      Rpm : Servo.RpmRange;
+      Rpm : Servo.Rpm_Range;
    end record;
    
-   SteeringServo : Servo_Half :=
+   Steering_Servo : Servo_Half :=
      (Pin => 3,
       Angle => 0);
-   DispenserServo : Servo_Half :=
+   Dispenser_Servo_Left : Servo_Half :=
      (Pin => 23,
-      Angle => 0);
-   EngineServo : Servo_Full :=
+      Angle => -90);
+    Dispenser_Servo_Right : Servo_Half :=
+     (Pin => 24,
+      Angle => 90);
+   Engine_Servo : Servo_Full :=
      (Pin => 21,
       Rpm => 0);
    

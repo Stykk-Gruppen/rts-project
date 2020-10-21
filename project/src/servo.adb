@@ -2,52 +2,52 @@ with Ada.Real_Time; use Ada.Real_Time;
 
 package body Servo is
 
-   --------------
-   -- SetAngle --
-   --------------
+   ---------------
+   -- Set_Angle --
+   ---------------
 
-   procedure SetAngle(angle : AngleRange; PinId : Arduino.IOs.Pin_Id) is
-      highTime : Integer;
+   procedure Set_Angle(Angle : Angle_Range; Pin_Id : Arduino.IOs.Pin_Id) is
+      High_Time : Integer;
    begin
-      highTime := (mapVal(angle, AngleRange'First, AngleRange'Last, PulseRange'First, PulseRange'Last)); 
-      Write(highTime, pinId);
-   end SetAngle;
+      High_Time := (Map_Val(Angle, Angle_Range'First, Angle_Range'Last, Pulse_Range'First, Pulse_Range'Last)); 
+      Write(High_Time, Pin_Id);
+   end Set_Angle;
 
-   ------------
-   -- SetRpm --
-   ------------
+   -------------
+   -- Set_Rpm --
+   -------------
 
-   procedure SetRpm(rpm : RpmRange; pinId : Arduino.IOs.Pin_Id) is
-      highTime : Integer;
+   procedure Set_Rpm(Rpm : Rpm_Range; Pin_Id : Arduino.IOs.Pin_Id) is
+      High_Time : Integer;
    begin
-      highTime := ((mapVal(rpm, RpmRange'First, RpmRange'Last, PulseRange'First, PulseRange'Last)));
-      Write(highTime, pinId);
-   end SetRpm;
+      High_Time := (Map_Val(Rpm, Rpm_Range'First, Rpm_Range'Last, Pulse_Range'First, Pulse_Range'Last));
+      Write(High_Time, Pin_Id);
+   end Set_Rpm;
 
-   ------------
-   -- MapVal --
-   ------------
+   -------------
+   -- Map_Val --
+   -------------
 
-   function MapVal(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer is
+   function Map_Val(Input : Integer; Input_Min : Integer; Input_Max : Integer; Output_Min : Integer; Output_Max : Integer) return Integer is
    begin
-      return outputMin + (input - inputMin) * (outputMax - outputMin) / (inputMax - inputMin);
-   end MapVal;
+      return Output_Min + (Input - Input_Min) * (Output_Max - Output_Min) / (Input_Max - Input_Min);
+   end Map_Val;
 
    -----------
    -- Write --
    -----------
 
-   procedure Write(highTime : Integer; pinId : Arduino.IOs.Pin_Id) is
+   procedure Write(High_Time : Integer; Pin_Id : Arduino.IOs.Pin_Id) is
       --Har satt inn det krøkkete greiene her, siden det virket som delay ikke ville fungere med mikrosekunder.
       TimeNow : Time;
    begin
       TimeNow := Ada.Real_Time.Clock;
-      Arduino.IOs.DigitalWrite (pinId, True);
-      delay until TimeNow + Ada.Real_Time.Microseconds(highTime);
+      Arduino.IOs.DigitalWrite (Pin_Id, True);
+      delay until TimeNow + Ada.Real_Time.Microseconds(High_Time);
       
       TimeNow := Ada.Real_Time.Clock;
-      Arduino.IOs.DigitalWrite (pinId, false);
-      delay until TimeNow + Ada.Real_Time.Microseconds(20000 - highTime);
+      Arduino.IOs.DigitalWrite (Pin_Id, false);
+      delay until TimeNow + Ada.Real_Time.Microseconds(Period - High_Time);
    end Write;
 
 end Servo;
