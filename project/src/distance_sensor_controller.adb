@@ -23,20 +23,25 @@ package body Distance_Sensor_Controller is
    -------------
 
    task body Measure is
+      Temp : Float;
    begin
+
       loop
          loop
-            Front.Value := HCSR04.Distance(Front.TrigPin, Front.EchoPin);
-            exit when Front.Value /= -1.0;
+            Temp := HCSR04.Distance(Front.TrigPin, Front.EchoPin);
+            exit when Temp /= -1.0;
          end loop;
+         Front.Value := Temp;
          loop
-            Back.Value := HCSR04.Distance(Back.TrigPin, Back.EchoPin);
-            exit when Back.Value /= -1.0;
+            Temp := HCSR04.Distance(Back.TrigPin, Back.EchoPin);
+            exit when Temp /= -1.0;
          end loop;
+         Back.Value := Temp;
          loop
-            Dispenser.Value := HCSR04.Distance(Dispenser.TrigPin, Dispenser.EchoPin);
-            exit when Dispenser.Value /= -1.0;
+            Temp := HCSR04.Distance(Dispenser.TrigPin, Dispenser.EchoPin);
+            exit when Temp /= -1.0;
          end loop;
+         Dispenser.Value := Temp;
       end loop;
    end Measure;
 

@@ -9,21 +9,21 @@ package Distance_Sensor_Controller is
    end record;
 
    Front : Distance_Sensor :=
-     (TrigPin => 4,
-      EchoPin => 5,
-      Value => 0.0);
+     (TrigPin => 21,
+      EchoPin => 27,
+      Value => 50.0);
 
    Back : Distance_Sensor :=
      (TrigPin => 21,
       EchoPin => 27,
-      Value => 0.0);
+      Value => 50.0);
 
    Dispenser : Distance_Sensor :=
-     (TrigPin => 29,
-      EchoPin => 30,
-      Value => 0.0);
+     (TrigPin => 21,
+      EchoPin => 27,
+      Value => 50.0);
 
-   task Measure with Priority => 9;
+   task Measure with Priority => 10;
    procedure Measure2;
    
 end Distance_Sensor_Controller;

@@ -22,7 +22,7 @@ package Servo_Controller is
      (Pin => 23,
       Angle => -90);
     Dispenser_Servo_Right : Servo_Half :=
-     (Pin => 24,
+     (Pin => 34,
       Angle => 90);
    Engine_Servo : Servo_Full :=
      (Pin => 21,
