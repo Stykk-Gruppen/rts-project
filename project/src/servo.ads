@@ -17,5 +17,5 @@ private
    --Guessing these values, will probably have to be changed several times.
 
    procedure Write(High_Time : Integer; Pin_Id : Arduino.IOs.Pin_Id);
-   function Map_Val(input : Integer; inputMin : Integer; inputMax : Integer; outputMin : Integer; outputMax : Integer) return Integer;
+   function Map_Val(Input : Integer; Input_Min : Integer; Input_Max : Integer; Output_Min : Integer; Output_Max : Integer) return Integer;
 end Servo;
