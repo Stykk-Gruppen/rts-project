@@ -23,7 +23,7 @@ package Distance_Sensor_Controller is
       EchoPin => 27,
       Value => 50.0);
 
-   task Measure with Priority => 10;
+   task Measure with Priority => 9;
    procedure Measure2;
    
 end Distance_Sensor_Controller;

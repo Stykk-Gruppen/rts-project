@@ -5,7 +5,7 @@ package Vehicle_Controller is
    type Direction is (Forward, Backward, Stop);
 
    task Compute with Priority => 10;
-   task Status_Light with Priority => 10;
+   task Status_Light with Priority => 1;
    procedure Set_Steering_Angle (Angle : Steering_Angle);
    procedure Set_Velocity (Velocity : Float);
    procedure Activate_Dispenser;
