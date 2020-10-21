@@ -38,7 +38,6 @@ package body Servo is
    -----------
 
    procedure Write(High_Time : Integer; Pin_Id : Arduino.IOs.Pin_Id) is
-      --Har satt inn det krøkkete greiene her, siden det virket som delay ikke ville fungere med mikrosekunder.
       TimeNow : Time;
    begin
       TimeNow := Ada.Real_Time.Clock;
@@ -46,8 +45,8 @@ package body Servo is
       delay until TimeNow + Ada.Real_Time.Microseconds(High_Time);
       
       TimeNow := Ada.Real_Time.Clock;
-      Arduino.IOs.DigitalWrite (Pin_Id, false);
-      delay until TimeNow + Ada.Real_Time.Microseconds(Period - High_Time);
+      Arduino.IOs.DigitalWrite (Pin_Id, False);
+      delay until TimeNow + Ada.Real_Time.Microseconds(20000 - High_Time);
    end Write;
 
 end Servo;
