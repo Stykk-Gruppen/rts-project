@@ -28,8 +28,8 @@ package Servo_Controller is
      (Pin => 21,
       Rpm => 0);
    
-   task Steering with Priority => 10;
-   task Engine with Priority => 1;
-   task Dispenser with Priority => 1;
+   task Steering with Priority => 9;
+   task Engine with Priority => 9;
+   task Dispenser with Priority => 9;
 
 end Servo_Controller;
