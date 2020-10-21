@@ -22,9 +22,9 @@ package body Servo_Controller is
       end loop;
    end Engine;
 
-   ---------------
+   --------------------
    -- Left Dispenser --
-   ---------------
+   --------------------
 
    task body Dispenser_Left is
    begin
@@ -33,9 +33,9 @@ package body Servo_Controller is
       end loop;
    end Dispenser_Left;
 
-   ---------------
+   ---------------------
    -- Right Dispenser --
-   ---------------
+   ---------------------
 
    task body Dispenser_Right is
    begin
