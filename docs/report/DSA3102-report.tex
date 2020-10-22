@@ -64,6 +64,61 @@ texcl=true,
 \newpage
 \tableofcontents
 
+
+\newpage
+\section{Abstract}
+This is our submission for the semester assignemnt in the course Real-Time Systems DSA3102, fall of 2020.
+
+
+\section{Introduction}
+The semester assignment as given, was to design and implement a real-time system, which would run on an Arduino Nano 33 BLE Sense, with the requirement that it would be programmed in Ada. 
+
+
+A broad definition of a real-time system, is a system that reacts to external stimuli, make calucations, and performs some output, within a given deadline. In other words, the challenge here is not only to write a logically correct program, but also that it finishes all tasks in time. Which naturally increases the difficulty. 
+
+
+This report will explain our project choice as well as the design. It will give a detailed description of the challenges, especially concerning running Ada on an Arduino Nano. Finally we will explain how the final solution works, and how we can prove that it is safe, and that the system will be able to meet all its deadlines. 
+
+
+\section{Specifications}
+
+Very early on, we decided on building an autonomous car. We initially had a plan on using a hololens to interact with the car in some way, but we quickly moved away from this, in order to reduce the overall complexity. 
+
+The car should not only drive, but it would also have a bottle of antibac on top of it, with a sensor that would stop the car, and provide a person with a few drops of desinfecting liquid. 
+
+The initial design looked like this. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{prototype-drawing.png}
+	\caption{Prototype drawing of our vehicle}
+	\label{ProtoDrawing}
+\end{figure}
+
+As the car would provide people with antibac, we naturally wanted the car to be able to drive on top of a table. That is why it had downpointing sensors, to be able to know when it would drive of an edge. However, after receiving the car from our professor, we quickly found, that the navigation system we would need to implement would be way to comprehensive, given the small timefram of the assignment. 
+
+Throughout the project, the system went through several iterations, as as we met challenges along the way, the antibac idea was abandoned. The final design would look like this:
+
+*********Diagram eller bilde av sluttdesign********************
+
+\section{Technologies}
+
+\subsection{The Ada Programming Language}
+
+\subsection{Arduino Nano 33 BLE Sense}
+
+
+
+
+
+\section{Implementation}
+\subsection{Ada on the Arduino}
+
+\subsubsection{Ada Drivers Library}
+
+\subsubsection{Ravenscar Run-time Library}
+
+
 \newpage
 \section{Maybe useful text}
 
@@ -145,6 +200,24 @@ We were able to create a steady pulse using digital I/O and tasks with a fixed p
 
 We encountered some problems using a 9V battery power source, as the Ardino requires at least 5V and the peripherals need 5V.
 
+
+\vspace{5mm}
+October 21.
+
+We wrote the code for the entire system.
+
+
+\vspace{5mm}
+October 22.
+
+This was the first day we tested our servo code on the car. After a lot of trial and error on the steering we quickly moved on to the drive motor. We got the wheels to move fairly quickly after discovering that the motor needs a neutral (1500ms PWM) signal to intialize, before giving it signals which indicate torque. However, there quickly emerged problems. First of all the minimum speed was much to high, and secondly, it was impossible to get the car to switch between going forwards and backwards. After conversations with our professor, we learned that Joakim Bjork, had worked a lot with this car, and sat on a lot of documentation for the motors. This documentation would be made available for us on the next day.
+
+\vspace{5mm}
+
+Obtober 23.
+
+\textbf{D-Day} (Documentation day)
+
 \section{Ravenscar}
 
 The full ravenscar run-time library offers what is called the Ravenscar profile. This is a subset of the Ada language, where the features and available libraries are limited. The reason for this is to ensure robust software on realtime and safety critical systems. 
@@ -207,12 +280,15 @@ We found the P1 base address for the nRF52840 seen on page 23 in the datasheet \
 \end{figure}
 
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{prototype-drawing.png}
-	\caption{Prototype drawing of our vehicle}
-	\label{ProtoDrawing}
-\end{figure}
+
+\section{Conclusion}
+
+The purpose of this assigment was to try and implement the theory relating to real-time systems in practice, in order to better understand it. In spite of the challenges along the way, and how we had to downscale the project several times, we would still say that this goal was accomplished.
+
+One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving, nothing can beat the feeling of actually experiencing it. As mentioned, we had several tasks that did'nt deliver the output we expected, and many times this was due to the task not getting any time on the CPU. That is a powerful experience. 
+
+Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was great, is guaranteed to prove very useful knowledge in the future. 
+
 
 \newpage
 %Referanse
