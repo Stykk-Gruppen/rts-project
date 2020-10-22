@@ -11,7 +11,7 @@ package Vehicle_Controller is
    procedure Activate_Dispenser;
 
 private
-   Status_Light_Colour : Colour := Blue;
+   Status_Light_Colour : Colour := Green;
    Wheel_Radius : Float := 5.0;
      
 end Vehicle_Controller;

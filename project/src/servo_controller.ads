@@ -16,20 +16,21 @@ package Servo_Controller is
    end record;
    
    Steering_Servo : Servo_Half :=
-     (Pin => 3,
+     (Pin => 4,
       Angle => 0);
    Dispenser_Servo_Left : Servo_Half :=
      (Pin => 23,
       Angle => -90);
     Dispenser_Servo_Right : Servo_Half :=
-     (Pin => 24,
+     (Pin => 34,
       Angle => 90);
    Engine_Servo : Servo_Full :=
-     (Pin => 21,
+     (Pin => 5,
       Rpm => 0);
    
-   task Steering with Priority => 10;
-   task Engine with Priority => 1;
-   task Dispenser with Priority => 1;
+   task Steering with Priority => 11;
+   task Engine with Priority => 11;
+   task Dispenser_Left with Priority => 11;
+   task Dispenser_Right with Priority => 11;
 
 end Servo_Controller;

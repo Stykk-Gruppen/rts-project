@@ -17,7 +17,7 @@ package body Vehicle_Controller is
       Current_Direction := Forward;
       Set_Velocity (1.0);
       loop
-         if Distance_Sensor_Controller.Dispenser.Value < 20.0 then
+         if Distance_Sensor_Controller.Dispenser.Value < 5.0 then
             Status_Light_Colour := Blue;
             Previous_Direction := Current_Direction;
             Current_Direction := Stop;
@@ -53,10 +53,12 @@ package body Vehicle_Controller is
                      Set_Velocity (1.0);
                      Previous_Direction := Forward;
                end case;
+               Status_Light_Colour := Green;
                Current_Direction := Previous_Direction;
             end if;
          end if;
-
+         Time_Now := Ada.Real_Time.Clock;
+         delay until Time_Now + Ada.Real_Time.Milliseconds(200);
       end loop;
    end Compute;
 
@@ -67,6 +69,9 @@ package body Vehicle_Controller is
    task body Status_Light is
       Time_Now : Ada.Real_Time.Time;
    begin
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, True);
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, True);
+      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, True);
       loop
          Time_Now := Ada.Real_Time.Clock;
          case Status_Light_Colour is

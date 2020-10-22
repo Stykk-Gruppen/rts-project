@@ -22,16 +22,26 @@ package body Servo_Controller is
       end loop;
    end Engine;
 
-   ---------------
-   -- Dispenser --
-   ---------------
+   --------------------
+   -- Left Dispenser --
+   --------------------
 
-   task body Dispenser is
+   task body Dispenser_Left is
    begin
       loop
          Servo.Set_Angle (Dispenser_Servo_Left.Angle, Dispenser_Servo_Left.Pin);
+      end loop;
+   end Dispenser_Left;
+
+   ---------------------
+   -- Right Dispenser --
+   ---------------------
+
+   task body Dispenser_Right is
+   begin
+      loop
          Servo.Set_Angle (Dispenser_Servo_Right.Angle, Dispenser_Servo_Right.Pin);
       end loop;
-   end Dispenser;
+   end Dispenser_Right;
 
 end Servo_Controller;
