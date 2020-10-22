@@ -1,6 +1,7 @@
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[normalem]{ulem}
+\usepackage{tikz}
 
 \title{The \sout{Antibac}Buggy}
 \author{Kent Odde, Stian Onarheim, Tarald Vestbøstad}
@@ -10,8 +11,13 @@
 \begin{document}
 
 \frame{\titlepage}
+\addtobeamertemplate{headline}{}{%
+\begin{tikzpicture}[remember picture,overlay]
+\node at([shift={(.45\paperwidth,-.64)}]current page.north) {\includegraphics[height=.5cm]{img/logo.png}};
+\end{tikzpicture}}
 
 \begin{frame}
+    \frametitle{Test}
 Hello.
 \end{frame}
 
