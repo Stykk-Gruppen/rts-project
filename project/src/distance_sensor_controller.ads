@@ -14,8 +14,8 @@ package Distance_Sensor_Controller is
       Value => 50.0);
 
    Back : Distance_Sensor :=
-     (TrigPin => 21,
-      EchoPin => 27,
+     (TrigPin => 30,
+      EchoPin => 29,
       Value => 50.0);
 
    Dispenser : Distance_Sensor :=

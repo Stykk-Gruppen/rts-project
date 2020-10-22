@@ -42,11 +42,11 @@ package body Servo is
    begin
       TimeNow := Ada.Real_Time.Clock;
       Arduino.IOs.DigitalWrite (Pin_Id, True);
-      delay until TimeNow + Ada.Real_Time.Microseconds(High_Time);
+      delay until TimeNow + Ada.Real_Time.Microseconds(2000);--High_Time);
       
       TimeNow := Ada.Real_Time.Clock;
       Arduino.IOs.DigitalWrite (Pin_Id, False);
-      delay until TimeNow + Ada.Real_Time.Microseconds(20000 - High_Time);
+      delay until TimeNow + Ada.Real_Time.Microseconds(20000 - 2000);
    end Write;
 
 end Servo;
