@@ -1,7 +1,7 @@
 with Distance_Sensor_Controller;
-with Servo_Controller;
 with Ada.Real_Time; use Ada.Real_Time;
 with Arduino_Nano_33_Ble_Sense.IOs;
+with Servo_Controller;
 
 package body Vehicle_Controller is
 
@@ -11,56 +11,62 @@ package body Vehicle_Controller is
 
    task body Compute is
       Time_Now : Ada.Real_Time.Time;
-      Current_Direction : Direction;
-      Previous_Direction : Direction;
+
    begin
-      Current_Direction := Forward;
-      Set_Velocity (1.0);
+      Time_Now := Ada.Real_Time.Clock;
+      delay until Time_Now + Ada.Real_Time.Milliseconds(1000);
       loop
-         if Distance_Sensor_Controller.Dispenser.Value < 5.0 then
-            Status_Light_Colour := Blue;
-            Previous_Direction := Current_Direction;
-            Current_Direction := Stop;
-            Set_Velocity (0.0);
 
-            Time_Now := Ada.Real_Time.Clock;
-            delay until Time_Now + Ada.Real_Time.Milliseconds(1000);
 
-            Activate_Dispenser;
-
-            Time_Now := Ada.Real_Time.Clock;
-            delay until Time_Now + Ada.Real_Time.Milliseconds(1000);
-         elsif Distance_Sensor_Controller.Front.Value < 20.0 and Distance_Sensor_Controller.Back.Value < 20.0 then
-            Set_Velocity (0.0);
-            Current_Direction := Stop;
-            Status_Light_Colour := Red;
-         elsif Distance_Sensor_Controller.Front.Value < 20.0 then
-            Status_Light_Colour := Green;
-            Set_Velocity (-1.0);
-            Current_Direction := Backward;
-         elsif  Distance_Sensor_Controller.Back.Value < 20.0 then
-            Status_Light_Colour := Green;
-            Set_Velocity (1.0);
-            Current_Direction := Forward;
+         --Next state logic
+         if Distance_Sensor_Controller.Front.Value < Stop_Distance_Front and Distance_Sensor_Controller.Back.Value < Stop_Distance_Back then
+            Next_Dir := Stop;
+            null;
+         elsif Distance_Sensor_Controller.Front.Value < Stop_Distance_Front then
+            Next_Dir := Backward;
+         elsif  Distance_Sensor_Controller.Back.Value < Stop_Distance_Back then
+            Next_Dir := Forward;
          else
             if Current_Direction = Stop then
-               case Previous_Direction is
-                  when Forward =>
-                     Set_Velocity (1.0);
-                  when Backward =>
-                     Set_Velocity (-1.0);
-                  when Stop =>
-                     Set_Velocity (1.0);
-                     Previous_Direction := Forward;
-               end case;
-               Status_Light_Colour := Green;
-               Current_Direction := Previous_Direction;
+               Next_Dir := Forward;
+            else
+               Next_Dir := Current_Direction;
             end if;
          end if;
+
+         Change_Direction(Next_Dir);
+
          Time_Now := Ada.Real_Time.Clock;
          delay until Time_Now + Ada.Real_Time.Milliseconds(200);
       end loop;
    end Compute;
+
+   procedure Change_Direction(Next_Direction : Direction) is
+      Time_Now : Ada.Real_Time.Time;
+   begin
+      case Next_Direction is
+         when Forward =>
+            Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Forward;
+            Status_Light_Colour := Green;
+         when Backward =>
+            if Current_Direction /= Backward then
+               Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Backward;
+               Time_Now := Ada.Real_Time.Clock;
+               delay until Time_Now + Ada.Real_Time.Milliseconds(200);
+               Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Stop;
+               Time_Now := Ada.Real_Time.Clock;
+               delay until Time_Now + Ada.Real_Time.Milliseconds(600);
+            end if;
+            Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Backward;
+            Status_Light_Colour := Blue;
+         when Stop =>
+            Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Stop;
+            Status_Light_Colour := Red;
+
+         end case;
+         Current_Direction := Next_Direction;
+
+   end Change_Direction;
 
    ------------------
    -- Status_Light --
@@ -77,70 +83,23 @@ package body Vehicle_Controller is
          case Status_Light_Colour is
             when Red =>
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, False);
-               delay until Time_Now + Ada.Real_Time.Milliseconds(200);
+               delay until Time_Now + Ada.Real_Time.Milliseconds(100);
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, True);
             when Green =>
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, False);
-               delay until Time_Now + Ada.Real_Time.Milliseconds(200);
+               delay until Time_Now + Ada.Real_Time.Milliseconds(100);
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, True);
             when Blue =>
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, False);
-               delay until Time_Now + Ada.Real_Time.Milliseconds(200);
+               delay until Time_Now + Ada.Real_Time.Milliseconds(100);
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, True);
          end case;
          Time_Now := Ada.Real_Time.Clock;
-         delay until Time_Now + Ada.Real_Time.Milliseconds(200);
-
+         delay until Time_Now + Ada.Real_Time.Milliseconds(100);
       end loop;
    end Status_Light;
 
-   ------------------
-   -- Set_Velocity --
-   ------------------
 
-   procedure Set_Velocity (Velocity : Float) is
-      Rpm : Servo_Controller.Rpm_Range;
-   begin
-      Rpm := Integer((60.0 * Velocity) / (2.0 * Wheel_Radius * 3.0));
-      Servo_Controller.Engine_Servo.Rpm := Rpm;
-   end Set_Velocity;
 
-   ------------------------
-   -- Set_Steering_Angle --
-   ------------------------
-
-   procedure Set_Steering_Angle (Angle : Steering_Angle) is
-   begin
-      case Angle is
-         when Straight =>
-            Servo_Controller.Steering_Servo.Angle := 0;
-         when Left =>
-            Servo_Controller.Steering_Servo.Angle := -15;
-         when Hard_Left =>
-            Servo_Controller.Steering_Servo.Angle := -30;
-         when Right =>
-            Servo_Controller.Steering_Servo.Angle := 15;
-         when Hard_Right =>
-            Servo_Controller.Steering_Servo.Angle := 30;
-      end case;
-   end Set_Steering_Angle;
-
-   ------------------------
-   -- Activate_Dispenser --
-   ------------------------
-
-   procedure Activate_Dispenser is
-      Time_Now : Ada.Real_Time.Time;
-   begin
-      Servo_Controller.Dispenser_Servo_Left.Angle := 90;
-      Servo_Controller.Dispenser_Servo_Right.Angle := -90;
-
-      Time_Now := Ada.Real_Time.Clock;
-      delay until Time_Now + Ada.Real_Time.Milliseconds(1000);
-
-      Servo_Controller.Dispenser_Servo_Left.Angle := -90;
-      Servo_Controller.Dispenser_Servo_Right.Angle := 90;
-
-   end Activate_Dispenser;
 
 end Vehicle_Controller;

@@ -14,17 +14,6 @@ package body Servo is
    end Set_Angle;
 
    -------------
-   -- Set_Rpm --
-   -------------
-
-   procedure Set_Rpm(Rpm : Rpm_Range; Pin_Id : Arduino.IOs.Pin_Id) is
-      High_Time : Integer;
-   begin
-      High_Time := (Map_Val(Rpm, Rpm_Range'First, Rpm_Range'Last, Pulse_Range'First, Pulse_Range'Last));
-      Write(High_Time, Pin_Id);
-   end Set_Rpm;
-
-   -------------
    -- Map_Val --
    -------------
 
@@ -42,7 +31,7 @@ package body Servo is
    begin
       TimeNow := Ada.Real_Time.Clock;
       Arduino.IOs.DigitalWrite (Pin_Id, True);
-      delay until TimeNow + Ada.Real_Time.Microseconds(2000);--High_Time);
+      delay until TimeNow + Ada.Real_Time.Microseconds(High_Time);--High_Time);
       
       TimeNow := Ada.Real_Time.Clock;
       Arduino.IOs.DigitalWrite (Pin_Id, False);
