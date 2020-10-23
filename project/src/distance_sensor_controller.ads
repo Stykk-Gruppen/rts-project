@@ -18,12 +18,6 @@ package Distance_Sensor_Controller is
       EchoPin => 29,
       Value => 50.0);
 
-   Dispenser : Distance_Sensor :=
-     (TrigPin => 21,
-      EchoPin => 27,
-      Value => 50.0);
-
    task Measure with Priority => 9;
-   procedure Measure2;
    
 end Distance_Sensor_Controller;
