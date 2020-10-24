@@ -104,19 +104,195 @@ Throughout the project, the system went through several iterations, as as we met
 \section{Technologies}
 
 \subsection{The Ada Programming Language}
+Ada was development for the American department of defence in the 80's in order to try and get a standard programming language for all of their projects. As its main use-case was intended to be on critical military systems, the language would be designed from ground up, to accomodate the creation of robust and safe software. This resulted in a language with strong typing, a strict compiler, and a syntax that is meant to improve the readability, resulting in a easier maintainability in large projects. Today Ada is still mostly used in the defence and aerospace sector, and is very suitable for embedded systems.
+
 
 \subsection{Arduino Nano 33 BLE Sense}
 
+Her må noen andre finne på noe lurt***************************Kent
+
+
+
+\subsection{Servo Motors}
+Usually, when programming Arduinos in C, one makes use of a library to control servo motors. However, as we were doing this in Ada, we would have to write our own library. Servo motors are controlled using a pulse width modulated signal (PWM). A PWM has a fixed period, where the amount of time the signal is high defines the signal. 
+
+In the case of a servo motor, the fixed period is 20 milliseconds, and the signal must be high in a range between 1 and 2 milliseconds. Sending a 1.5 milliseconds high signal to a servo engine, is defined as the input for outputing neutral position. If we send a 1ms signal, the servo will move to the extreme left, and 2ms will output the extreme right. An illustration of this can be seen in figure \ref{}.
+
+*****Bilde av servo signal for grader.************
+
+
+
+\subsection{Ultrasonic Sensors (HS***********)}
+As the ultrasonic sensors has both input and output, they are a bit more complicated than the servo motors. They have a TRIG pin and an ECHO pin. 
+
+The TRIG is its input, where we send a signal letting it know that we want to perform a measurement. TheECHO pin responds with a signal, that when interpreted correctly, will tell us the distance to the closest object in the sensors facing direction. 
+
+The signal.... ****Her må du skrive litt stian********
 
 
 
 
-\section{Implementation}
+%Finn riktig navn på denne, pluss litt specs
+\subsection{The Turnigy Trooper}
+The Turnigy Trooper is the name of the car that our professor provided us with. It was originally a remote controlled car, but a lot is removed, so nothing but the chassis, motors and wheels remain. 
+
+A diagram of the components on the car can be seen in figure \ref{}
+
+****Diagram av ECD, servo osv fra manual************
+
+
+The servo motor for the steering is traditional one, which takes the PWM that was desribed previously. 
+
+The motor which will provide us with propulsion however, is actually a DC motor. Luckily for us, the ESC, provides a PWM interface for us, so that we can treat the motor as a fully rotating servo motor. 
+
+As in the case with regular servo motors, we send it a standard PWM signal, but in this case, the high time of the signal does not refer to a static deegree, but to the speed of rotation. As can be seen in figure \ref{}, a high signal of 1.5ms means that the motor will not rotate. If we send a 2ms signal it will rotate forward at the highest speed, and the opposite applies for 1ms. 
+
+
+The ESC in the Turnigy Trooper is also possible to program quite extensively, and after receiving the manual, we played around with the settings for a bit, before deciding that the default settings would suit us fine. 
+
+\section{Toolchain \& Testing}
 \subsection{Ada on the Arduino}
+As we were told early on that almost noone had programmed Ada on the Nano, we knew early on that this would be a challenge. We didn't really know were to begin, until our assistant professor, Steven Bos, pointed us in the right direction. 
 
 \subsubsection{Ada Drivers Library}
 
+The \textit{Ada Drivers Library}, is a collection of drivers and examples for programming Ada on a wide range of micro-controllers, however the Arduino Nano was \textbf{not} one of them. However, as Steven Bos had discovered, it does provide drivers for the \textit{NRF52\_DK}. This board has the same CPU, \textit{NRF52840}, as the Arduino Nano. Steven presented a working solution for a classical led blink example using this library, and after that we at least had a path to follow, as well as expanding on. 
+
+We knew that it would be quite a few hours of adjusting the existing drivers, to suit the Nano. In the hope of being able to contribute to the open-source community, we forked the \textit{Ada Drivers Library}
+, and used their script to build basic board files for the Nano, based on our inputted specifications. 
+
+%**Ha med noenprintscreens eller noe herfra? Evt legge med link til github eller noe???
+
 \subsubsection{Ravenscar Run-time Library}
+
+When flashing a microcontroller with code, you also need to have a run-time library. As a micro-controller is limited in space, you usually won't include everything that the language normally offers. 
+
+For most of the micro-controllers in the \textit{Ada Drivers Library}, there exists three kinds:
+\begin{itemize}
+  \item{ZFP (Zero footprint library)}
+  \item{Ravenscar SFP (Small footprint library)}
+  \item{Ravenscar Full}
+\end{itemize}
+
+For the NRF52840, the only run-time library that was provided to us out of the box, was the ZFP. The ZFP has (as the name implies) almost none of the features we would need. The most crucial one being the ability to have multithreading (called tasks in Ada). As much of this course's theory is based around having several tasks, and how to schedule them etc, a sequential approach would not do. 
+
+In order to have access to the Ravenscar full library, we cloned BB-runtimes from Github, and used a script they provide in order to build it. This proved a tedious task, and there were quite a few errors within the script that had actually already been fixed by the developers, but not released at that time. 
+%Er dette riktig forklaring????? 
+Luckily for us, this eventually worked out okay. The ravenscar library still has its limitations which would change the way in which we structured our software. For instance, it does not allow entry points into tasks. This means that we would not have access to dynamic tasking, and that all tasks would have to be created statically. It also meant that we would not (without extreme difficulty) be able to take advantage of the multiple core processor on the Nano.
+
+\subsection{Flashing the Arduino}
+
+After getting our software toolchain together, we started trying to flash our Arduino with a blinkin test. As we had'nt received the JLink debugger yet, we wanted to see if this was possible to accomplish using only USB. After spending way too many hours on this, we found that this would not be feasible. 
+
+When we received the JLink debugger, we would unfortunately also have to wait for a 3D-printed clamp holder, as the soldering on the Nano had proved to be quite unstable for some of the other students. Our eagerness and impatiance luckily drove us to try and flash the Nano, whilst holding wires to the pins on the Nano by Hand. This took a lot of trial and error, but eventually some of the members of the group developed great skills for this technique, as can be seen in the picture below:
+
+********Bilde av flashing med manuell holding av ledninger******************
+
+When we finally received the clamp holder a few weeks later, flashing turned into a dream, and we could with much greater ease debug our program, as it no longer required someone manually holding the wires in place during runtime. 
+
+
+%Finne på bedre tittel.
+%Vil du fylle inn litt om pins her Tarald?
+\subsubsection{Our Arduino library}
+
+As mentioned, we built source files for our own drivers for the Arduino, using the scripts provided by the \textit{Ada Drivers Library}. Most of the files required only small changes, but the pin layouts are quite different on the Arduino compared to the NRF52\_DK. 
+
+The pins on the Arduino range from ... ... .. Mer om pin layout fix jfkdlsjfdklajfkdlasjfkldsajfkdlasfjdklasfjdklasfjdklasfjdkla
+
+**TARALD****
+
+We also wanted to include the ability for analog writes and interrupts, but this proved to be overly complicated and timeconsuming to justify prioritization. More on this later. 
+
+As the code is quite extensive, we have chosen not to include it in the appendices, but our fork of the \textit{Ada Drivers Library} can be seen on \href{https://github.com/Stykk-Gruppen/Ada_Drivers_Library}{GitHub}.
+
+\subsection{Minimum working examples}
+
+During the difficulties of flashing the Arduino, we spent our spare time writing both the full program, but also creating small testing suites. This would help us more efficiently test all the components, and how we interfaced with them, in a limited environment. 
+
+This helped us find quite a few bugs early on, as well as figuring out what would, and would not work.
+jj
+For instance, the Ada Drivers Library has a servo motor example using analog write and interrupts. We initially tried doing it this way, to ensure steady PWMs for the servo motors, but as mentioned this proved to be much harder than anticipated. Because of our approach of test early, fail early, we were able to develop workarounds for this at an early stage. 
+
+The code for these tests can be seen in appendix \ref{}, and an image of the testing can be seen below. 
+
+***Bilde av Servoer og sensorer????**************
+
+\section{Implementation}
+
+\subsection{Hardware}
+
+\subsection{Software}
+
+\subsubsection{Architecture}
+
+\subsubsection{Scheduling}
+
+
+\section{Final Product}
+
+To sum it up, the final product is a car, that will drive forwards and backwards, and avoid hitting walls. 
+
+******Images**********
+\section{Conclusion}
+
+The purpose of this assigment was to try and implement the theory relating to real-time systems in practice, in order to better understand it. In spite of the challenges along the way, and how we had to downscale the project several times, we would still say that this goal was accomplished.
+
+One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving, nothing can beat the feeling of actually experiencing it. As mentioned, we had several tasks that did'nt deliver the output we expected, and many times this was due to the task not getting any time on the CPU. That is a powerful experience. 
+
+Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was great, is guaranteed to prove very useful knowledge in the future. 
+
+
+\newpage
+%Referanse
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{ref}
+\addcontentsline{toc}{section}{References}
+
+\newpage
+\section{Appendices}
+
+\subsection{Stacktrace}
+\lstset{frame=tb,
+extendedchars = true,
+texcl=true,
+  language=Ada,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{black},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\includepdf[scale=1.0,pages=-,pagecommand=\subsection{Arduino Nano 33 BLE sense PIN layout\label{pinlayout}}]{pdf/Pinout-NANOsense_latest.pdf}
+
+
+\lstset{frame=tb,
+extendedchars = true,
+texcl=true,
+  language=Bash,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{black},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 
 
 \newpage
@@ -280,47 +456,4 @@ We found the P1 base address for the nRF52840 seen on page 23 in the datasheet \
 \end{figure}
 
 
-
-\section{Conclusion}
-
-The purpose of this assigment was to try and implement the theory relating to real-time systems in practice, in order to better understand it. In spite of the challenges along the way, and how we had to downscale the project several times, we would still say that this goal was accomplished.
-
-One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving, nothing can beat the feeling of actually experiencing it. As mentioned, we had several tasks that did'nt deliver the output we expected, and many times this was due to the task not getting any time on the CPU. That is a powerful experience. 
-
-Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was great, is guaranteed to prove very useful knowledge in the future. 
-
-
-\newpage
-%Referanse
-\nocite{*}
-\bibliographystyle{plain}
-\bibliography{ref}
-\addcontentsline{toc}{section}{References}
-
-\newpage
-\section{Maybe appendix}
-
-\subsection{Stacktrace}
-\lstset{frame=tb,
-extendedchars = true,
-texcl=true,
-  language=Ada,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{black},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=3
-}
-
-\includepdf[scale=1.0,pages=-,pagecommand=\subsection{Arduino Nano 33 BLE sense PIN layout\label{pinlayout}}]{pdf/Pinout-NANOsense_latest.pdf}
-
 \end{document}
-
