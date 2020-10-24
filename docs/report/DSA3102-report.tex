@@ -257,6 +257,16 @@ We have developed testing projects to test the servos and the ultrasonic sensors
 \subsection{Software}
 
 \subsubsection{Architecture}
+The system architecutre is illustrated in Figure \ref{SystemArchBlock}. The Distance Sensor Controller keeps a hold of the ultrasonic sensors. It operates them all in one task, reading the values sequentially and stores them in the controller. The servo controller was initially made to control the steering servo, the ESC and the two servos used in operating the dispenser. As the project deadling got closer, we had to remove the three servos and were left with the ESC. Even though the Brushless Motor ESC is technically not a servo, it uses the same operating signals as the other servos. At the time it made sense to fit it in with the others under the same controller.\\
+
+The main component is the Vehicle controller. It reads the sensor values from the Distance Sensor Controller and uses them to calculate the next sate logic. Each state writes their own unique values to the Servo Controller. These values indicates the signals sent to the ESC, altering its speed.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{system-architecture.png}
+	\caption{Block diagram of our system architecture}
+	\label{SystemArchBlock}
+\end{figure}
 
 \subsubsection{Scheduling}
 
@@ -289,7 +299,6 @@ In the list below are some problems we have encountered during our development p
 \end{itemize}
 
 \section{Final Product}
-
 To sum it up, the final product is a car, that will drive forwards and backwards, and avoid hitting walls. 
 
 \begin{figure}[H]
@@ -299,15 +308,13 @@ To sum it up, the final product is a car, that will drive forwards and backwards
 	\label{showcase}
 \end{figure}
 
-******Images**********
 \section{Conclusion}
 
-The purpose of this assigment was to try and implement the theory relating to real-time systems in practice, in order to better understand it. In spite of the challenges along the way, and how we had to downscale the project several times, we would still say that this goal was accomplished.
+The purpose of this assigment was to try and implement the theory relating to real-time systems in practice, in order to better understand it. In spite of the challenges along the way, and how we had to downscale the project several times, we would still say that this goal was accomplished.\\
 
-One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving, nothing can beat the feeling of actually experiencing it. As mentioned, we had several tasks that did'nt deliver the output we expected, and many times this was due to the task not getting any time on the CPU. That is a powerful experience. 
+One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving, nothing can beat the feeling of actually experiencing it. As mentioned, we had several tasks that did'nt deliver the output we expected, and many times this was due to the task not getting any time on the CPU. That is a powerful experience.\\ 
 
-Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was great, is guaranteed to prove very useful knowledge in the future. 
-
+Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was great, is guaranteed to prove very useful knowledge in the future.\\ 
 
 \newpage
 %Referanse
@@ -319,7 +326,6 @@ Learning to program in Ada along the way, as well as building the the ravenscar 
 \newpage
 \section{Appendices}
 
-\subsection{Stacktrace}
 \lstset{frame=tb,
 extendedchars = true,
 texcl=true,
@@ -475,23 +481,9 @@ The maximum number of entries in tasks are set to 0. This means that we won't be
 
 Another thing we planned was to specify which tasks would run on the respective cores of the CPU. This however, is not supported within the ravenscar profile, and we will need to do all the scheduling as if we only had a single-core processor. 
 
-
 \subsection{Pin layout}
 11.10.2020\\
 The nRF52840 has two ports, P0 has 32 pins while P1 has 16 pins.\\ 
 We found the P1 base address for the nRF52840 seen on page 23 in the datasheet \cite{NRF52840}. Without it we were only able to use the pins with P0 seen on figure \ref{pinlayout}. After adding the base address to the Ada code and the option to chose between 0 and 47 pin number we were able to make all the pins function.
-
-
-\newpage
-\section{Maybe useful pictures}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{system-architecture.png}
-	\caption{Block diagram of our system architecture}
-	\label{SystemArchBlock}
-\end{figure}
-
 
 \end{document}
