@@ -288,8 +288,6 @@ In the list below are some problems we have encountered during our development p
 
 	\item After installing software for the Segger J-Link debugger from their official webpage, a new .rules file for the debugger appears in $/etc/udev/rules.d$ containing the necessary information for the debugger to be found by $pyocd\ list$. This has only been successful with one of our computers. A workaround is to run pyocd with sudo privileges.
 
-	\item Including unused libraries in the Ada source-code makes the arduino crash under run-time.
-
 	\item When trying to flash to the board without having the cables soldered, errors in the list below have appeared as a consequence of unstable hands.
 		\begin{itemize}
 			\item Unable to start CPU core.
@@ -298,7 +296,7 @@ In the list below are some problems we have encountered during our development p
             \item J-Link is already open.
 		\end{itemize}
 
-	\item Including Arduino\_Nano\_33\_Ble\_Sense.Time makes the microcontroller crash in real time. --ref til Debug lstlisting i appendix--
+	\item Including Arduino\_Nano\_33\_Ble\_Sense.Time makes the microcontroller crash in real time.
 
 	\item Only Digital I/O works. Possibly because Analog relies on interrupt/timers which seem broken in our drivers or runtime.
 
