@@ -11,37 +11,38 @@ package body Vehicle_Controller is
 
    task body Compute is
       Time_Now : Ada.Real_Time.Time;
-
    begin
       Time_Now := Ada.Real_Time.Clock;
       delay until Time_Now + Ada.Real_Time.Milliseconds(1000);
       loop
-
-
          --Next state logic
          if Distance_Sensor_Controller.Front.Value < Stop_Distance_Front and Distance_Sensor_Controller.Back.Value < Stop_Distance_Back then
-            Next_Dir := Stop;
+            Next_Direction := Stop;
             null;
          elsif Distance_Sensor_Controller.Front.Value < Stop_Distance_Front then
-            Next_Dir := Backward;
+            Next_Direction := Backward;
          elsif  Distance_Sensor_Controller.Back.Value < Stop_Distance_Back then
-            Next_Dir := Forward;
+            Next_Direction := Forward;
          else
             if Current_Direction = Stop then
-               Next_Dir := Forward;
+               Next_Direction := Forward;
             else
-               Next_Dir := Current_Direction;
+               Next_Direction := Current_Direction;
             end if;
          end if;
 
-         Change_Direction(Next_Dir);
-
+         Change_Direction;
          Time_Now := Ada.Real_Time.Clock;
          delay until Time_Now + Ada.Real_Time.Milliseconds(200);
+
       end loop;
    end Compute;
 
-   procedure Change_Direction(Next_Direction : Direction) is
+   ----------------------
+   -- Change_Direction --
+   ----------------------
+
+   procedure Change_Direction is
       Time_Now : Ada.Real_Time.Time;
    begin
       case Next_Direction is
@@ -50,6 +51,7 @@ package body Vehicle_Controller is
             Status_Light_Colour := Green;
          when Backward =>
             if Current_Direction /= Backward then
+               Current_Direction := Braking;
                Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Backward;
                Time_Now := Ada.Real_Time.Clock;
                delay until Time_Now + Ada.Real_Time.Milliseconds(200);
@@ -62,7 +64,8 @@ package body Vehicle_Controller is
          when Stop =>
             Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Stop;
             Status_Light_Colour := Red;
-
+         when Braking =>
+            Status_Light_Colour := Yellow;
          end case;
          Current_Direction := Next_Direction;
 
@@ -93,13 +96,16 @@ package body Vehicle_Controller is
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, False);
                delay until Time_Now + Ada.Real_Time.Milliseconds(100);
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, True);
+            when Yellow =>
+               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, False);
+               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, False);
+               delay until Time_Now + Ada.Real_Time.Milliseconds(100);
+               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, True);
+               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, True);
          end case;
          Time_Now := Ada.Real_Time.Clock;
          delay until Time_Now + Ada.Real_Time.Milliseconds(100);
       end loop;
    end Status_Light;
-
-
-
 
 end Vehicle_Controller;

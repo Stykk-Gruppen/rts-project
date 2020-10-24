@@ -1,6 +1,5 @@
 pragma Task_Dispatching_Policy(FIFO_Within_Priorities);
 with Vehicle_Controller;
---with Servo_Controller;
 
 procedure Main with Priority => 0 is
 begin

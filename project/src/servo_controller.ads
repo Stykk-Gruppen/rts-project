@@ -4,6 +4,7 @@ with Servo;
 package Servo_Controller is
    
    type Direction is (Forward, Backward, Stop);
+   
    type Servo_Half is record
       Pin : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id;
       Angle : Servo.Angle_Range;

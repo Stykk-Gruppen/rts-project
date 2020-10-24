@@ -1,6 +1,8 @@
 with Arduino_Nano_33_Ble_Sense.IOs;
 
 package Distance_Sensor_Controller is
+   
+   task Measure with Priority => 2;
 
    type Distance_Sensor is record
       TrigPin : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id;
@@ -18,7 +20,4 @@ package Distance_Sensor_Controller is
       EchoPin => 44,
       Value => 50.0);
 
-
-   task Measure with Priority => 2;
-   
 end Distance_Sensor_Controller;
