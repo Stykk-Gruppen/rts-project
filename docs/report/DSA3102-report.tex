@@ -174,7 +174,7 @@ As in the case with regular servo motors, we send it a standard PWM signal, but 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{brushless-motor-esc.png}
-	\caption{Missing caption.}
+	\caption{Block diagram of signal path from Arduino}
 	\label{esc}
 \end{figure}
 
@@ -187,13 +187,17 @@ As we were told early on that almost noone had programmed Ada on the Nano, we kn
 
 \subsubsection{Ada Drivers Library}
 
-The \textit{Ada Drivers Library}, is a collection of drivers and examples for programming Ada on a wide range of micro-controllers, however the Arduino Nano was \textbf{not} one of them. However, as Steven Bos had discovered, it does provide drivers for the \textit{NRF52\_DK}. This board has the same CPU, \textit{NRF52840}, as the Arduino Nano. Steven presented a working solution for a classical led blink example using this library, and after that we at least had a path to follow, as well as expanding on.\\ 
+The \textit{Ada Drivers Library}, is a collection of drivers and examples for programming Ada on a wide range of micro-controllers, however the Arduino Nano was \textbf{not} one of them. However, as Steven Bos had discovered, it does provide drivers for the \textit{NRF52\_DK}. This board has the same CPU, \textit{Arm Cortex-M4} and a similar microcontroller as the Arduino Nano. Steven presented a working solution for a classical led blink example using this library, and after that we at least had a path to follow, as well as expanding on.\\ 
 
 We knew that it would be quite a few hours of adjusting the existing drivers, to suit the Nano. In the hope of being able to contribute to the open-source community, we forked the \textit{Ada Drivers Library}
 , and used their script to build basic board files for the Nano, based on our inputted specifications. 
 
-%**Ha med noenprintscreens eller noe herfra? Evt legge med link til github eller noe???
-
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{projectWizard.png}
+  \caption{Screenshot of the project wizard from Ada Drivers Library}
+  \label{projectWizard}
+\end{figure}
 \subsubsection{Ravenscar Run-time Library}
 
 When flashing a microcontroller with code, you also need to have a run-time library. As a micro-controller is limited in space, you usually won't include everything that the language normally offers.\\ 
