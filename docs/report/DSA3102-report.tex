@@ -187,7 +187,7 @@ As we were told early on that almost noone had programmed Ada on the Nano, we kn
 
 \subsubsection{Ada Drivers Library}
 
-The \textit{Ada Drivers Library}, is a collection of drivers and examples for programming Ada on a wide range of micro-controllers, however the Arduino Nano was \textbf{not} one of them. However, as Steven Bos had discovered, it does provide drivers for the \textit{NRF52\_DK}. This board has the same CPU, \textit{Arm Cortex-M4} and a similar microcontroller as the Arduino Nano. Steven presented a working solution for a classical led blink example using this library, and after that we at least had a path to follow, as well as expanding on.\\ 
+The \textit{Ada Drivers Library}, is a collection of drivers and examples for programming Ada on a wide range of microcontrollers, however the Arduino Nano was \textbf{not} one of them. However, as Steven Bos had discovered, it does provide drivers for the \textit{NRF52\_DK}. This board has the same CPU, \textit{Arm Cortex-M4} and a similar microcontroller as the Arduino Nano. Steven presented a working solution for a classical led blink example using this library, and after that we at least had a path to follow, as well as expanding on.\\ 
 
 We knew that it would be quite a few hours of adjusting the existing drivers, to suit the Nano. In the hope of being able to contribute to the open-source community, we forked the \textit{Ada Drivers Library}
 , and used their script to build basic board files for the Nano, based on our inputted specifications. 
@@ -198,18 +198,18 @@ We knew that it would be quite a few hours of adjusting the existing drivers, to
   \caption{Screenshot of the project wizard from Ada Drivers Library}
   \label{projectWizard}
 \end{figure}
-\subsubsection{Ravenscar Run-time Library}
+\subsubsection{Ravenscar runtime Library}
 
-When flashing a microcontroller with code, you also need to have a run-time library. As a micro-controller is limited in space, you usually won't include everything that the language normally offers.\\ 
+When flashing a microcontroller with code, you also need to have a runtime library. As a microcontroller is limited in space, you usually won't include everything that the language normally offers.\\ 
 
-For most of the micro-controllers in the \textit{Ada Drivers Library}, there exists three kinds:
+For most of the microcontrollers in the \textit{Ada Drivers Library}, there exists three kinds:
 \begin{itemize}
   \item{ZFP (Zero footprint library)}
   \item{Ravenscar SFP (Small footprint library)}
   \item{Ravenscar Full}
 \end{itemize}
 
-For the NRF52840, the only run-time library that was provided to us out of the box, was the ZFP. The ZFP has (as the name implies) almost none of the features we would need. The most crucial one being the ability to have multithreading (called tasks in Ada). As much of this course's theory is based around having several tasks, and how to schedule them etc, a sequential approach would not do.\\ 
+For the NRF52840, the only runtime library that was provided to us out of the box, was the ZFP. The ZFP has (as the name implies) almost none of the features we would need. The most crucial one being the ability to have multithreading (called tasks in Ada). As much of this course's theory is based around having several tasks, and how to schedule them etc, a sequential approach would not do.\\ 
 
 In order to have access to the Ravenscar full library, we cloned BB-runtimes from Github, and used a script they provide in order to build it. This proved a tedious task, and there were quite a few errors within the script that had actually already been fixed by the developers, but not released at that time.\\ 
 %Er dette riktig forklaring????? 
@@ -232,9 +232,8 @@ When we finally received the clamp holder a few weeks later, flashing turned int
 
 As mentioned, we built source files for our own drivers for the Arduino, using the scripts provided by the \textit{Ada Drivers Library}. Most of the files required only small changes, but the pin layouts are quite different on the Arduino compared to the NRF52\_DK. 
 
-The pins on the Arduino range from ... ... .. Mer om pin layout fix jfkdlsjfdklajfkdlasjfkldsajfkdlasfjdklasfjdklasfjdklasfjdkla
-
-**TARALD****
+The nRF52840 has two ports, P0 has 32 pins while P1 has 16 pins.\\ 
+We found the P1 base address for the nRF52840 seen on page 23 in the datasheet \cite{NRF52840}. Without it we were only able to use the pins with P0 seen on figure \ref{pinlayout}. After adding the base address to our Drivers Library and the option to chose between 0 and 47 pin number we were able to make all the pins function.
 
 We also wanted to include the ability for analog writes and interrupts, but this proved to be overly complicated and timeconsuming to justify prioritization. More on this later. 
 
@@ -281,7 +280,7 @@ The purpose of this assigment was to try and implement the theory relating to re
 
 One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving, nothing can beat the feeling of actually experiencing it. As mentioned, we had several tasks that did'nt deliver the output we expected, and many times this was due to the task not getting any time on the CPU. That is a powerful experience. 
 
-Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was great, is guaranteed to prove very useful knowledge in the future. 
+Learning to program in Ada along the way, as well as building the the ravenscar runtime library and the library for the NRF52840, was great, is guaranteed to prove very useful knowledge in the future. 
 
 
 \newpage
@@ -355,7 +354,7 @@ We will need to write a library which will abstract this away in the code. Where
 
 \vspace{5mm}
 %Litt vanskelig med fortid og nåtid i formuleringa her = p
-After Steven showed us a proof of concept that it will be quite doable to base our library for the Arduino Nano on the existing toolchain for NRF52840, we started developing on the 17th of September. However there quickly emerged a problem, as Gnat arm-elf initally only supports ZFP-runtime libraries for this card. This meant that it would only support barebone functionality, and we would never be able to make use of the Ada realtime library, or even multithreading the software. Luckily, there exists support for full ravenscar run-time libraries for the card. We followed the official guide at the bb-runtime repo \cite{BBRUNTIMES}, to generate and build them ourselves.
+After Steven showed us a proof of concept that it will be quite doable to base our library for the Arduino Nano on the existing toolchain for NRF52840, we started developing on the 17th of September. However there quickly emerged a problem, as Gnat arm-elf initally only supports ZFP-runtime libraries for this card. This meant that it would only support barebone functionality, and we would never be able to make use of the Ada realtime library, or even multithreading the software. Luckily, there exists support for full ravenscar runtime libraries for the card. We followed the official guide at the bb-runtime repo \cite{BBRUNTIMES}, to generate and build them ourselves.
 
 %Before we could start using Ada's real-time library under runtime, we had to generate the library for our microcontroller nRF52840. We followed the official guide [kilde]\url{https://github.com/AdaCore/bb-runtimes} to generate and build the library. 
 
@@ -438,7 +437,7 @@ Obtober 23.
 
 \section{Ravenscar}
 
-The full ravenscar run-time library offers what is called the Ravenscar profile. This is a subset of the Ada language, where the features and available libraries are limited. The reason for this is to ensure robust software on realtime and safety critical systems. 
+The full ravenscar runtime library offers what is called the Ravenscar profile. This is a subset of the Ada language, where the features and available libraries are limited. The reason for this is to ensure robust software on realtime and safety critical systems. 
 
 The specifications of the ravenscar profile are the following:
 %Lim inn liste kanskje?
@@ -459,7 +458,7 @@ In the list below are some problems we have encountered during our development p
 
 	\item After installing software for the Segger J-Link debugger from their official webpage, a new .rules file for the debugger appears in $/etc/udev/rules.d$ containing the necessary information for the debugger to be found by $pyocd\ list$. This has only been successful with one of our computers. A workaround is to run pyocd with sudo privileges.
 
-	\item Including unused libraries in the Ada source-code makes the arduino crash under run-time.
+	\item Including unused libraries in the Ada source-code makes the arduino crash under runtime.
 
 	\item When trying to flash to the board without having the cables soldered, errors in the list below have appeared as a consequence of unstable hands.
 		\begin{itemize}
