@@ -29,7 +29,7 @@ package body HCSR04 is
       while Pulse = Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) loop
          --Wait for the analog signal to change from low - high or high - low
          --exit when Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(500000);
-         if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then
+         if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(50000) then
             --goto DistStart;
             return -1.0;
          end if;
@@ -40,7 +40,7 @@ package body HCSR04 is
 
       while Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) = False loop
          --Wait for the signal to go from low to high
-         if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then
+         if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(50000) then
             --goto DistStart;
             return -1.0;
 
@@ -57,7 +57,7 @@ package body HCSR04 is
          while not Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) = False loop
             -- Wait for the signal to change to LOW
             --exit when Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(500000);
-            if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(5000) then
+            if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(50000) then
                --goto DistStart;
                return -1.0;
             end if;

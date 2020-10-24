@@ -1,16 +1,4 @@
 package body Servo_Controller is
-
-   --------------
-   -- Steering --
-   --------------
-
-   task body Steering is
-   begin
-      loop
-         Servo.Set_Angle (Steering_Servo.Angle, Steering_Servo.Pin);
-      end loop;
-   end Steering;
-
    ------------
    -- Engine --
    ------------
@@ -18,30 +6,15 @@ package body Servo_Controller is
    task body Engine is
    begin
       loop
-         Servo.Set_Rpm (Engine_Servo.Rpm, Engine_Servo.Pin);
+         case Engine_Servo.Current_Direction is
+            when Forward =>
+               Servo.Write(1800, Engine_Servo.Pin);
+            when Backward =>
+               Servo.Write(1000, Engine_Servo.Pin);
+            when Stop =>
+               Servo.Write(1500, Engine_Servo.Pin);
+         end case;
       end loop;
    end Engine;
-
-   --------------------
-   -- Left Dispenser --
-   --------------------
-
-   task body Dispenser_Left is
-   begin
-      loop
-         Servo.Set_Angle (Dispenser_Servo_Left.Angle, Dispenser_Servo_Left.Pin);
-      end loop;
-   end Dispenser_Left;
-
-   ---------------------
-   -- Right Dispenser --
-   ---------------------
-
-   task body Dispenser_Right is
-   begin
-      loop
-         Servo.Set_Angle (Dispenser_Servo_Right.Angle, Dispenser_Servo_Right.Pin);
-      end loop;
-   end Dispenser_Right;
 
 end Servo_Controller;
