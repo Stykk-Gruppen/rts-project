@@ -8,6 +8,7 @@
 \usepackage{pdfpages}
 \usepackage{tcolorbox}
 \usepackage{textcomp}
+\usepackage[parfill]{parskip}
 
 \definecolor{light-gray}{gray}{0.9}
 \lstset{frame=tb,
@@ -36,50 +37,21 @@ texcl=true,
 
 \begin{document}
 
-\pagestyle{empty}
-
- \begin{tikzpicture}[remember picture,overlay]
-    \node[anchor=north west,yshift=-15pt,xshift=20pt]%
-        at (current page.north west)
-        {\includegraphics[height=8em]{img/USN_logotype.png}};
-
-\end{tikzpicture}
-
-
-%\vspace{2.5cm}
-
-{\LARGE test}\hspace{2cm}
-
-\begin{tikzpicture}[overlay]
-    \node[anchor=north, inner sep=0] at (4,-2)
-        {\includegraphics[width=\textwidth]{img/frontpage-block.png}};
-\end{tikzpicture}
-
-\begin{tikzpicture}[overlay]
-    \node[anchor=north, inner sep=0] at (-3,-0) {\large Hello};
-        
-\end{tikzpicture}
-
 \maketitle
 
 \newpage
 \tableofcontents
 
-
 \newpage
 \section{Abstract}
 This is our submission for the semester assignemnt in the course Real-Time Systems DSA3102, fall of 2020.
 
-
 \section{Introduction}
 The semester assignment as given, was to design and implement a real-time system, which would run on an Arduino Nano 33 BLE Sense, with the requirement that it would be programmed in Ada.\\ 
 
-
 A broad definition of a real-time system, is a system that reacts to external stimuli, make calucations, and performs some output, within a given deadline. In other words, the challenge here is not only to write a logically correct program, but also that it finishes all tasks in time. Which naturally increases the difficulty.\\ 
 
-
 This report will explain our project choice as well as the design. It will give a detailed description of the challenges, especially concerning running Ada on an Arduino Nano. Finally we will explain how the final solution works, and how we can prove that it is safe, and that the system will be able to meet all its deadlines.\\ 
-
 
 \section{Specifications}
 
@@ -276,6 +248,15 @@ The main component is the Vehicle controller. It reads the sensor values from th
 	\includegraphics[width=\linewidth]{system-architecture.png}
 	\caption{Block diagram of our system architecture}
 	\label{SystemArchBlock}
+\end{figure}
+
+The system is built with a finite state machine in mind. Its states and conditions are illustrated in Figure \ref{fsm}. A builtin led on the Arduino is actively blinking the current state's colour, as described by the state's colour in Figure \ref{fsm}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{../presentation/img/finite-state-machine.png}
+    \caption{Finite State Machine}
+    \label{fsm}
 \end{figure}
 
 \subsubsection{Scheduling}
