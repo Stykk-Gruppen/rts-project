@@ -51,7 +51,7 @@ package body Vehicle_Controller is
             Status_Light_Colour := Green;
          when Backward =>
             if Current_Direction /= Backward then
-               Current_Direction := Braking;
+               Status_Light_Colour := Yellow;
                Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Backward;
                Time_Now := Ada.Real_Time.Clock;
                delay until Time_Now + Ada.Real_Time.Milliseconds(200);
@@ -65,6 +65,7 @@ package body Vehicle_Controller is
             Servo_Controller.Engine_Servo.Current_Direction := Servo_Controller.Stop;
             Status_Light_Colour := Red;
          when Braking =>
+            -- It will never end up here.
             Status_Light_Colour := Yellow;
          end case;
          Current_Direction := Next_Direction;
