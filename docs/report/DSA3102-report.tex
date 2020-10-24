@@ -96,9 +96,9 @@ The initial design looked like this.
 	\label{ProtoDrawing}
 \end{figure}
 
-As the car would provide people with antibac, we naturally wanted the car to be able to drive on top of a table. That is why it had downpointing sensors, to be able to know when it would drive of an edge. However, after receiving the car from our professor, we quickly found, that the navigation system we would need to implement would be way to comprehensive, given the small timefram of the assignment.\\ 
+As the car would provide people with antibac, we naturally wanted the car to be able to drive on top of a table. That is why it had downpointing sensors, to be able to know when it would drive of an edge. However, after receiving the car from our professor, we quickly found, that the navigation system we would need to implement would be way too comprehensive, given the small timeframe of the assignment.\\ 
 
-Throughout the project, the system went through several iterations, as as we met challenges along the way, the antibac idea was abandoned. The final design is illustrated in Figure \ref{final-design}. 
+Throughout the project, the system went through several iterations, and as we met challenges along the way, the antibac idea was abandoned. The final design is illustrated in Figure \ref{final-design}. 
 
 \begin{figure}[H]
 	\centering
@@ -115,9 +115,16 @@ Ada was development for the American department of defence in the 80's in order 
 
 \subsection{Arduino Nano 33 BLE Sense}
 
-Her må noen andre finne på noe lurt***************************Kent
-
-
+The Arduino Nano 33 BLE Sense is a small board with a nRF52840 microcontroller.
+It comes with plenty of peripherals:
+\begin{itemize}
+  \item Bluetooth
+  \item IMU
+  \item Microphone
+  \item Gesture/Light/Proximity detector
+  \item Barometric pressure gauge
+  \item Temperature and humidity gauge
+\end{itemize}
 
 \subsection{Servo Motors}
 Usually, when programming Arduinos in C, one makes use of a library to control servo motors. However, as we were doing this in Ada, we would have to write our own library. Servo motors are controlled using a pulse width modulated signal (PWM). A PWM has a fixed period, where the amount of time the signal is high defines the signal. 
