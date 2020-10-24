@@ -451,8 +451,7 @@ The maximum number of entries in tasks are set to 0. This means that we won't be
 Another thing we planned was to specify which tasks would run on the respective cores of the CPU. This however, is not supported within the ravenscar profile, and we will need to do all the scheduling as if we only had a single-core processor. 
 
 \section{Various problems we've encountered along the way}
-
-By the time you're reading this, some of these issues might have been fixed. Down below are some problems we have encountered during our development phase from 17.02.2020 - ??. Most of these issues have occured using Linux, it is stated otherwise.
+In the list below are some problems we have encountered during our development phase from 17.09.2020 - 23.10.2020. Most of these issues have occured using Linux, it is stated otherwise.
 
 
 \begin{itemize}
@@ -476,7 +475,7 @@ By the time you're reading this, some of these issues might have been fixed. Dow
 
 	\item Generating a pulse accepted by the servos and ultrasonic sensor is more challenging than setting pins to low/high and using a delay.
 
-	\item Using a copied bb-runtime library will not work correctly on other computers under debugging. They must be generated on every new computer.
+	\item Using a copied bb-runtime library will not work correctly on other computers under debugging. They must be generated on the debugging enviorment.
 
 \end{itemize}
 
