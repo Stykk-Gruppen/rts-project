@@ -242,15 +242,13 @@ As the code is quite extensive, we have chosen not to include it in the appendic
 
 \subsection{Minimum working examples}
 
-During the difficulties of flashing the Arduino, we spent our spare time writing both the full program, but also creating small testing suites. This would help us more efficiently test all the components, and how we interfaced with them, in a limited environment. 
+During the difficulties of flashing the Arduino, we spent our spare time writing both the full program, but also creating small testing suites. This would help us more efficiently test all the components, and how we interfaced with them, in a limited environment.\\ 
 
-This helped us find quite a few bugs early on, as well as figuring out what would, and would not work.
+This helped us find quite a few bugs early on, as well as figuring out what would, and would not work.\\
 
 For instance, the Ada Drivers Library has a servo motor example using analog write and interrupts. We initially tried doing it this way, to ensure steady PWMs for the servo motors, but as mentioned this proved to be much harder than anticipated. Because of our approach of test early, fail early, we were able to develop workarounds for this at an early stage.\\ 
 
-The code for these tests can be seen in appendix \ref{}, and an image of the testing can be seen below. 
-
-***Bilde av Servoer og sensorer????**************
+We have developed testing projects to test the servos and the ultrasonic sensors. To test every pin on the board, we developed a blinking example, turning every pin on and off. The code for these tests can be found in our GitHub repository.
 
 \section{Implementation}
 
@@ -262,6 +260,33 @@ The code for these tests can be seen in appendix \ref{}, and an image of the tes
 
 \subsubsection{Scheduling}
 
+\section{Various problems we've encountered along the way}
+In the list below are some problems we have encountered during our development phase from 17.09.2020 - 23.10.2020. Most of these issues have occured using Linux, it is stated otherwise.
+
+\begin{itemize}
+	\item Flashing to the Arduino board without a debugging probe might be impossible.
+
+	\item After installing software for the Segger J-Link debugger from their official webpage, a new .rules file for the debugger appears in $/etc/udev/rules.d$ containing the necessary information for the debugger to be found by $pyocd\ list$. This has only been successful with one of our computers. A workaround is to run pyocd with sudo privileges.
+
+	\item Including unused libraries in the Ada source-code makes the arduino crash under run-time.
+
+	\item When trying to flash to the board without having the cables soldered, errors in the list below have appeared as a consequence of unstable hands.
+		\begin{itemize}
+			\item Unable to start CPU core.
+			\item Target System has no power.
+            \item Unspecified Error.
+            \item J-Link is already open.
+		\end{itemize}
+
+	\item Including Arduino\_Nano\_33\_Ble\_Sense.Time makes the microcontroller crash in real time. --ref til Debug lstlisting i appendix--
+
+	\item Only Digital I/O works. Possibly because Analog relies on interrupt/timers which seem broken in our drivers or runtime.
+
+	\item Generating a pulse accepted by the servos and ultrasonic sensor is more challenging than setting pins to low/high and using a delay.
+
+	\item Using a copied bb-runtime library will not work correctly on other computers under debugging. They must be generated on the debugging enviorment.
+
+\end{itemize}
 
 \section{Final Product}
 
@@ -450,34 +475,6 @@ The maximum number of entries in tasks are set to 0. This means that we won't be
 
 Another thing we planned was to specify which tasks would run on the respective cores of the CPU. This however, is not supported within the ravenscar profile, and we will need to do all the scheduling as if we only had a single-core processor. 
 
-\section{Various problems we've encountered along the way}
-In the list below are some problems we have encountered during our development phase from 17.09.2020 - 23.10.2020. Most of these issues have occured using Linux, it is stated otherwise.
-
-
-\begin{itemize}
-	\item Flashing to the Arduino board without a debugging probe might be impossible.
-
-	\item After installing software for the Segger J-Link debugger from their official webpage, a new .rules file for the debugger appears in $/etc/udev/rules.d$ containing the necessary information for the debugger to be found by $pyocd\ list$. This has only been successful with one of our computers. A workaround is to run pyocd with sudo privileges.
-
-	\item Including unused libraries in the Ada source-code makes the arduino crash under run-time.
-
-	\item When trying to flash to the board without having the cables soldered, errors in the list below have appeared as a consequence of unstable hands.
-		\begin{itemize}
-			\item Unable to start CPU core.
-			\item Target System has no power.
-            \item Unspecified Error.
-            \item J-Link is already open.
-		\end{itemize}
-
-	\item Including Arduino\_Nano\_33\_Ble\_Sense.Time makes the microcontroller crash in real time. --ref til Debug lstlisting i appendix--
-
-	\item Only Digital I/O works. Possibly because Analog relies on interrupt/timers which seem broken in our drivers or runtime.
-
-	\item Generating a pulse accepted by the servos and ultrasonic sensor is more challenging than setting pins to low/high and using a delay.
-
-	\item Using a copied bb-runtime library will not work correctly on other computers under debugging. They must be generated on the debugging enviorment.
-
-\end{itemize}
 
 \subsection{Pin layout}
 11.10.2020\\
