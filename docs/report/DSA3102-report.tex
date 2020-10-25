@@ -59,7 +59,7 @@ Very early on, we decided on building an autonomous car. We initially had a plan
 
 The car should not only drive, but it would also have a bottle of antibac on top of it, with a sensor that would stop the car, and provide a person with a few drops of desinfecting liquid.\\ 
 
-The initial design looked like this. 
+The initial design is illustrated in Figure \ref{ProtoDrawing}.
 
 \begin{figure}[H]
 	\centering
@@ -237,6 +237,8 @@ In Figure \ref{Hardware} we have drawn our wire setup, with common ground for bo
 \end{figure}
 
 \subsection{Software}
+Our software is written with the Ada language. To function it is heavily dependent on the open source Ada Drivers Library. To keep track of time and execute delays, we have used the Ada Real-Time library. As there were no libraries for the distance sensor and the servo, we have written them ourselves.\\
+--Var det noe slikt du ville ha Kent?--
 
 \subsubsection{Architecture}
 The system architecutre is illustrated in Figure \ref{SystemArchBlock}. The Distance Sensor Controller keeps a hold of the ultrasonic sensors. It operates them all in one task, reading the values sequentially and stores them in the controller. The servo controller was initially made to control the steering servo, the ESC and the two servos used in operating the dispenser. As the project deadling got closer, we had to remove the three servos and were left with the ESC. Even though the Brushless Motor ESC is technically not a servo, it uses the same operating signals as the other servos. At the time it made sense to fit it in with the others under the same controller.\\
