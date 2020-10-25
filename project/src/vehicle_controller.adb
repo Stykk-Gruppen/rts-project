@@ -99,7 +99,6 @@ package body Vehicle_Controller is
       Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, True);
       Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, True);
       Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, True);
-      Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (13, False);
       loop
          Time_Now := Ada.Real_Time.Clock;
          case Status_Light_Colour is
@@ -116,9 +115,11 @@ package body Vehicle_Controller is
                delay until Time_Now + Ada.Real_Time.Milliseconds(100);
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, True);
             when Yellow =>
-               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (13, True);
+               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, False);
+               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, False);
                delay until Time_Now + Ada.Real_Time.Milliseconds(100);
-               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (13, False);
+               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, True);
+               Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, True);
          end case;
          Time_Now := Ada.Real_Time.Clock;
          delay until Time_Now + Ada.Real_Time.Milliseconds(100);
