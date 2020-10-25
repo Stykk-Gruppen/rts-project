@@ -9,9 +9,13 @@ package body HCSR04 is
    function Distance(TrigPin, EchoPin : Arduino_Nano_33_Ble_Sense.IOs.Pin_Id) return Float is
       TimeNow : Ada.Real_Time.Time;
       TimeoutStart : Ada.Real_Time.Time;
+      --Maximum distance of sensor is 400cm = 23200uS. We add a 1ms margin on top of that
+      DeadlineMicroseconds : constant Integer := 25200;
       Result : Duration;
       Pulse : Boolean;
    begin
+
+      TimeoutStart := Ada.Real_Time.Clock;
       TimeNow := Ada.Real_Time.Clock;
       Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(TrigPin, False);
       delay until TimeNow + Ada.Real_Time.Microseconds(2);
@@ -24,10 +28,10 @@ package body HCSR04 is
       --There must be no interrupts between these parts.
 
       Pulse := Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin);
-      TimeoutStart := Ada.Real_Time.Clock;
+      
       while Pulse = Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) loop
          --Wait for the analog signal to change from low - high or high - low
-         if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(50000) then
+         if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(DeadlineMicroseconds) then
             return -1.0;
          end if;
       end loop;
@@ -36,7 +40,7 @@ package body HCSR04 is
 
       while Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) = False loop
          --Wait for the signal to go from low to high
-         if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(50000) then
+         if Ada.Real_Time.Clock > TimeoutStart + Ada.Real_Time.Microseconds(DeadlineMicroseconds) then
             return -1.0;
          end if;
       end loop;
@@ -46,7 +50,7 @@ package body HCSR04 is
 
          while not Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) = False loop
             -- Wait for the signal to change to LOW
-            if Ada.Real_Time.Clock > TimeNow + Ada.Real_Time.Microseconds(50000) then
+            if Ada.Real_Time.Clock > TimeNow + Ada.Real_Time.Microseconds(DeadlineMicroseconds) then
                return -1.0;
             end if;
          end loop;
