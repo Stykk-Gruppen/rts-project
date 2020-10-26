@@ -73,6 +73,32 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Schedule}
+    \begin{center}
+        \begin{tabular}{||l c c c|r||}
+            \hline
+              Task & Period(P) & Comp. time(C) & Priority(P) & Util(U) \\ [0.5ex]
+            \hline\hline
+              EngineServo & 20 & 4094ns & 4 & 0.0002 \\
+            \hline
+              Compute & 16ms & 844ns & 3 & 0.000052 \\
+            \hline
+              Sensors & 16ms & 11600190ns & 2 & 0.72 \\
+            \hline
+              Lights & 200ms & 13438ns & 1 & 0.000067 \\
+            \hline
+              Main & N/A & 16ns & 0 & 0 \\ [1ex]
+            \hline
+        \end{tabular}
+    \end{center}
+    The utilization factor for this system is
+    \begin{equation*}
+      U_{Sum} = 72.0319\%
+    \end{equation*}
+    which is lower than the limit of 74.1\% for five tasks.
+\end{frame}
+
+\begin{frame}
     \centering
     \frametitle{Questions}
 Any questions?
