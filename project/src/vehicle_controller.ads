@@ -12,6 +12,6 @@ private
    Current_Direction : Direction := Stop;
    Next_Direction : Direction := Stop;
    Stop_Distance_Front : Float := 50.0;
-   Stop_Distance_Back : Float := 30.0;
+   Stop_Distance_Back : Float := 40.0;
      
 end Vehicle_Controller;

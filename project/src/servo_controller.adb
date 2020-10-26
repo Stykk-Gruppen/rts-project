@@ -8,7 +8,7 @@ package body Servo_Controller is
       loop
          case Engine_Servo.Current_Direction is
             when Forward =>
-               Servo.Write(1800, Engine_Servo.Pin);
+               Servo.Write(1600, Engine_Servo.Pin);
             when Backward =>
                Servo.Write(1000, Engine_Servo.Pin);
             when Stop =>

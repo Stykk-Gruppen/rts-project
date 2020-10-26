@@ -10,7 +10,7 @@ package body HCSR04 is
       TimeNow : Ada.Real_Time.Time;
       TimeoutStart : Ada.Real_Time.Time;
       --Maximum distance of sensor is 400cm = 23200uS. We add a 1ms margin on top of that
-      DeadlineMicroseconds : constant Integer := 25200;
+      DeadlineMicroseconds : constant Integer := 5800;
       Result : Duration;
       Pulse : Boolean;
    begin
@@ -51,7 +51,7 @@ package body HCSR04 is
          while not Arduino_Nano_33_Ble_Sense.IOs.DigitalRead(EchoPin) = False loop
             -- Wait for the signal to change to LOW
             if Ada.Real_Time.Clock > TimeNow + Ada.Real_Time.Microseconds(DeadlineMicroseconds) then
-               return -1.0;
+               return 100.0;
             end if;
          end loop;
 

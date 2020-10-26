@@ -1,6 +1,6 @@
 with Distance_Sensor_Controller;
 with Ada.Real_Time; use Ada.Real_Time;
-with Ada.Execution_Time;
+--with Ada.Execution_Time;
 with Arduino_Nano_33_Ble_Sense.IOs;
 with Servo_Controller;
 
@@ -12,9 +12,9 @@ package body Vehicle_Controller is
 
    task body Compute is
       --Only for calculating schedule--
-      StartTimer : Ada.Execution_Time.CPU_Time;
-      EndTimer : Ada.Execution_Time.CPU_Time;
-      ExeTime : Ada.Execution_Time.CPU_Time;
+      --StartTimer : Ada.Execution_Time.CPU_Time;
+      --EndTimer : Ada.Execution_Time.CPU_Time;
+      --ExeTime : Ada.Execution_Time.CPU_Time;
 
       Time_Now : Ada.Real_Time.Time;
       Front_Blocked : Boolean;
@@ -22,11 +22,13 @@ package body Vehicle_Controller is
    begin
       --Only for calculating schedule--
       --Should start at 0 when task is created, and increase only when used by CPU
-      StartTimer := Ada.Execution_Time.Clock;
+      --StartTimer := Ada.Execution_Time.Clock;
 
       Time_Now := Ada.Real_Time.Clock;
       delay until Time_Now + Ada.Real_Time.Milliseconds(1000);
       loop
+         Time_Now := Ada.Real_Time.Clock;
+
          Front_Blocked := Distance_Sensor_Controller.Front.Value < Stop_Distance_Front;
          Back_Blocked := Distance_Sensor_Controller.Back.Value < Stop_Distance_Back;
 
@@ -64,11 +66,10 @@ package body Vehicle_Controller is
          end if;
 
          Change_Direction;
-         Time_Now := Ada.Real_Time.Clock;
-         delay until Time_Now + Ada.Real_Time.Milliseconds(200);
+         delay until Time_Now + Ada.Real_Time.Milliseconds(16);
 
          --Only for calculating schedule--
-         EndTimer := Ada.Execution_Time.Clock;
+         --EndTimer := Ada.Execution_Time.Clock;
       end loop;
    end Compute;
 
@@ -117,23 +118,30 @@ package body Vehicle_Controller is
             when Red =>
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, False);
                delay until Time_Now + Ada.Real_Time.Milliseconds(100);
+               Time_Now := Ada.Real_Time.Clock;
+
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, True);
             when Green =>
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, False);
                delay until Time_Now + Ada.Real_Time.Milliseconds(100);
+               Time_Now := Ada.Real_Time.Clock;
+
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, True);
             when Blue =>
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, False);
                delay until Time_Now + Ada.Real_Time.Milliseconds(100);
+               Time_Now := Ada.Real_Time.Clock;
+
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (6, True);
             when Yellow =>
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, False);
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, False);
                delay until Time_Now + Ada.Real_Time.Milliseconds(100);
+               Time_Now := Ada.Real_Time.Clock;
+
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (24, True);
                Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite (16, True);
          end case;
-         Time_Now := Ada.Real_Time.Clock;
          delay until Time_Now + Ada.Real_Time.Milliseconds(100);
       end loop;
    end Status_Light;

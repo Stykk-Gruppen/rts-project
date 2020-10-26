@@ -13,11 +13,11 @@ package Distance_Sensor_Controller is
    Front : Distance_Sensor :=
      (TrigPin => 47,
       EchoPin => 45,
-      Value => 50.0);
+      Value => 100.0);
 
    Back : Distance_Sensor :=
      (TrigPin => 43,
       EchoPin => 44,
-      Value => 50.0);
+      Value => 100.0);
 
 end Distance_Sensor_Controller;
