@@ -9,7 +9,7 @@
 \usepackage{tcolorbox}
 \usepackage{textcomp}
 \usepackage[parfill]{parskip}
-
+\usepackage{amsmath}
 \definecolor{light-gray}{gray}{0.9}
 \lstset{frame=tb,
 extendedchars = true,
@@ -294,14 +294,53 @@ The sensors and lights come next, and finally the main loop. The good thing abou
 
 We quickly found that if a high priority task, like Compute did not have any delays, it would lead to starvation on the lower priority tasks. First we played around with these numbers a bit, before settling on values that seemed to work.
 
-However, a bit of trial and error is not good enough for a real time system. We needed to be able to prove that our system will never miss any deadlines. In order to accomplish this, we looked at the assembly code for each task, and caclulated the number of clock cycles necessary for each of them.
+However, a bit of trial and error is not good enough for a real time system. We needed to be able to prove that our system will never miss any deadlines.
 
-...
+In order to find out if our system was schedulable, we decided to make use of the utilazation test. As we had five tasks, the formula states that the combined utilization factor must be:
 
-...
+\begin{equation*}
+  U_{Sum} < 74.3\%
+\end{equation*}
 
-...
+The utilization factor for a given task is given by the formula:
+\begin{equation*}
+  U_{i} = frac{C_{i}}{P_{i}}
+\end{equation*}
 
+We found the computation time for each task in Gnatstudio, by opening the assembly code window during debugging. Here we went through each task step by step, and counted the lines. In cases where the code had the possibility of moving to different branches, we always chose the \textit{worst-case} option. Merely counting lines in assembly is probably not a 100\% accurate, but for our use, this was good enough.
+
+The periods were set in advance based on guesses. Luckily for us we were able to see just how effective this tool is when developing real-time systems. When we started the scheduling analysis, we were quite satisfied with our system, even though it had a few bugs, which would appear in irreproducable conditions. The reason became clear when we saw that we had a utilization factor of 0.92.
+
+We played around with the periods of the Compute and Sensor task, as well as adjusting the computation time for the sensors by letting the task timeout on distances bigger than 1 meter. This led to the table that can be seen below.
+
+\begin{center}
+ \begin{tabular}{||l c c c|r||}
+ \hline
+   Task & Period(P) & Comp. time(C) & Priority(P) & Util(U) \\ [0.5ex]
+ \hline\hline
+   EngineServo & 20 & 4094ns & 4 & 0.0002 \\
+ \hline
+   Compute & 16ms & 844ns & 3 & 0.000052 \\
+ \hline
+   Sensors & 16ms & 11600190ns & 2 & 0.72 \\
+ \hline
+   Lights & 200ms & 13438ns & 1 & 0.000067 \\
+ \hline
+   Main & N/A & 16ns & 0 & 0 \\ [1ex]
+ \hline
+\end{tabular}
+\end{center}
+
+The utilization factor for this system is
+\begin{equation*}
+  U_{Sum} = 72.0319\%
+\end{equation*}
+
+which is of course lower than the limit of 74.1\% for five tasks.
+
+After implementing these changes in the code, we saw that the bugs we had previously had disappeared. We ran the system for five minutes continously, exposing the sensors to all kinds of behaviour without any errors.
+
+Because our system eventually passed the utilization test, we can say we pretty high confidence that all our tasks will meet their deadlines.
 
 
 \section{Various problems we've encountered along the way}
