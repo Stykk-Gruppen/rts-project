@@ -159,9 +159,9 @@ As we were told early on that almost noone had programmed Ada on the Nano, we kn
 
 \subsubsection{Ada Drivers Library}
 
-The \textit{Ada Drivers Library}, is a collection of drivers and examples for programming Ada on a wide range of microcontrollers, however the Arduino Nano was \textbf{not} one of them. However, as Steven Bos had discovered, it does provide drivers for the \textit{NRF52\_DK}. This board has the same CPU, \textit{Arm Cortex-M4} and a similar microcontroller as the Arduino Nano. Steven presented a working solution for a classical led blink example using this library, and after that we at least had a path to follow, as well as expanding on.\\
+The \textit{Ada Drivers Library}, is a collection of drivers and examples for programming Ada on a wide range of microcontrollers, but the Arduino Nano was \textbf{not} one of them. However, as Steven Bos had discovered, it does provide drivers for the \textit{NRF52\_DK}. This board has the same CPU, \textit{Arm Cortex-M4} and is a similar board as the Arduino Nano. Steven presented a working solution for a classical led blink example using this library, and after that we at least had a path to follow, as well as expanding on.\\
 
-We knew that it would be quite a few hours of adjusting the existing drivers, to suit the Nano. In the hope of being able to contribute to the open-source community, we forked the \textit{Ada Drivers Library}
+We knew that it would take quite a few hours to adjust the existing drivers, to suit the Nano. In the hope of being able to contribute to the open-source community, we forked the \textit{Ada Drivers Library}
 , and used their script to build basic board files for the Nano, based on our inputted specifications.
 
 \begin{figure}[H]
@@ -172,7 +172,7 @@ We knew that it would be quite a few hours of adjusting the existing drivers, to
 \end{figure}
 \subsubsection{Ravenscar runtime Library}
 
-When flashing a microcontroller with code, you also need to have a runtime library. As a microcontroller is limited in space, you usually won't include everything that the language normally offers.\\
+When flashing a microcontroller, you also need to have a runtime library. As a microcontroller is limited in space, you usually won't include everything that the language normally offers.\\
 
 For most of the microcontrollers in the \textit{Ada Drivers Library}, there exists three kinds:
 \begin{itemize}
@@ -183,24 +183,20 @@ For most of the microcontrollers in the \textit{Ada Drivers Library}, there exis
 
 For the NRF52840, the only runtime library that was provided to us out of the box, was the ZFP. The ZFP has (as the name implies) almost none of the features we would need. The most crucial one being the ability to have multithreading (called tasks in Ada). As much of this course's theory is based around having several tasks, and how to schedule them etc, a sequential approach would not do.\\
 
-In order to have access to the Ravenscar full library, we cloned BB-runtimes from Github, and used a script they provide in order to build it. This proved a tedious task, and there were quite a few errors within the script that had actually already been fixed by the developers, but not released at that time.\\
-%Er dette riktig forklaring?????
+In order to have access to the full Ravenscar library, we cloned BB-runtimes from Github, and used a script they provide in order to build it. This proved a tedious task, and there were quite a few errors within the script that had actually already been fixed by the developers, but not released at that time.\\
+
 Luckily for us, this eventually worked out okay. The ravenscar library still has its limitations which would change the way in which we structured our software. For instance, it does not allow entry points into tasks. This means that we would not have access to dynamic tasking, and that all tasks would have to be created statically. It also meant that we would not (without extreme difficulty) be able to take advantage of the multiple core processor on the Nano.\\
 
 \subsection{Flashing the Arduino}
 
-After getting our software toolchain together, we started trying to flash our Arduino with a blinkin test. As we had'nt received the JLink debugger yet, we wanted to see if this was possible to accomplish using only USB. After spending way too many hours on this, we found that this would not be feasible.\\
+After getting our software toolchain together, we started trying to flash our Arduino with a blinking test. As we had not received the JLink debugger yet, we wanted to see if this was possible to accomplish using only USB. After spending way too many hours on this, we found that this would not be feasible.\\
 
-When we received the JLink debugger, we would unfortunately also have to wait for a 3D-printed clamp holder, as the soldering on the Nano had proved to be quite unstable for some of the other students. Our eagerness and impatiance luckily drove us to try and flash the Nano, whilst holding wires to the pins on the Nano by Hand. This took a lot of trial and error, but eventually some of the members of the group developed great skills for this technique, as can be seen in the picture below:
-
-********Bilde av flashing med manuell holding av ledninger******************
+When we received the JLink debugger, we would unfortunately also have to wait for a 3D-printed clamp holder, as the soldering on the Nano had proved to be quite unstable for some of the other students. Our eagerness and impatiance luckily drove us to try and flash the Nano whilst holding wires to the pins on the Nano by hand. This took a lot of trial and error, but eventually some of the members of the group developed great skills for this technique.
 
 When we finally received the clamp holder a few weeks later, flashing turned into a dream, and we could with much greater ease debug our program, as it no longer required someone manually holding the wires in place during runtime.
 
 
-%Finne på bedre tittel.
-%Vil du fylle inn litt om pins her Tarald?
-\subsubsection{Our Arduino library}
+\subsubsection{Our Ada Drivers Library Fork}
 
 As mentioned, we built source files for our own drivers for the Arduino, using the scripts provided by the \textit{Ada Drivers Library}. Most of the files required only small changes, but the pin layouts are quite different on the Arduino compared to the NRF52\_DK.
 
@@ -217,9 +213,11 @@ During the difficulties of flashing the Arduino, we spent our spare time writing
 
 This helped us find quite a few bugs early on, as well as figuring out what would, and would not work.\\
 
-For instance, the Ada Drivers Library has a servo motor example using analog write and interrupts. We initially tried doing it this way, to ensure steady PWMs for the servo motors, but as mentioned this proved to be much harder than anticipated. Because of our approach of test early, fail early, we were able to develop workarounds for this at an early stage.\\
+For instance, the Ada Drivers Library has a servo motor example using analog write and interrupts. We initially tried doing it this way, to ensure steady PWMs for the servo motors, but as mentioned this proved to be much harder than anticipated.\\
 
-We have developed testing projects to test the servos and the ultrasonic sensors. To test every pin on the board, we developed a blinking example, turning every pin on and off. The code for these tests can be found in our GitHub repository.
+We  developed testing projects to test the servos and the ultrasonic sensors. To test every pin on the board, we developed a blinking example, turning every pin on and off. The code for these tests can be found in our GitHub repository.\\
+
+Because of our approach of test early, fail early, we were able to develop workarounds for this at an early stage.\\
 
 \section{Implementation}
 
@@ -287,7 +285,7 @@ The prioritation of the tasks in our system, can be seen in the table below{}
 \end{tabular}
 \end{center}
 
-In order to not ever break the PWM sent to the ESC, the task that controls the engine has been given the highest priority. Next, we find the task that makes the computations, which normally would have had the highest priority, had we had access to interrupts.
+In order to not ever break the PWM sent to the ESC, the task that controls the engine has been given the highest priority. Next is the task that makes the computations. If we had access to interrupts, this would naturally have had the highest priority.
 
 The sensors and lights comes next, and finally the main loop. The good thing about FPS, is that one can add arbitrary tasks and assign them a priority of 0. In our case the system will run forever, so the main loop is just a loop with a null statement, which will never still any CPU clock cycles.
 
@@ -382,9 +380,9 @@ To sum it up, the final product is a car, that will drive forwards and backwards
 
 The purpose of this assigment was to try and implement the theory relating to real-time systems in practice, in order to better understand it. In spite of the challenges along the way, and how we had to downscale the project several times, we would still say that this goal was accomplished.\\
 
-One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving, nothing can beat the feeling of actually experiencing it. As mentioned, we had several tasks that didn't deliver the output we expected, and many times this was due to the task not getting any time on the CPU. That is a powerful experience.\\
+One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving. However, nothing can beat the feeling of actually seeing it in real life. As mentioned, we had several tasks that didn't deliver the output we expected, and many times this was due to the task not getting any time on the CPU. This was a powerful experience.\\
 
-Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was great, is guaranteed to prove very useful knowledge in the future.\\
+Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was a great experience, and is guaranteed to prove very valuable in the future.\\
 
 \newpage
 %Referanse
@@ -414,8 +412,8 @@ texcl=true,
   breakatwhitespace=true,
   tabsize=3
 }
-
-\includepdf[scale=1.0,pages=-,pagecommand=\subsection{Arduino Nano 33 BLE sense PIN layout\label{pinlayout}}]{pdf/Pinout-NANOsense_latest.pdf}
+\subsection{Arduino Nano 33 BLE Sense Pin Layout}
+\includepdf[scale=1.0,pages=-,pagecommand=\label{pinlayout}]{pdf/Pinout-NANOsense_latest.pdf}
 
 \lstset{frame=tb,
 extendedchars = true,
