@@ -44,20 +44,20 @@ texcl=true,
 
 \newpage
 \section{Abstract}
-This is our submission for the semester assignemnt in the course Real-Time Systems DSA3102, fall of 2020.
+This is our submission for the semester assignment in the course Real-Time Systems DSA3102, fall of 2020.
 
 \section{Introduction}
 The semester assignment as given, was to design and implement a real-time system, which would run on an Arduino Nano 33 BLE Sense, with the requirement that it would be programmed in Ada.\\
 
-A broad definition of a real-time system, is a system that reacts to external stimuli, make calucations, and performs some output, within a given deadline. In other words, the challenge here is not only to write a logically correct program, but also that it finishes all tasks in time. Which naturally increases the difficulty.\\
+A broad definition of a real-time system, is a system that reacts to external stimuli, make calculations, and performs some output, within a given deadline. In other words, the challenge here is not only to write a logically correct program, but also that it finishes all tasks in time. Which naturally increases the difficulty.\\
 
 This report will explain our project choice as well as the design. It will give a detailed description of the challenges, especially concerning running Ada on an Arduino Nano. Finally we will explain how the final solution works, and how we can prove that it is safe, and that the system will be able to meet all its deadlines.\\
 
 \section{Specifications}
 
-Very early on, we decided on building an autonomous car. We initially had a plan on using a hololens to interact with the car in some way, but we quickly moved away from this, in order to reduce the overall complexity.\\
+Very early on, we decided on building an autonomous car. We initially had a plan on using a Hololens to interact with the car in some way, but we quickly moved away from this, in order to reduce the overall complexity.\\
 
-The car should not only drive, but it would also have a bottle of antibac on top of it, with a sensor that would stop the car, and provide a person with a few drops of desinfecting liquid.\\
+The car should not only drive, but it would also have a bottle of antibac on top of it, with a sensor that would stop the car, and provide a person with a few drops of disinfecting liquid.\\
 
 The initial design is illustrated in Figure \ref{ProtoDrawing}.
 
@@ -68,7 +68,7 @@ The initial design is illustrated in Figure \ref{ProtoDrawing}.
 	\label{ProtoDrawing}
 \end{figure}
 
-As the car would provide people with antibac, we naturally wanted the car to be able to drive on top of a table. That is why it had downpointing sensors, to be able to know when it would drive of an edge. However, after receiving the car from our professor, we quickly found, that the navigation system we would need to implement would be way too comprehensive, given the small timeframe of the assignment.\\
+As the car would provide people with antibac, we naturally wanted the car to be able to drive on top of a table. That is why it had down-pointing sensors, to be able to know when it would drive of an edge. However, after receiving the car from our professor, we quickly found, that the navigation system we would need to implement would be way too comprehensive, given the small time frame of the assignment.\\
 
 Throughout the project, the system went through several iterations, and as we met challenges along the way, the antibac idea was abandoned. The final design is illustrated in Figure \ref{final-design}.
 
@@ -82,7 +82,7 @@ Throughout the project, the system went through several iterations, and as we me
 \section{Technologies}
 
 \subsection{The Ada Programming Language}
-Ada was development for the American department of defence in the 80's in order to try and get a standard programming language for all of their projects. As its main use-case was intended to be on critical military systems, the language would be designed from ground up, to accomodate the creation of robust and safe software. This resulted in a language with strong typing, a strict compiler, and a syntax that is meant to improve the readability, resulting in a easier maintainability in large projects. Today Ada is still mostly used in the defence and aerospace sector, and is very suitable for embedded systems.\\
+Ada was development for the American department of defence in the 80's in order to try and get a standard programming language for all of their projects. As its main use-case was intended to be on critical military systems, the language would be designed from ground up, to accommodate the creation of robust and safe software. This resulted in a language with strong typing, a strict compiler, and a syntax that is meant to improve the readability, resulting in a easier maintainability in large projects. Today Ada is still mostly used in the defence and aerospace sector, and is very suitable for embedded systems.\\
 
 
 \subsection{Arduino Nano 33 BLE Sense}
@@ -101,7 +101,7 @@ It comes with plenty of peripherals:
 \subsection{Servo Motors}
 Usually, when programming Arduinos in C, one makes use of a library to control servo motors. However, as we were doing this in Ada, we would have to write our own library. Servo motors are controlled using a pulse width modulated signal (PWM). A PWM has a fixed period, where the amount of time the signal is high defines the signal.
 
-In the case of a servo motor, the fixed period is 20 milliseconds, and the signal must be high in a range between 1 and 2 milliseconds. Sending a 1.5 milliseconds high signal to a servo engine, is defined as the input for outputing neutral position. If we send a 1ms signal, the servo will move to the extreme left, and 2ms will output the extreme right. An illustration of this can be seen in Figure \ref{servo}.
+In the case of a servo motor, the fixed period is 20 milliseconds, and the signal must be high in a range between 1 and 2 milliseconds. Sending a 1.5 milliseconds high signal to a servo engine, is defined as the input for outputting neutral position. If we send a 1ms signal, the servo will move to the extreme left, and 2ms will output the extreme right. An illustration of this can be seen in Figure \ref{servo}.
 
 \begin{figure}[H]
 	\centering
@@ -122,7 +122,7 @@ The TRIG is its input, where we send a signal letting it know that we want to pe
 	\label{ultrasonic-sensor}
 \end{figure}
 
-%Finn riktig navn på denne, pluss litt specs
+
 \subsection{The Turnigy Trooper}
 The Turnigy Trooper is the name of the car that our professor provided us with. It was originally a remote controlled car, but a lot is removed, so nothing but the chassis, motors and wheels remain.\\
 
@@ -137,11 +137,11 @@ The Receiver from this diagram has also been removed from the car.
 \end{figure}
 
 
-The servo motor for the steering is traditional one, which takes the PWM that was desribed previously.\\
+The servo motor for the steering is traditional one, which takes the PWM that was described previously.\\
 
 The motor which will provide us with propulsion however, is actually a BLDC motor. Luckily for us, the ESC, provides a PWM interface for us, so that we can treat the motor as a fully rotating servo motor.\\
 
-As in the case with regular servo motors, we send it a standard PWM signal, but in this case, the high time of the signal does not refer to a static deegree, but to the speed of rotation. As can be seen in figure \ref{esc}, a high signal of 1.5ms means that the motor will not rotate. If we send a 2ms signal it will rotate forward at the highest speed, and the opposite applies for 1ms.
+As in the case with regular servo motors, we send it a standard PWM signal, but in this case, the high time of the signal does not refer to a static degree, but to the speed of rotation. As can be seen in figure \ref{esc}, a high signal of 1.5ms means that the motor will not rotate. If we send a 2ms signal it will rotate forward at the highest speed, and the opposite applies for 1ms.
 
 \begin{figure}[H]
 	\centering
@@ -155,7 +155,7 @@ The ESC in the Turnigy Trooper is also possible to program quite extensively, an
 
 \section{Toolchain \& Testing}
 \subsection{Ada on the Arduino}
-As we were told early on that almost noone had programmed Ada on the Nano, we knew early on that this would be a challenge. We didn't really know were to begin, until our assistant professor, Steven Bos, pointed us in the right direction.
+As we were told early on that almost no one had programmed Ada on the Nano, we knew early on that this would be a challenge. We didn't really know were to begin, until our assistant professor, Steven Bos, pointed us in the right direction.
 
 \subsubsection{Ada Drivers Library}
 
@@ -183,15 +183,15 @@ For most of the microcontrollers in the \textit{Ada Drivers Library}, there exis
 
 For the NRF52840, the only runtime library that was provided to us out of the box, was the ZFP. The ZFP has (as the name implies) almost none of the features we would need. The most crucial one being the ability to have multithreading (called tasks in Ada). As much of this course's theory is based around having several tasks, and how to schedule them etc, a sequential approach would not do.\\
 
-In order to have access to the full Ravenscar library, we cloned BB-runtimes from Github, and used a script they provide in order to build it. This proved a tedious task, and there were quite a few errors within the script that had actually already been fixed by the developers, but not released at that time.\\
+In order to have access to the full Ravenscar library, we cloned \textit{bb-runtimes} from GitHub, and used a script they provide in order to build it. This proved a tedious task, and there were quite a few errors within the script that had actually already been fixed by the developers, but not released at that time.\\
 
-Luckily for us, this eventually worked out okay. The ravenscar library still has its limitations which would change the way in which we structured our software. For instance, it does not allow entry points into tasks. This means that we would not have access to dynamic tasking, and that all tasks would have to be created statically. It also meant that we would not (without extreme difficulty) be able to take advantage of the multiple core processor on the Nano.\\
+Luckily for us, this eventually worked out okay. The Ravenscar library still has its limitations which would change the way in which we structured our software. For instance, it does not allow entry points into tasks. This means that we would not have access to dynamic tasking, and that all tasks would have to be created statically. It also meant that we would not (without extreme difficulty) be able to take advantage of the multiple core processor on the Nano.\\
 
 \subsection{Flashing the Arduino}
 
 After getting our software toolchain together, we started trying to flash our Arduino with a blinking test. As we had not received the JLink debugger yet, we wanted to see if this was possible to accomplish using only USB. After spending way too many hours on this, we found that this would not be feasible.\\
 
-When we received the JLink debugger, we would unfortunately also have to wait for a 3D-printed clamp holder, as the soldering on the Nano had proved to be quite unstable for some of the other students. Our eagerness and impatiance luckily drove us to try and flash the Nano whilst holding wires to the pins on the Nano by hand. This took a lot of trial and error, but eventually some of the members of the group developed great skills for this technique.
+When we received the JLink debugger, we would unfortunately also have to wait for a 3D-printed clamp holder, as the soldering on the Nano had proved to be quite unstable for some of the other students. Our eagerness and impatience luckily drove us to try and flash the Nano whilst holding wires to the pins on the Nano by hand. This took a lot of trial and error, but eventually some of the members of the group developed great skills for this technique.
 
 When we finally received the clamp holder a few weeks later, flashing turned into a dream, and we could with much greater ease debug our program, as it no longer required someone manually holding the wires in place during runtime.
 
@@ -201,9 +201,9 @@ When we finally received the clamp holder a few weeks later, flashing turned int
 As mentioned, we built source files for our own drivers for the Arduino, using the scripts provided by the \textit{Ada Drivers Library}. Most of the files required only small changes, but the pin layouts are quite different on the Arduino compared to the NRF52\_DK.
 
 The nRF52840 has two ports, P0 has 32 pins while P1 has 16 pins.\\
-We found the P1 base address for the nRF52840 seen on page 23 in the datasheet \cite{NRF52840}. Without it we were only able to use the pins with P0 seen on figure \ref{pinlayout}. After adding the base address to our Drivers Library and the option to chose between 0 and 47 pin number we were able to make all the pins function.
+We found the P1 base address for the nRF52840 seen on page 23 in the data-sheet \cite{NRF52840}. Without it we were only able to use the pins with P0 seen on figure \ref{pinlayout}. After adding the base address to our Drivers Library and the option to chose between 0 and 47 pin number we were able to make all the pins function.
 
-We also wanted to include the ability for analog writes and interrupts, but this proved to be overly complicated and timeconsuming to justify prioritization. More on this later.
+We also wanted to include the ability for analogue writes and interrupts, but this proved to be overly complicated and time-consuming to justify prioritization. More on this later.
 
 As the code is quite extensive, we have chosen not to include it in the appendices, but our fork of the \textit{Ada Drivers Library} can be seen on \href{https://github.com/Stykk-Gruppen/Ada_Drivers_Library}{GitHub}.
 
@@ -213,7 +213,7 @@ During the difficulties of flashing the Arduino, we spent our spare time writing
 
 This helped us find quite a few bugs early on, as well as figuring out what would, and would not work.\\
 
-For instance, the Ada Drivers Library has a servo motor example using analog write and interrupts. We initially tried doing it this way, to ensure steady PWMs for the servo motors, but as mentioned this proved to be much harder than anticipated.\\
+For instance, the Ada Drivers Library has a servo motor example using analogue write and interrupts. We initially tried doing it this way, to ensure steady PWMs for the servo motors, but as mentioned this proved to be much harder than anticipated.\\
 
 We  developed testing projects to test the servos and the ultrasonic sensors. To test every pin on the board, we developed a blinking example, turning every pin on and off. The code for these tests can be found in our GitHub repository.\\
 
@@ -222,7 +222,7 @@ Because of our approach of test early, fail early, we were able to develop worka
 \section{Implementation}
 
 \subsection{Hardware}
-The car has a 7.4V lithium battery, which initially powered the ESC and the motor. We chose to power the Arduino with the lithium battery aswell, but the sensors require 5V. We received a converter from Henning and used it with a 9V alkaline battery to power the two sensors.
+The car has a 7.4V lithium battery, which initially powered the ESC and the motor. We chose to power the Arduino with the lithium battery as well, but the sensors require 5V. We received a converter from Henning and used it with a 9V alkaline battery to power the two sensors.
 
 The sensors have two connections to the Arduino, in and out while the ESC has a single connection.
 
@@ -238,7 +238,7 @@ In Figure \ref{Hardware} we have drawn our wire setup, with common ground for bo
 Our software is written with the Ada language. To function it is heavily dependent on the open source Ada Drivers Library. To keep track of time and execute delays, we have used the Ada Real-Time library. As there were no libraries for the distance sensor and the servo, we have written them ourselves.\\
 
 \subsubsection{Architecture}
-The system architecutre is illustrated in Figure \ref{SystemArchBlock}. The Distance Sensor Controller keeps a hold of the ultrasonic sensors. It operates them all in one task, reading the values sequentially and stores them in the controller. The servo controller was initially made to control the steering servo, the ESC and the two servos used in operating the dispenser. As the project's deadline got closer, we had to remove the three servos and were left with the ESC. Even though the Brushless Motor ESC is technically not a servo, it uses the same operating signals as the other servos. At the time it made sense to fit it in with the others under the same controller.\\
+The system architecture is illustrated in Figure \ref{SystemArchBlock}. The Distance Sensor Controller keeps a hold of the ultrasonic sensors. It operates them all in one task, reading the values sequentially and stores them in the controller. The servo controller was initially made to control the steering servo, the ESC and the two servos used in operating the dispenser. As the project's deadline got closer, we had to remove the three servos and were left with the ESC. Even though the Brushless Motor ESC is technically not a servo, it uses the same operating signals as the other servos. At the time it made sense to fit it in with the others under the same controller.\\
 
 The main component is the Vehicle controller. It reads the sensor values from the Distance Sensor Controller and uses them to calculate the next sate logic. Each state writes their own unique values to the Servo Controller. These values indicates the signals sent to the ESC, altering its speed.
 
@@ -249,7 +249,7 @@ The main component is the Vehicle controller. It reads the sensor values from th
 	\label{SystemArchBlock}
 \end{figure}
 
-The system is built with a finite state machine in mind. Its states and conditions are illustrated in Figure \ref{fsm}. A builtin led on the Arduino is actively blinking the current state's colour, as described by the state's colour in Figure \ref{fsm}.
+The system is built with a finite state machine in mind. Its states and conditions are illustrated in Figure \ref{fsm}. A built-in led on the Arduino is actively blinking the current state's colour, as described by the state's colour in Figure \ref{fsm}.
 
 \begin{figure}[H]
     \centering
@@ -261,11 +261,11 @@ The system is built with a finite state machine in mind. Its states and conditio
 \subsubsection{Scheduling}
 As the software for the system consists of several concurrent tasks, it is crucial to make sure that the system is schedulable, and is able to reach all of its deadlines.
 
-As mentioned previosly, we were not able to get interrupt signals to work on the Arduino. This increases the importance of our scheduling even more, as we have hardware components that rely on steady and exact signal interaction. Where as the ESC is the the most crucial component.
+As mentioned previously, we were not able to get interrupt signals to work on the Arduino. This increases the importance of our scheduling even more, as we have hardware components that rely on steady and exact signal interaction. Where as the ESC is the the most crucial component.
 
 The simplest and most suitable scheduling scheme for our system, we found to be fixed-priority scheduling (FPS). This is a scheme where all the tasks are given a priority at compile-time, and is very simple to implement.
 
-The prioritation of the tasks in our system, can be seen in the table below{}
+The prioritization of the tasks in our system, can be seen in the table below.
 
 \begin{center}
  \begin{tabular}{||l c||}
@@ -293,7 +293,7 @@ We quickly found out that if a high priority task like Compute didn't have any d
 
 However, a bit of trial and error is not good enough for a real time system. We needed to be able to prove that our system will never miss any deadlines.
 
-In order to find out if our system was schedulable, we decided to make use of the utilazation test. As we had five tasks, the formula states that the combined utilization factor must be:
+In order to find out if our system was schedulable, we decided to make use of the utilization test. As we had five tasks, the formula states that the combined utilization factor must be:
 
 \begin{equation*}
   U_{Sum} < 74.3\%
@@ -306,7 +306,7 @@ The utilization factor for a given task is given by the formula:
 
 We found the computation time for each task in Gnatstudio, by opening the assembly code window during debugging. Here we went through each task step by step, and counted the lines. In cases where the code had the possibility of moving to different branches, we always chose the \textit{worst-case} option. Merely counting lines in assembly is probably not 100\% accurate, but for our use, this was good enough.
 
-The periods were set in advance based on guesses. Luckily for us we were able to see just how effective this tool is when developing real-time systems. When we started the scheduling analysis, we were quite satisfied with our system, even though it had a few bugs, which would appear in irreproducable conditions. The reason became clear when we saw that we had a utilization factor of 0.92.
+The periods were set in advance based on guesses. Luckily for us we were able to see just how effective this tool is when developing real-time systems. When we started the scheduling analysis, we were quite satisfied with our system, even though it had a few bugs, which would appear in irreproducible conditions. The reason became clear when we saw that we had a utilization factor of 0.92.
 
 We played around with the periods of the Compute and Sensor task, as well as adjusting the computation time for the sensors by letting the task timeout on distances bigger than 1 meter. This led to the table that can be seen below.
 
@@ -335,13 +335,13 @@ The utilization factor for this system is
 
 which is lower than the limit of 74.1\% for five tasks.
 
-After implementing these changes in the code, we noticed that the bugs we have previously, had disappeared. We ran the system for five minutes continously, exposing the sensors to all kinds of behaviour without any errors.
+After implementing these changes in the code, we noticed that the bugs we have previously, had disappeared. We ran the system for five minutes continuously, exposing the sensors to all kinds of behaviour without any errors.
 
 Because our system eventually passed the utilization test, we can say we pretty high confidence that all our tasks will meet their deadlines.
 
 
 \section{Various problems we've encountered along the way}
-In the list below are some problems we have encountered during our development phase from 17.09.2020 - 23.10.2020. Most of these issues have occured using Linux.
+In the list below are some problems we have encountered during our development phase from 17.09.2020 - 23.10.2020. Most of these issues have occurred using Linux.
 
 \begin{itemize}
 	\item Flashing to the Arduino board without a debugging probe might be impossible.
@@ -358,11 +358,11 @@ In the list below are some problems we have encountered during our development p
 
 	\item Including Arduino\_Nano\_33\_Ble\_Sense.Time makes the microcontroller crash during runtime.
 
-	\item Only Digital I/O works. Possibly because Analog relies on interrupt/timers which seem broken in our drivers or runtime.
+	\item Only Digital I/O works. Possibly because Analogue relies on interrupt/timers which seem broken in our drivers or runtime.
 
 	\item Generating a pulse accepted by the servos and ultrasonic sensor is more challenging than setting pins to low/high and using a delay.
 
-	\item Using a copied bb-runtime library will not work correctly on other computers under debugging. They must be generated on the debugging enviorment.
+	\item Using a copied bb-runtime library will not work correctly on other computers under debugging. They must be generated on the debugging environment.
 
 \end{itemize}
 
@@ -378,11 +378,11 @@ To sum it up, the final product is a car, that will drive forwards and backwards
 
 \section{Conclusion}
 
-The purpose of this assigment was to try and implement the theory relating to real-time systems in practice, in order to better understand it. In spite of the challenges along the way, and how we had to downscale the project several times, we would still say that this goal was accomplished.\\
+The purpose of this assignment was to try and implement the theory relating to real-time systems in practice, in order to better understand it. In spite of the challenges along the way, and how we had to downscale the project several times, we would still say that this goal was accomplished.\\
 
 One can read about the difficulty of making a system meet all its deadlines, how scheduling works and what happens when a thread is starving. However, nothing can beat the feeling of actually seeing it in real life. As mentioned, we had several tasks that didn't deliver the output we expected, and many times this was due to the task not getting any time on the CPU. This was a powerful experience.\\
 
-Learning to program in Ada along the way, as well as building the the ravenscar run-time library and the library for the NRF52840, was a great experience, and is guaranteed to prove very valuable in the future.\\
+Learning to program in Ada along the way, as well as building the the Ravenscar run-time library and the library for the nRF52840, was a great experience, and is guaranteed to prove very valuable in the future.\\
 
 \newpage
 %Referanse
