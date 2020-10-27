@@ -271,11 +271,11 @@ The simplest and most suitable scheduling scheme for our system, we found to be 
 The prioritation of the tasks in our system, can be seen in the table below{}
 
 \begin{center}
- \begin{tabular}{||c c||}
+ \begin{tabular}{||l c||}
  \hline
  Task & Priority \\ [0.5ex]
  \hline\hline
-   EngineServo & 4 \\
+   Engine & 4 \\
  \hline
    Compute & 3 \\
  \hline
@@ -304,7 +304,7 @@ In order to find out if our system was schedulable, we decided to make use of th
 
 The utilization factor for a given task is given by the formula:
 \begin{equation*}
-  U_{i} = frac{C_{i}}{P_{i}}
+  U_{i} = \frac{C_{i}}{P_{i}}
 \end{equation*}
 
 We found the computation time for each task in Gnatstudio, by opening the assembly code window during debugging. Here we went through each task step by step, and counted the lines. In cases where the code had the possibility of moving to different branches, we always chose the \textit{worst-case} option. Merely counting lines in assembly is probably not a 100\% accurate, but for our use, this was good enough.
@@ -314,11 +314,11 @@ The periods were set in advance based on guesses. Luckily for us we were able to
 We played around with the periods of the Compute and Sensor task, as well as adjusting the computation time for the sensors by letting the task timeout on distances bigger than 1 meter. This led to the table that can be seen below.
 
 \begin{center}
- \begin{tabular}{||l c c c|r||}
+ \begin{tabular}{||l l l l|l||}
  \hline
    Task & Period(P) & Comp. time(C) & Priority(P) & Util(U) \\ [0.5ex]
  \hline\hline
-   EngineServo & 20 & 4094ns & 4 & 0.0002 \\
+   Engine & 20ms & 4094ns & 4 & 0.0002 \\
  \hline
    Compute & 16ms & 844ns & 3 & 0.000052 \\
  \hline
