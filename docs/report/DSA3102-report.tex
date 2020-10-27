@@ -224,7 +224,7 @@ We have developed testing projects to test the servos and the ultrasonic sensors
 \section{Implementation}
 
 \subsection{Hardware}
-The car has a 7.4V lithium battery, it initially powered the ESC and the motor. We chose to power the Arduino with the lithium battery aswell, but the sensors require 5V. We received a converter from Henning and used it with a 9V alkaline battery to power the two sensors.
+The car has a 7.4V lithium battery, which initially powered the ESC and the motor. We chose to power the Arduino with the lithium battery aswell, but the sensors require 5V. We received a converter from Henning and used it with a 9V alkaline battery to power the two sensors.
 
 The sensors have two connections to the Arduino, in and out while the ESC has a single connection.
 
@@ -238,10 +238,9 @@ In Figure \ref{Hardware} we have drawn our wire setup, with common ground for bo
 
 \subsection{Software}
 Our software is written with the Ada language. To function it is heavily dependent on the open source Ada Drivers Library. To keep track of time and execute delays, we have used the Ada Real-Time library. As there were no libraries for the distance sensor and the servo, we have written them ourselves.\\
---Var det noe slikt du ville ha Kent?--
 
 \subsubsection{Architecture}
-The system architecutre is illustrated in Figure \ref{SystemArchBlock}. The Distance Sensor Controller keeps a hold of the ultrasonic sensors. It operates them all in one task, reading the values sequentially and stores them in the controller. The servo controller was initially made to control the steering servo, the ESC and the two servos used in operating the dispenser. As the project deadling got closer, we had to remove the three servos and were left with the ESC. Even though the Brushless Motor ESC is technically not a servo, it uses the same operating signals as the other servos. At the time it made sense to fit it in with the others under the same controller.\\
+The system architecutre is illustrated in Figure \ref{SystemArchBlock}. The Distance Sensor Controller keeps a hold of the ultrasonic sensors. It operates them all in one task, reading the values sequentially and stores them in the controller. The servo controller was initially made to control the steering servo, the ESC and the two servos used in operating the dispenser. As the project's deadline got closer, we had to remove the three servos and were left with the ESC. Even though the Brushless Motor ESC is technically not a servo, it uses the same operating signals as the other servos. At the time it made sense to fit it in with the others under the same controller.\\
 
 The main component is the Vehicle controller. It reads the sensor values from the Distance Sensor Controller and uses them to calculate the next sate logic. Each state writes their own unique values to the Servo Controller. These values indicates the signals sent to the ESC, altering its speed.
 
@@ -262,7 +261,7 @@ The system is built with a finite state machine in mind. Its states and conditio
 \end{figure}
 
 \subsubsection{Scheduling}
-As the software for the system consists of several concurrent tasks, it is crucial to make sure that the system is schedulable, and is able to reach all of its deadline.
+As the software for the system consists of several concurrent tasks, it is crucial to make sure that the system is schedulable, and is able to reach all of its deadlines.
 
 As mentioned previosly, we were not able to get interrupt signals to work on the Arduino. This increases the importance of our scheduling even more, as we have hardware components that rely on steady and exact signal interaction. Where as the ESC is the the most crucial component.
 
@@ -290,9 +289,9 @@ The prioritation of the tasks in our system, can be seen in the table below{}
 
 In order to not ever break the PWM sent to the ESC, the task that controls the engine has been given the highest priority. Next, we find the task that makes the computations, which normally would have had the highest priority, had we had access to interrupts.
 
-The sensors and lights come next, and finally the main loop. The good thing about FPS, is that one can add arbitrary tasks that and assign them a priority of 0. In our case the system will run forever, so the main loop is just a loop with a null statement, which will never still any CPU clock cycles.
+The sensors and lights comes next, and finally the main loop. The good thing about FPS, is that one can add arbitrary tasks and assign them a priority of 0. In our case the system will run forever, so the main loop is just a loop with a null statement, which will never still any CPU clock cycles.
 
-We quickly found that if a high priority task, like Compute did not have any delays, it would lead to starvation on the lower priority tasks. First we played around with these numbers a bit, before settling on values that seemed to work.
+We quickly found out that if a high priority task like Compute didn't have any delays, it would lead to starvation on the lower priority tasks. First we played around with these numbers a bit, before settling on values that seemed to work.
 
 However, a bit of trial and error is not good enough for a real time system. We needed to be able to prove that our system will never miss any deadlines.
 
@@ -307,7 +306,7 @@ The utilization factor for a given task is given by the formula:
   U_{i} = \frac{C_{i}}{P_{i}}
 \end{equation*}
 
-We found the computation time for each task in Gnatstudio, by opening the assembly code window during debugging. Here we went through each task step by step, and counted the lines. In cases where the code had the possibility of moving to different branches, we always chose the \textit{worst-case} option. Merely counting lines in assembly is probably not a 100\% accurate, but for our use, this was good enough.
+We found the computation time for each task in Gnatstudio, by opening the assembly code window during debugging. Here we went through each task step by step, and counted the lines. In cases where the code had the possibility of moving to different branches, we always chose the \textit{worst-case} option. Merely counting lines in assembly is probably not 100\% accurate, but for our use, this was good enough.
 
 The periods were set in advance based on guesses. Luckily for us we were able to see just how effective this tool is when developing real-time systems. When we started the scheduling analysis, we were quite satisfied with our system, even though it had a few bugs, which would appear in irreproducable conditions. The reason became clear when we saw that we had a utilization factor of 0.92.
 
@@ -336,15 +335,15 @@ The utilization factor for this system is
   U_{Sum} = 72.0319\%
 \end{equation*}
 
-which is of course lower than the limit of 74.1\% for five tasks.
+which is lower than the limit of 74.1\% for five tasks.
 
-After implementing these changes in the code, we saw that the bugs we had previously had disappeared. We ran the system for five minutes continously, exposing the sensors to all kinds of behaviour without any errors.
+After implementing these changes in the code, we noticed that the bugs we have previously, had disappeared. We ran the system for five minutes continously, exposing the sensors to all kinds of behaviour without any errors.
 
 Because our system eventually passed the utilization test, we can say we pretty high confidence that all our tasks will meet their deadlines.
 
 
 \section{Various problems we've encountered along the way}
-In the list below are some problems we have encountered during our development phase from 17.09.2020 - 23.10.2020. Most of these issues have occured using Linux, it is stated otherwise.
+In the list below are some problems we have encountered during our development phase from 17.09.2020 - 23.10.2020. Most of these issues have occured using Linux.
 
 \begin{itemize}
 	\item Flashing to the Arduino board without a debugging probe might be impossible.
