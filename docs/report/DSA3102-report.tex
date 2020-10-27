@@ -139,7 +139,7 @@ The Receiver from this diagram has also been removed from the car.
 
 The servo motor for the steering is traditional one, which takes the PWM that was desribed previously.\\
 
-The motor which will provide us with propulsion however, is actually a DC motor. Luckily for us, the ESC, provides a PWM interface for us, so that we can treat the motor as a fully rotating servo motor.\\
+The motor which will provide us with propulsion however, is actually a BLDC motor. Luckily for us, the ESC, provides a PWM interface for us, so that we can treat the motor as a fully rotating servo motor.\\
 
 As in the case with regular servo motors, we send it a standard PWM signal, but in this case, the high time of the signal does not refer to a static deegree, but to the speed of rotation. As can be seen in figure \ref{esc}, a high signal of 1.5ms means that the motor will not rotate. If we send a 2ms signal it will rotate forward at the highest speed, and the opposite applies for 1ms.
 
