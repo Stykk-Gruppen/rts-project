@@ -10,6 +10,8 @@
 \usepackage{textcomp}
 \usepackage[parfill]{parskip}
 \usepackage{amsmath}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \definecolor{light-gray}{gray}{0.9}
 \lstset{frame=tb,
 extendedchars = true,
@@ -29,6 +31,10 @@ texcl=true,
   breaklines=true,
   tabsize=3
 }
+
+
+
+
 
 \graphicspath{ {./img/} }
 
@@ -215,7 +221,7 @@ This helped us find quite a few bugs early on, as well as figuring out what woul
 
 For instance, the Ada Drivers Library has a servo motor example using analogue write and interrupts. We initially tried doing it this way, to ensure steady PWMs for the servo motors, but as mentioned this proved to be much harder than anticipated.\\
 
-We  developed testing projects to test the servos and the ultrasonic sensors. To test every pin on the board, we developed a blinking example, turning every pin on and off. The code for these tests can be found in our GitHub repository.\\
+We  developed testing projects to test the servos and the ultrasonic sensors. To test every pin on the board, we developed a blinking example, turning every pin on and off. The code for these tests can be found in our GitHub repository\cite{STYKK}.\\
 
 Because of our approach of test early, fail early, we were able to develop workarounds for this at an early stage.\\
 
@@ -337,8 +343,40 @@ which is lower than the limit of 74.1\% for five tasks.
 
 After implementing these changes in the code, we noticed that the bugs we have previously, had disappeared. We ran the system for five minutes continuously, exposing the sensors to all kinds of behaviour without any errors.
 
-Because our system eventually passed the utilization test, we can say we pretty high confidence that all our tasks will meet their deadlines.
 
+
+Even though our system was sure to meet its deadlines, we wanted to also try and prove this using response-time analysis.
+
+The equation for this is given by:
+\begin{equation*}
+  R_{i} = C_{i} + \sum_{j \epsilon hp(i)} \ceil[\Bigg]{\frac{R_{i}}{T_{j}}} C_{j}
+\end{equation*}
+
+
+When calculated with a C++ implementation, we found these results:
+
+
+\begin{center}
+ \begin{tabular}{||l l l l|l||}
+ \hline
+   Task & Period(T) & Comp. time(C) & Priority(P) & Response Time(R) \\ [0.5ex]
+ \hline\hline
+   Engine & 20ms & 4094ns & 4 & 4094ns \\
+ \hline
+   Compute & 16ms & 844ns & 3 & 4938ns \\
+ \hline
+   Sensors & 16ms & 11600190ns & 2 & 11605128ns \\
+ \hline
+   Lights & 200ms & 13438ns & 1 & 11618566ns \\
+ \hline
+   Main & N/A & 16ns & 0 & N/A \\ [1ex]
+ \hline
+\end{tabular}
+\end{center}
+
+The fact that all the response times are much lower than the deadlines (periods in this case), means that our system has passed the response time analysis.\\
+
+Because our system eventually passed the utilization test and the response time analysis, we can say we pretty high confidence that all our tasks will meet their deadlines.
 
 \section{Various problems we've encountered along the way}
 In the list below are some problems we have encountered during our development phase from 17.09.2020 - 23.10.2020. Most of these issues have occurred using Linux.
