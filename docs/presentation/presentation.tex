@@ -73,7 +73,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Schedule}
+    \frametitle{Scheduling with utilization test}
 \begin{center}
  \begin{tabular}{||l l l l|l||}
  \hline
@@ -98,6 +98,43 @@ The utilization factor for this system is
 \end{equation*}
 
 which is lower than the limit of 74.1\% for five tasks.
+\end{frame}
+
+\begin{frame}
+    \centering
+    \frametitle{Scheduling with response time analysis}
+\begin{equation*}
+  R_{i} = C_{i} + \sum_{j \epsilon hp(i)} \ceil[\Bigg]{\frac{R_{i}}{T_{j}}} C_{j}
+\end{equation*}
+
+
+When calculated with a C++ implementation, we found these results:
+
+
+\begin{center}
+ \begin{tabular}{||l l l l|l||}
+ \hline
+   Task & Period(T) & Comp. time(C) & Priority(P) & Response Time(R) \\ [0.5ex]
+ \hline\hline
+   Engine & 20ms & 4094ns & 4 & 4094ns \\
+ \hline
+   Compute & 16ms & 844ns & 3 & 4938ns \\
+ \hline
+   Sensors & 16ms & 11600190ns & 2 & 11605128ns \\
+ \hline
+   Lights & 200ms & 13438ns & 1 & 11618566ns \\
+ \hline
+   Main & N/A & 16ns & 0 & N/A \\ [1ex]
+ \hline
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+    \centering
+    \frametitle{Demonstration}
+    Live Demo
 \end{frame}
 
 \begin{frame}
