@@ -8,9 +8,12 @@ procedure Main is
    High_Time : Integer := 2_000;
 begin
    loop
-      if Ada.Real_Time.Clock > Rotate_Time + Ada.Real_Time.Milliseconds(1000) then
-         --Changes between 1000 and 2000
-         High_Time := ((High_Time + 1) mod 2000) + 1000;
+     if Ada.Real_Time.Clock > Rotate_Time + Ada.Real_Time.Milliseconds(150) then
+         --Changes between 1000 and 2000 in 100 increments
+         High_Time := (High_Time + 100) mod 2000;
+         if High_Time < 1000 then
+            High_Time := High_Time + 1000;
+         end if;
          Rotate_Time := Ada.Real_Time.Clock;
       end if;
       Arduino_Nano_33_Ble_Sense.IOs.DigitalWrite(Pin_Id_PWM,True);
